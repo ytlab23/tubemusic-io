@@ -1,5 +1,6 @@
 import { YoutubeController } from "../controllers/YoutubeController";
 import express, { Request, Response } from "express";
+import { authMiddleware } from "../middleware/auth";
 
 const router = express.Router();
 const youtubeController = new YoutubeController();
@@ -23,5 +24,17 @@ router.post("/music-search", asyncHandler(youtubeController.searchMusic));
 router.get("/genres", asyncHandler(youtubeController.getGenres));
 router.get("/moods", asyncHandler(youtubeController.getMoods));
 router.get("/channels", asyncHandler(youtubeController.getChannels));
+router.get("/video-info", asyncHandler(youtubeController.videoInfo));
+router.get("/keys-status", asyncHandler(youtubeController.keysStatus));
+router.get(
+  "/checks",
+  authMiddleware,
+  asyncHandler(youtubeController.listChecks)
+);
+router.post(
+  "/checks/:id/flag",
+  authMiddleware,
+  asyncHandler(youtubeController.flagCheck)
+);
 
 export default router;

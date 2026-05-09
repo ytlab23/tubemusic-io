@@ -6,6 +6,7 @@ import { MusicDialogComponent } from '../music-dialog/music-dialog.component';
 import { SignupService } from '../../services/signup.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastService } from '../../services/toast.service';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-music-gallery',
@@ -15,7 +16,7 @@ import { ToastService } from '../../services/toast.service';
 export class MusicGalleryComponent implements OnInit {
   videos: any[] = [];
   currentPage = 1;
-  perPage = 12;
+  perPage = 30;
   totalPages = 0;
   query = '';
   selectedGenre = '';
@@ -29,13 +30,29 @@ export class MusicGalleryComponent implements OnInit {
   loading = false;
   isLogged = false;
   showChannels = false;
+  showAdvancedFilters = false;
+  viewMode: 'grid' | 'list' = 'grid';
+  uploadDateFilter = '';
+  minViews: number | null = null;
+  maxViews: number | null = null;
+  perPageOptions = [12, 30, 60, 100];
 
   sortOptions = [
     { label: 'Most Recent', value: 'recent' },
     { label: 'Oldest First', value: 'old' },
     { label: 'Most Views', value: 'views' },
+    { label: 'Fewest Views', value: 'views_asc' },
     { label: 'Most Likes', value: 'likes' },
     { label: 'Engagement Rate', value: 'engagement' }
+  ];
+
+  uploadDateOptions = [
+    { label: 'Any time', value: '' },
+    { label: 'Last 24 hours', value: 'day' },
+    { label: 'Last week', value: 'week' },
+    { label: 'Last month', value: 'month' },
+    { label: 'Last 3 months', value: 'quarter' },
+    { label: 'Last year', value: 'year' }
   ];
 
   constructor(
@@ -47,8 +64,13 @@ export class MusicGalleryComponent implements OnInit {
     private route: ActivatedRoute,
     private titleService: Title,
     private metaService: Meta,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private favorites: FavoritesService
   ) {}
+
+  isSaved(video: any): boolean {
+    return this.favorites.isSaved(video?.video_id);
+  }
 
   ngOnInit() {
     this.isLogged = this.userService.isAuth();
@@ -72,7 +94,12 @@ export class MusicGalleryComponent implements OnInit {
       this.sortBy = params['sort'] || 'recent';
       this.currentPage = +params['page'] || 1;
       this.filterType = params['filter'] === 'mood' ? 'mood' : 'genre';
-      
+      this.viewMode = params['view'] === 'list' ? 'list' : 'grid';
+      this.uploadDateFilter = params['upload_date'] || '';
+      this.minViews = params['min_views'] ? +params['min_views'] : null;
+      this.maxViews = params['max_views'] ? +params['max_views'] : null;
+      this.perPage = params['per_page'] ? +params['per_page'] : 30;
+
       if (this.genres.length === 0) {
         this.loadFilters();
       }
@@ -114,15 +141,18 @@ export class MusicGalleryComponent implements OnInit {
     this.loading = true;
     this.updateUrl();
     
-    const params = {
+    const params: any = {
       query: this.query,
       genre: this.filterType === 'genre' ? this.selectedGenre : '',
       mood: this.filterType === 'mood' ? this.selectedMood : '',
       channels: this.selectedChannels,
       page: this.currentPage,
       per_page: this.perPage,
-      sort: this.sortBy
+      sort: this.sortBy,
     };
+    if (this.uploadDateFilter) params.upload_date = this.uploadDateFilter;
+    if (this.minViews != null) params.min_views = this.minViews;
+    if (this.maxViews != null) params.max_views = this.maxViews;
 
     this.musicService.searchMusic(params).subscribe(
       (res: any) => {
@@ -146,12 +176,49 @@ export class MusicGalleryComponent implements OnInit {
     if (this.sortBy !== 'recent') queryParams.sort = this.sortBy;
     if (this.currentPage > 1) queryParams.page = this.currentPage;
     if (this.filterType !== 'genre') queryParams.filter = this.filterType;
-    
+    if (this.viewMode !== 'grid') queryParams.view = this.viewMode;
+    if (this.uploadDateFilter) queryParams.upload_date = this.uploadDateFilter;
+    if (this.minViews != null) queryParams.min_views = this.minViews;
+    if (this.maxViews != null) queryParams.max_views = this.maxViews;
+    if (this.perPage !== 30) queryParams.per_page = this.perPage;
+
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams,
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
     });
+  }
+
+  toggleViewMode() {
+    this.viewMode = this.viewMode === 'grid' ? 'list' : 'grid';
+    this.updateUrl();
+  }
+
+  toggleAdvancedFilters() {
+    this.showAdvancedFilters = !this.showAdvancedFilters;
+  }
+
+  applyAdvancedFilters() {
+    this.currentPage = 1;
+    this.searchVideos();
+  }
+
+  clearAdvancedFilters() {
+    this.uploadDateFilter = '';
+    this.minViews = null;
+    this.maxViews = null;
+    this.currentPage = 1;
+    this.searchVideos();
+  }
+
+  onPerPageChange() {
+    this.currentPage = 1;
+    this.searchVideos();
+  }
+
+  formatViewLabel(n: number | null): string {
+    if (n == null || isNaN(n)) return '';
+    return this.formatNumber(n);
   }
 
   onSearch() {
@@ -241,33 +308,25 @@ export class MusicGalleryComponent implements OnInit {
 
   saveMusic(video: any, event: Event) {
     event.stopPropagation();
-    
-    if (!this.isLogged) {
-      this.toastService.showToast('error', 'You need to login to save music');
-      this.router.navigate(['/sign-in']);
-      return;
-    }
-
-    const musicData = {
+    if (!video?.video_id) return;
+    const payload = {
       videoId: video.video_id,
-      title: video.name,
+      title: video.name || video.title,
       thumbnail: video.thumbnail,
       url: `https://youtube.com/watch?v=${video.video_id}`,
-      tags: [video.genre, video.mood].filter(Boolean)
+      tags: [video.genre, video.mood].filter(Boolean),
+      source: 'gallery' as const,
     };
-
-    this.musicService.createMusic(musicData).subscribe(
-      () => {
-        this.toastService.showToast('success', 'Music saved successfully');
-      },
-      (error: any) => {
-        if (error?.status === 400 && (error?.error?.message || '').toLowerCase().includes('already exists')) {
-          this.toastService.showToast('error', 'Music already exists');
-        } else {
-          this.toastService.showToast('error', 'An error occurred while saving music');
-        }
-      }
-    );
+    this.favorites.toggle(payload).subscribe((saved) => {
+      this.toastService.showToast(
+        saved ? 'success' : 'info',
+        saved
+          ? this.isLogged
+            ? 'Saved to your favorites'
+            : 'Saved on this device'
+          : 'Removed from favorites'
+      );
+    });
   }
 
   formatNumber(num: number): string {

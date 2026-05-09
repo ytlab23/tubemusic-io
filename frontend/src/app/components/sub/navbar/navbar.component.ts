@@ -1,13 +1,15 @@
-import { Component, Input, HostListener } from '@angular/core';
+import { Component, Input, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ToastService } from '../../../services/toast.service';
 import { SignupService } from '../../../services/signup.service';
+import { PaymentsService } from '../../../services/payments.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
   @Input()
   link1: string = 'Home'
   @Input()
@@ -33,9 +35,18 @@ export class NavbarComponent {
   link4: string = 'Contact'
 
 
-  constructor(private toastService: ToastService, private userService: SignupService) {}
-  
+  constructor(private toastService: ToastService, private userService: SignupService, private payments: PaymentsService) {}
+
   ismobile: boolean = false;
+  isScrolled: boolean = false;
+  isPro: boolean = false;
+  private proSub: Subscription | null = null;
+
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
+    if (typeof window === 'undefined') return;
+    this.isScrolled = window.scrollY > 12;
+  }
 
   toggleNavbar() {
     console.log('Hamburger menu clicked'); // Debugging log
@@ -83,6 +94,11 @@ export class NavbarComponent {
 
   ngOnInit(): void {
     this.isAuth();
+    this.proSub = this.payments.isPro$.subscribe((v) => (this.isPro = v));
+  }
+
+  ngOnDestroy(): void {
+    this.proSub?.unsubscribe();
   }
 
   isLogged: boolean = false;

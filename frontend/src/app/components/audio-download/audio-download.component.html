@@ -1,172 +1,249 @@
-<div class="main-container">
-  <div class="section-header">
-    <h2>Audio Download</h2>
-    <div class="underline"></div>
-  </div>
-
-  <div class="sections-grid">
-    <!-- URL Input Section -->
-    <div class="section-card">
-      <div class="icon-container">
-        <i class="fas fa-link"></i>
-      </div>
-      <div class="content-wrapper">
-        <h5>Enter Video URL</h5>
-        <p>
-          Paste your YouTube video link and click "Get Video Info". We'll load
-          the video details and prepare it for audio extraction.
-        </p>
-
-        <div class="input-section">
-          <input
-            type="text"
-            [(ngModel)]="url"
-            (keydown.enter)="fetchVideoInfo()"
-            [disabled]="isLoadingInfo || isDownloading"
-            placeholder="Paste your YouTube URL here..."
-            class="url-input"
-          />
-          <button
-            (click)="fetchVideoInfo()"
-            [disabled]="isLoadingInfo || isDownloading"
-            class="fetch-btn thq-button-animated thq-button-filled"
-          >
-            Get Video Info
-          </button>
-        </div>
-
-        <div *ngIf="isLoadingInfo" class="loading-container">
-          <div class="spinner-wrapper">
-            <div class="modern-loader"></div>
-            <div class="spinner-dots"></div>
-          </div>
-          <p class="loading-text">Fetching video information...</p>
-        </div>
-
-        <!-- Video Info Display -->
-        <div *ngIf="videoInfo && step !== 'input'">
-          <div class="video-info-card">
-            <img
-              [src]="videoInfo.thumbnail"
-              alt="Video thumbnail"
-              class="video-thumbnail"
-            />
-            <div class="video-details">
-              <h3 class="video-title">{{ videoInfo.title }}</h3>
-              <div class="video-meta">
-                <div class="meta-item">
-                  <i class="fas fa-clock"></i>
-                  <span>{{ formatDuration(videoInfo.duration) }}</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-eye"></i>
-                  <span>{{ formatNumber(videoInfo.viewCount) }} views</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-thumbs-up"></i>
-                  <span>{{ formatNumber(videoInfo.likeCount) }}</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-user"></i>
-                  <span>{{ videoInfo.channelTitle }}</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-calendar"></i>
-                  <span>{{ formatDate(videoInfo.publishedAt) }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            *ngIf="step === 'info'"
-            style="text-align: center; margin: 20px 0"
-          >
-            <button
-              (click)="startDownload()"
-              class="download-btn thq-button-animated thq-button-filled"
-            >
-              Download Audio
-            </button>
-          </div>
-
-          <!-- Download Progress -->
-          <div *ngIf="step === 'downloading'" class="progress-container">
-            <h3>Download Progress</h3>
-            <div class="progress-bar">
-              <div
-                class="progress-fill"
-                [style.width.%]="getProgressPercentage()"
-              ></div>
-            </div>
-            <p class="progress-text">
-              {{ getProgressPercentage().toFixed(2) }}% -
-              {{ message || "Processing..." }}
-            </p>
-          </div>
-
-          <!-- Download Complete -->
-          <div *ngIf="step === 'completed'" class="completion-card">
-            <i class="fas fa-check-circle success-icon"></i>
-            <h3>Download Ready!</h3>
-            <p>Your audio file has been processed and is ready for download.</p>
-            <div
-              style="
-                display: flex;
-                gap: 10px;
-                justify-content: center;
-                flex-wrap: wrap;
-              "
-            >
-              <button
-                (click)="downloadFile()"
-                class="download-ready-btn thq-button-animated thq-button-filled"
-              >
-                Download File
-              </button>
-              <button
-                (click)="resetForm()"
-                class="fetch-btn thq-button-animated thq-button-filled"
-                style="background: #6c757d"
-              >
-                Download Another
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p class="intro-text">
-      Download high-quality audio from YouTube videos quickly and easily. Our
-      tool extracts audio in the best available quality, providing you with
-      clean, professional-grade audio files for your projects.
-      <br />
-      <br />
-      Whether you're a content creator, podcaster, or just need audio from your
-      favorite videos, our downloader makes the process simple and
-      straightforward. Just paste the link and get your audio file in seconds.
-      <br />
-      <br />
-      Our audio extraction tool is designed with simplicity in mind, ensuring
-      that you can focus on your creative work rather than dealing with
-      complicated software or lengthy processes.
+<section class="audio-shell">
+  <header class="audio-hero">
+    <span class="audio-eyebrow">YouTube → MP3</span>
+    <h1>Convert YouTube to MP3 — fast, free, safe</h1>
+    <p class="audio-lead">
+      No ads. No malware. No fake redirects. 2 free downloads every 24 hours per browser.
+      <a routerLink="/pro">Go PRO</a> for unlimited.
     </p>
+    <p class="audio-quota" *ngIf="quota && !isPro">
+      <mat-icon>bolt</mat-icon>
+      {{ quota.remaining }} of {{ quota.limit }} free downloads left today
+    </p>
+    <p class="audio-quota audio-quota-pro" *ngIf="isPro">
+      <mat-icon>star</mat-icon> PRO — unlimited downloads
+    </p>
+  </header>
 
-    <!-- How It Works Section -->
-    <div class="section-card">
-      <div class="icon-container">
-        <i class="fas fa-cogs"></i>
+  <article class="audio-card">
+    <div *ngIf="step === 'input'">
+      <label class="audio-field">
+        <span>YouTube URL</span>
+        <input
+          type="url"
+          placeholder="https://youtube.com/watch?v=..."
+          [(ngModel)]="url"
+          (keydown.enter)="fetchInfo()"
+          [disabled]="isLoadingInfo"
+        />
+      </label>
+      <button class="audio-primary" (click)="fetchInfo()" [disabled]="isLoadingInfo">
+        <mat-icon *ngIf="!isLoadingInfo">search</mat-icon>
+        <mat-icon *ngIf="isLoadingInfo" class="spin">autorenew</mat-icon>
+        {{ isLoadingInfo ? 'Loading…' : 'Get audio' }}
+      </button>
+    </div>
+
+    <div *ngIf="step === 'info' && videoInfo" class="audio-info">
+      <div class="audio-info-meta">
+        <img
+          [src]="(videoInfo.thumbnail | ytThumb:'sddefault')"
+          [alt]="videoInfo.title"
+        />
+        <div class="audio-info-text">
+          <h3>{{ videoInfo.title }}</h3>
+          <p class="audio-info-channel">
+            <mat-icon>tv</mat-icon> {{ videoInfo.channelTitle }}
+          </p>
+          <ul class="audio-info-stats">
+            <li>
+              <mat-icon>schedule</mat-icon>
+              {{ formatDuration(videoInfo.durationSeconds) }}
+            </li>
+            <li *ngIf="videoInfo.viewCount">
+              <mat-icon>visibility</mat-icon>
+              {{ formatNumber(videoInfo.viewCount) }} views
+            </li>
+            <li *ngIf="videoInfo.likeCount">
+              <mat-icon>thumb_up</mat-icon>
+              {{ formatNumber(videoInfo.likeCount) }}
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="content-wrapper">
-        <h5>How It Works</h5>
-        <p>
-          Paste a YouTube link, click to fetch video info, then download. That's
-          it. Three steps to get your audio file.
-        </p>
+
+      <div class="audio-options">
+        <label class="audio-field-inline">
+          <span>Format</span>
+          <select [(ngModel)]="ext">
+            <option value="mp3">MP3 (universal)</option>
+            <option value="m4a">M4A / AAC (Apple-friendly)</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="audio-captcha">
+        <span class="audio-captcha-label">
+          Prove you’re human:
+          <strong>{{ captcha.a }} + {{ captcha.b }} = ?</strong>
+        </span>
+        <input
+          type="number"
+          inputmode="numeric"
+          [(ngModel)]="captchaInput"
+          placeholder="?"
+          aria-label="Captcha answer"
+        />
+        <button
+          type="button"
+          class="audio-captcha-refresh"
+          (click)="refreshCaptcha()"
+          aria-label="Refresh captcha"
+        >
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+
+      <div class="audio-actions">
+        <button class="audio-primary" (click)="startDownload()" [disabled]="!isCaptchaValid()">
+          <mat-icon>download</mat-icon> Start download
+        </button>
+        <button class="audio-secondary" (click)="resetForm()">
+          <mat-icon>arrow_back</mat-icon> Change link
+        </button>
       </div>
     </div>
 
-    <app-step-download></app-step-download>
+    <div *ngIf="step === 'downloading'" class="audio-progress">
+      <h3>Working on your audio…</h3>
+      <div class="audio-progress-bar">
+        <div class="audio-progress-fill" [style.width.%]="progress"></div>
+      </div>
+      <p class="audio-progress-label">{{ progressLabel || 'Preparing…' }}</p>
+      <p class="audio-progress-hint">
+        Real progress + estimated wait — usually under 30 seconds. No need to refresh.
+      </p>
+    </div>
+
+    <div *ngIf="step === 'completed' && result" class="audio-completed">
+      <h3>Ready 🎉</h3>
+      <p class="audio-completed-sub">
+        Maximum-quality {{ result.ext.toUpperCase() }} for <strong>{{ result.title }}</strong>
+      </p>
+      <div class="audio-actions">
+        <button class="audio-primary" (click)="saveDownloadFile()">
+          <mat-icon>download</mat-icon> Save {{ result.ext.toUpperCase() }}
+        </button>
+        <button
+          class="audio-secondary"
+          [class.is-saved]="isSaved()"
+          (click)="toggleSave()"
+          [title]="isSaved() ? 'Remove from favorites' : 'Add to favorites'"
+        >
+          <mat-icon>{{ isSaved() ? 'favorite' : 'favorite_border' }}</mat-icon>
+          {{ isSaved() ? 'Saved' : 'Save to favorites' }}
+        </button>
+        <a *ngIf="result.streamUrl" [href]="result.streamUrl" target="_blank" rel="noopener" class="audio-secondary">
+          <mat-icon>play_arrow</mat-icon> Stream
+        </a>
+        <button class="audio-secondary" (click)="resetForm()">
+          <mat-icon>refresh</mat-icon> New download
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="step === 'error'" class="audio-error">
+      <h3>Download failed</h3>
+      <p>{{ errorMessage }}</p>
+      <p class="audio-error-code" *ngIf="errorCode">Code: {{ errorCode }}</p>
+      <div class="audio-actions">
+        <button class="audio-primary" (click)="retry()">
+          <mat-icon>refresh</mat-icon> Retry
+        </button>
+        <button
+          class="audio-secondary"
+          (click)="reportIssue()"
+          [class.disabled]="!isPro"
+          [title]="isPro ? 'Report to our team' : 'PRO feature'"
+        >
+          <mat-icon>flag</mat-icon> Report
+          <span class="audio-pro-pill" *ngIf="!isPro">PRO</span>
+        </button>
+        <button class="audio-secondary" (click)="resetForm()">
+          <mat-icon>arrow_back</mat-icon> Try another link
+        </button>
+      </div>
+    </div>
+  </article>
+
+  <section class="audio-features">
+    <h2>Why choose our downloader</h2>
+    <div class="audio-feature-grid">
+      <article class="audio-feature">
+        <span class="audio-feature-icon"><mat-icon>flash_on</mat-icon></span>
+        <h3>Lightning fast</h3>
+        <p>Server-side conversion with progress streaming. Most tracks are ready in under 30 seconds.</p>
+      </article>
+      <article class="audio-feature">
+        <span class="audio-feature-icon"><mat-icon>headphones</mat-icon></span>
+        <h3>Best-in-class quality</h3>
+        <p>Always max quality — never re-encoded. Choose MP3 for universal compatibility or M4A for Apple devices.</p>
+      </article>
+      <article class="audio-feature">
+        <span class="audio-feature-icon"><mat-icon>verified_user</mat-icon></span>
+        <h3>Copyright aware</h3>
+        <p>Pair with our <a routerLink="/home">copyright checker</a> before publishing — never get a strike again.</p>
+      </article>
+      <article class="audio-feature">
+        <span class="audio-feature-icon"><mat-icon>devices</mat-icon></span>
+        <h3>Works everywhere</h3>
+        <p>Mobile, desktop, tablet. Built for content creators on the go — no install, no signup.</p>
+      </article>
+      <article class="audio-feature">
+        <span class="audio-feature-icon"><mat-icon>block</mat-icon></span>
+        <h3>No ads, no malware</h3>
+        <p>Unlike most YouTube to MP3 sites, we never pop-up, redirect, or attach toolbars. Pure download.</p>
+      </article>
+      <article class="audio-feature">
+        <span class="audio-feature-icon"><mat-icon>savings</mat-icon></span>
+        <h3>100% free to start</h3>
+        <p>2 downloads per day, every day, forever — no card required. Go PRO any time you need more.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="audio-faq">
+    <h2>Frequently asked questions</h2>
+    <details *ngFor="let item of faq">
+      <summary>{{ item.q }}</summary>
+      <p>{{ item.a }}</p>
+    </details>
+  </section>
+
+  <section class="audio-cta">
+    <h2>Tired of YouTube MP3 sites that don’t work?</h2>
+    <p>Go PRO and enjoy unlimited downloads, AI music generation, and the full royalty-free library.</p>
+    <a routerLink="/pro" class="audio-primary audio-primary-large">
+      <span class="audio-cta-price">$2.90<small>/mo</small></span>
+      <span>Go PRO</span>
+    </a>
+    <p class="audio-cta-trust">Secure payment · Satisfied or refunded · Cancel anytime</p>
+  </section>
+</section>
+
+<div class="audio-modal" *ngIf="showProModal" (click)="closeProModal()">
+  <div class="audio-modal-card" (click)="$event.stopPropagation()">
+    <button class="audio-modal-close" (click)="closeProModal()" aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h3>Tired of YouTube MP3 downloaders that don’t work?</h3>
+    <p>
+      We are the solution. Go PRO and enjoy <strong>unlimited MP3 downloads</strong> —
+      no ads, no malware, no limits, 100% working.
+    </p>
+    <ul>
+      <li><mat-icon>check</mat-icon> Unlimited MP3 downloads</li>
+      <li><mat-icon>check</mat-icon> 10× AI music generations / month</li>
+      <li><mat-icon>check</mat-icon> Full royalty-free music library</li>
+      <li><mat-icon>check</mat-icon> Up to 1h audio per download</li>
+      <li><mat-icon>check</mat-icon> Retry + report on failed jobs</li>
+      <li><mat-icon>check</mat-icon> Human support</li>
+    </ul>
+    <a routerLink="/pro" class="audio-primary audio-primary-block">
+      <span class="audio-cta-price">$2.90<small>/mo</small></span>
+      <span>Go PRO</span>
+    </a>
+    <p class="audio-modal-trust">Secure payment · Satisfied or refunded</p>
+    <p class="audio-modal-sub">Never stress about MP3 downloads again!</p>
   </div>
 </div>

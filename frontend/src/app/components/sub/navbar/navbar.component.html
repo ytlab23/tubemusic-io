@@ -1,11 +1,11 @@
-<header class="navbar-container">
+<header class="navbar-container" [class.navbar-scrolled]="isScrolled">
     <header data-thq="thq-navbar" class="navbar-navbar-interactive">
-      <div class="logo-container">
+      <a routerLink="/" class="logo-container" aria-label="TubeMusic home">
         <i class="fa fa-play-circle logo-icon" aria-hidden="true"></i>
         <span class="logo-text">
           <span class="logo-tube">Tube</span><span class="logo-music">Music</span>
         </span>
-      </div>
+      </a>
       <div data-thq="thq-navbar-nav" class="navbar-desktop-menu">
         <nav class="navbar-links1">
           <span routerLink="/" class="thq-link thq-body-small">{{ link1 }}</span>
@@ -13,6 +13,8 @@
           <span routerLink="/contact" class="thq-link thq-body-small">{{ link4 }}</span>
           <span routerLink="/copyright-free-music" class="thq-link thq-body-small">{{ link5 }}</span>
           <span routerLink="/audio-download" class="thq-link thq-body-small">Download</span>
+          <span routerLink="/ai-music-free" class="thq-link thq-body-small">AI Music</span>
+          <span *ngIf="!isPro" routerLink="/pro" class="thq-link thq-body-small thq-link-pro">PRO</span>
           <span routerLink="/faq" class="thq-link thq-body-small">{{ link6 }}</span>
         </nav>
         <div  class="navbar-buttons1">
@@ -24,8 +26,11 @@
           
           </button>
           <div *ngIf="isLogged" class="user-dropdown" (clickOutside)="closeDropdown()">
-            <button class="user-icon" (click)="toggleDropdown()">
-              <span ><img width="34" height="34" src="https://img.icons8.com/pastel-glyph/64/FFFFFF/user-male-circle.png" alt="user-male-circle"/> </span>
+            <button class="user-icon" [class.user-icon-pro]="isPro" (click)="toggleDropdown()" [attr.title]="isPro ? 'PRO member' : 'Account'">
+              <span><img width="34" height="34" src="https://img.icons8.com/pastel-glyph/64/FFFFFF/user-male-circle.png" alt="user-male-circle"/></span>
+              <span *ngIf="isPro" class="user-pro-star" aria-label="PRO member">
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </span>
             </button>
             <div class="dropdown-content" *ngIf="isDropdownOpen">
               <!-- <div *ngIf="isLogged" class="user-info">
@@ -35,7 +40,9 @@
               <!-- <div *ngIf="!isLogged" class="user-info">
                 <button routerLink="/sign-in" class="sign-out-btn"><i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Sign in</button>
               </div> -->
+              <button routerLink="/account" class="sign-out-btn"><i class="fa fa-user-circle fa-lg" aria-hidden="true"></i> Account</button>
               <button routerLink="/liked-music" class="sign-out-btn"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> Liked Music</button>
+              <button routerLink="/pro" class="sign-out-btn"><i class="fa fa-star fa-lg" aria-hidden="true"></i> Go PRO</button>
               <button (click)="logOut()" class="sign-out-btn"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> Sign out</button>
             </div>
           </div>
@@ -55,7 +62,12 @@
   
         <div class="navbar-nav">
           <div class="navbar-top">
-            <img [attr.alt]="logoAlt" [attr.src]="logoSrc" class="navbar-logo" />
+            <a routerLink="/" (click)="closeNavbar()" class="navbar-mobile-logo" aria-label="TubeMusic home">
+              <i class="fa fa-play-circle logo-icon" aria-hidden="true"></i>
+              <span class="logo-text">
+                <span class="logo-tube">Tube</span><span class="logo-music">Music</span>
+              </span>
+            </a>
             <div data-thq="thq-close-menu" class="navbar-close-menu" (click)="closeNavbar()">
               <svg viewBox="0 0 1024 1024" class="navbar-icon3">
                 <path
@@ -70,6 +82,9 @@
             <span routerLink="/contact" class="thq-link thq-body-small">{{ link4 }}</span>
             <span routerLink="/copyright-free-music" class="thq-link thq-body-small">{{ link5 }}</span>
             <span routerLink="/audio-download" class="thq-link thq-body-small">Download</span>
+            <span routerLink="/ai-music-free" class="thq-link thq-body-small">AI Music</span>
+            <span routerLink="/pro" class="thq-link thq-body-small thq-link-pro">PRO</span>
+            <span *ngIf="isLogged" routerLink="/account" class="thq-link thq-body-small">Account</span>
           </nav>
         </div>
         <div class="navbar-buttons2">

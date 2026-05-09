@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/components/landing-page/landing-page.component.css"],
+  "sourcesContent": [":host { \n  display: contents; \n}\n\n.home-container {\n  width: 100%;\n  display: flex;\n  min-height: 100vh;\n  align-items: center;\n  flex-direction: column;\n}\n\n.home-container > * {\n  width: 100%;\n  margin-bottom: 2rem;\n}\n\n.home-container > app-music-checker {\n  margin-bottom: 4rem;\n}\n\n.home-container > app-about-us {\n  margin: 2rem 0 4rem;\n}\n\n.home-container > app-features1 {\n  margin: 4rem 0;\n}\n\n.home-container > app-footer {\n  margin-bottom: 0;\n}\n"],
+  "mappings": ";AAAA;AACE,WAAS;AACX;AAEA,CAAC;AACC,SAAO;AACP,WAAS;AACT,cAAY;AACZ,eAAa;AACb,kBAAgB;AAClB;AAEA,CARC,eAQe,EAAE;AAChB,SAAO;AACP,iBAAe;AACjB;AAEA,CAbC,eAae,EAAE;AAChB,iBAAe;AACjB;AAEA,CAjBC,eAiBe,EAAE;AAChB,UAAQ,KAAK,EAAE;AACjB;AAEA,CArBC,eAqBe,EAAE;AAChB,UAAQ,KAAK;AACf;AAEA,CAzBC,eAyBe,EAAE;AAChB,iBAAe;AACjB;",
+  "names": []
+}

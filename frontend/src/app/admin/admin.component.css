@@ -1,10 +1,55 @@
+.admin-shell {
+    min-height: 100vh;
+    background-color: #1f3947;
+    padding: 24px clamp(20px, 4vw, 48px) 80px;
+    color: #f1f5f9;
+}
+.admin-head {
+    max-width: 1080px;
+    margin: 0 auto 16px;
+}
+.admin-head h1 {
+    margin: 0 0 12px;
+    font-size: 28px;
+    font-weight: 700;
+}
+.admin-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.admin-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+.admin-tab:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+.admin-tab.active {
+    background: #38bdf8;
+    border-color: #38bdf8;
+    color: #06222e;
+}
+.admin-tab mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
 .upload-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #326074;
-    padding: 20px;
+    align-items: flex-start;
+    padding: 20px 0;
   }
   
   .upload-card {
@@ -117,5 +162,251 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.logs-card,
+.keys-card {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 22px;
+    background: #ffffff;
+    color: #0f172a;
+    border-radius: 14px;
+    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.18);
+}
+.logs-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+.logs-toolbar input[type="text"] {
+    flex: 1 1 220px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(20, 116, 135, 0.18);
+}
+.logs-checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #475569;
+    font-size: 13px;
+}
+.logs-loading {
+    color: #64748b;
+}
+.logs-empty {
+    color: #94a3b8;
+    text-align: center;
+    padding: 16px;
+}
+.logs-error {
+    color: #b91c1c;
+}
+.logs-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13px;
+}
+.logs-table th,
+.logs-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+.logs-table th {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    background: rgba(20, 116, 135, 0.06);
+}
+.logs-title {
+    color: #0f172a;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    max-width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+.logs-title:hover {
+    color: #147487;
+}
+.logs-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.logs-pill.pill-ok {
+    background: rgba(4, 120, 87, 0.12);
+    color: #047857;
+}
+.logs-pill.pill-bad {
+    background: rgba(185, 28, 28, 0.12);
+    color: #b91c1c;
+}
+.logs-pill.pill-flagged {
+    background: rgba(245, 158, 11, 0.16);
+    color: #b45309;
+}
+.row-flagged {
+    background: rgba(245, 158, 11, 0.06);
+}
+.logs-ip {
+    font-family: monospace;
+    color: #475569;
+    font-size: 12px;
+}
+.logs-flag-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(185, 28, 28, 0.4);
+    background: #ffffff;
+    color: #b91c1c;
+    cursor: pointer;
+}
+.logs-flag-btn:hover {
+    background: rgba(185, 28, 28, 0.08);
+}
+.logs-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 0 4px;
+    color: #475569;
+    font-size: 13px;
+}
+.logs-pagination button {
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(20, 116, 135, 0.2);
+    background: #ffffff;
+    color: #147487;
+    cursor: pointer;
+}
+.logs-pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.keys-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.keys-stat {
+    background: rgba(20, 116, 135, 0.06);
+    border-radius: 12px;
+    padding: 14px;
+}
+.keys-stat-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+.keys-stat-value {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+}
+.keys-stat-good {
+    color: #047857;
+}
+.keys-stat-warn {
+    color: #b45309;
+}
+
+.flag-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(15, 23, 42, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.flag-modal-card {
+    position: relative;
+    background: #ffffff;
+    color: #0f172a;
+    border-radius: 18px;
+    padding: 24px;
+    width: min(440px, 100%);
+}
+.flag-modal-card h3 {
+    margin: 0 0 8px;
+}
+.flag-target-title {
+    margin: 0 0 8px;
+    font-weight: 600;
+}
+.flag-target-meta {
+    margin: 0 0 14px;
+}
+.flag-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+.flag-field span {
+    font-size: 13px;
+    color: #334155;
+    font-weight: 600;
+}
+.flag-field textarea {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(20, 116, 135, 0.18);
+    font-family: inherit;
+    font-size: 14px;
+    color: #0f172a;
+    resize: vertical;
+}
+.flag-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+.flag-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: 0;
+    color: #64748b;
+    cursor: pointer;
+}
+.btn-cancel {
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(15, 23, 42, 0.16);
+    background: #f8fafc;
+    color: #475569;
+    cursor: pointer;
+}
+.spin {
+    animation: lds-ring 1s linear infinite;
 }
 

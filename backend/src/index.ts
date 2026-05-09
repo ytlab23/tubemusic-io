@@ -1,63 +1,90 @@
-import express, { json, urlencoded } from 'express';
-import cors from 'cors';
-import connectDB from './database';
-import 'dotenv/config';
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import "dotenv/config";
 
-import userRoutes from './routes';
-import authRoutes from './routes/authRoutes';
-import youtubeRoutes from './routes/youtubeRoutes';
-import musicRoutes from './routes/musicRoutes';
-import tagRoutes from './routes/tagRoutes';
-
-import bodyParser from 'body-parser';
-import path from 'path';
+import connectDB from "./database";
+import userRoutes from "./routes";
+import authRoutes from "./routes/authRoutes";
+import youtubeRoutes from "./routes/youtubeRoutes";
+import musicRoutes from "./routes/musicRoutes";
+import tagRoutes from "./routes/tagRoutes";
+import aiMusicRoutes from "./routes/aiMusicRoutes";
+import audioRoutes from "./routes/audioRoutes";
+import paymentsRoutes from "./routes/paymentsRoutes";
+import { authMiddleware } from "./middleware/auth";
+import { PaymentsController } from "./controllers/PaymentsController";
+import { getYouTubeKeyRotator } from "./utils/youtubeKeyRotator";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors({
-  origin: '*'
-}))
+if (!process.env.SECRET_KEY || process.env.SECRET_KEY === "SECRET_KEY") {
+  console.error(
+    "[fatal] SECRET_KEY missing or set to the literal default. Set a strong SECRET_KEY in .env before starting."
+  );
+  process.exit(1);
+}
 
-app.use(bodyParser.json());
+const allowedOrigins = (process.env.CORS_ORIGINS || "*")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: allowedOrigins.includes("*") ? true : allowedOrigins,
+    credentials: true,
+  })
+);
 
-app.use('/users', userRoutes);
-app.use('/auth', authRoutes);
-app.use('/youtube', youtubeRoutes);
-app.use('/music', musicRoutes);
-app.use('/tags', tagRoutes);
+// ============================================================================
+// PAYMENT WEBHOOKS — must register BEFORE express.json() so we can verify
+// signatures against the raw body. Mirrors transcript-back-v2/server.js.
+// ============================================================================
+const paymentsController = new PaymentsController();
+app.post(
+  "/webhooks/whop",
+  express.raw({ type: "*/*", limit: "1mb" }),
+  paymentsController.whopWebhook
+);
 
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json({ limit: "2mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "2mb" }));
 
-app.get('/', function (req, res) {
-  res.send('Server is running');
+app.use("/users", userRoutes);
+app.use("/auth", authRoutes);
+app.use("/youtube", youtubeRoutes);
+app.use("/music", musicRoutes);
+app.use("/tags", tagRoutes);
+app.use("/ai-music", aiMusicRoutes);
+app.use("/audio", audioRoutes);
+app.use("/payments", paymentsRoutes);
+
+app.get("/", (_req, res) => res.send("Server is running"));
+
+app.get("/health", (_req, res) => {
+  let yt: any = { configured: false };
+  try {
+    yt = getYouTubeKeyRotator().status();
+    yt.configured = true;
+  } catch (e: any) {
+    yt = { configured: false, error: e?.message };
+  }
+  res.json({ ok: true, youtube: yt });
 });
 
 (async () => {
   await connectDB();
-
-
-  // Add the provided greenlock-express code here
-  // require('greenlock-express')
-  //     .init({
-  //         packageRoot: path.join(__dirname, '../'),
-  //         maintainerEmail: "afaisal3389@gmail.com",
-  //         subscriberEmail: "afaisal3389@gmail.com",
-  //         configDir: './greenlock.d',
-  //         cluster: false
-  //     })
-  //     .serve(app);
-
+  try {
+    const status = getYouTubeKeyRotator().status();
+    console.log(
+      `[boot] YouTube key rotator ready: ${status.available}/${status.total} keys available.`
+    );
+  } catch (e: any) {
+    console.warn(`[boot] YouTube key rotator NOT configured: ${e?.message}`);
+  }
   app.listen(PORT, () => {
-      console.log(`Server started on ${PORT}`);
+    console.log(`Server started on ${PORT}`);
   });
-  // const sslServer = https.createServer({
-  //     key: fs.readFileSync(path.join(__dirname, '../cert', 'key.pem')),
-  //     cert: fs.readFileSync(path.join(__dirname, '../cert', 'cert.pem')),
-  // }, app)
-  // sslServer.listen(443, () => {
-  //     logger.info(`SSL Server started on ${443}`);
-  // });
 })();

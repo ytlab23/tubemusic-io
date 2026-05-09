@@ -1,0 +1,1522 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="plan.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&amp;family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<link rel="stylesheet" href="styles.css"><style ng-app-id="ng">@import "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap";
+
+
+
+h1[_ngcontent-ng-c951744504], 
+h2[_ngcontent-ng-c951744504], 
+h3[_ngcontent-ng-c951744504], 
+h4[_ngcontent-ng-c951744504], 
+h5[_ngcontent-ng-c951744504], 
+h6[_ngcontent-ng-c951744504] {
+  font-family: "Roboto", sans-serif;
+}
+body[_ngcontent-ng-c951744504], 
+p[_ngcontent-ng-c951744504], 
+div[_ngcontent-ng-c951744504], 
+span[_ngcontent-ng-c951744504] {
+  font-family: serif;
+}
+.home-container[_ngcontent-ng-c951744504] {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+/*# sourceMappingURL=app.component.css.map */</style><style ng-app-id="ng">
+
+.toast[_ngcontent-ng-c721834416] {
+  position: fixed;
+  top: 89px;
+  right: 20px;
+  padding: 15px;
+  color: white;
+  border-radius: 5px;
+  z-index: 9999;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.toast.success[_ngcontent-ng-c721834416] {
+  background-color: green;
+}
+.toast.error[_ngcontent-ng-c721834416] {
+  background-color: red;
+}
+.toast.info[_ngcontent-ng-c721834416] {
+  background-color: blue;
+}
+.toast.warning[_ngcontent-ng-c721834416] {
+  background-color: orange;
+}
+/*# sourceMappingURL=toast.component.css.map */</style><style ng-app-id="ng">
+
+[_nghost-ng-c3663033336] {
+  display: contents;
+}
+.navbar-container[_ngcontent-ng-c3663033336] {
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  background-color: transparent;
+}
+.navbar-navbar-interactive[_ngcontent-ng-c3663033336] {
+  width: 100%;
+  display: flex;
+  max-width: var(--dl-size-size-maxwidth);
+  align-items: center;
+  padding-top: var(--dl-space-space-twounits);
+  padding-left: var(--dl-space-space-threeunits);
+  padding-right: var(--dl-space-space-threeunits);
+  padding-bottom: var(--dl-space-space-twounits);
+  justify-content: space-between;
+}
+.navbar-image1[_ngcontent-ng-c3663033336] {
+  height: 3rem;
+}
+.navbar-desktop-menu[_ngcontent-ng-c3663033336] {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+.navbar-links1[_ngcontent-ng-c3663033336] {
+  gap: var(--dl-space-space-twounits);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin-left: var(--dl-space-space-twounits);
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.navbar-buttons1[_ngcontent-ng-c3663033336] {
+  gap: var(--dl-space-space-twounits);
+  display: flex;
+  align-items: center;
+  margin-left: var(--dl-space-space-twounits);
+}
+.navbar-action11[_ngcontent-ng-c3663033336] {
+  display: flex;
+  flex-direction: row;
+}
+.navbar-action21[_ngcontent-ng-c3663033336] {
+  display: flex;
+  flex-direction: row;
+}
+.navbar-burger-menu[_ngcontent-ng-c3663033336] {
+  display: none;
+}
+.navbar-icon1[_ngcontent-ng-c3663033336] {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+}
+.navbar-mobile-menu[_ngcontent-ng-c3663033336] {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  padding: var(--dl-space-space-twounits);
+  z-index: 100;
+  position: absolute;
+  flex-direction: column;
+  background-color: var(--dl-color-theme-neutral-light);
+}
+.navbar-nav[_ngcontent-ng-c3663033336] {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.navbar-top[_ngcontent-ng-c3663033336] {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--dl-space-space-threeunits);
+  justify-content: space-between;
+}
+.navbar-logo[_ngcontent-ng-c3663033336] {
+  height: 3rem;
+}
+.navbar-close-menu[_ngcontent-ng-c3663033336] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar-icon3[_ngcontent-ng-c3663033336] {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+}
+.navbar-links2[_ngcontent-ng-c3663033336] {
+  gap: var(--dl-space-space-unit);
+  flex: 0 0 auto;
+  display: flex;
+  align-self: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.navbar-buttons2[_ngcontent-ng-c3663033336] {
+  gap: var(--dl-space-space-twounits);
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: center;
+}
+@media (max-width: 767px) {
+  .navbar-navbar-interactive[_ngcontent-ng-c3663033336] {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .navbar-desktop-menu[_ngcontent-ng-c3663033336] {
+    display: none;
+  }
+  .navbar-burger-menu[_ngcontent-ng-c3663033336] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-width: 479px) {
+  .navbar-navbar-interactive[_ngcontent-ng-c3663033336] {
+    padding: var(--dl-space-space-unit);
+  }
+  .navbar-mobile-menu[_ngcontent-ng-c3663033336] {
+    padding: var(--dl-space-space-unit);
+  }
+}
+.dark-mode-toggle[_ngcontent-ng-c3663033336] {
+  background-color: var(--dl-color-theme-accent1);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.dark-mode-toggle[_ngcontent-ng-c3663033336]:hover {
+  transform: scale(1.1);
+}
+.dark-mode-toggle[_ngcontent-ng-c3663033336]   fa-icon[_ngcontent-ng-c3663033336] {
+  font-size: 24px;
+  color: var(--dl-color-theme-neutral-dark);
+}
+.dark-mode[_ngcontent-ng-c3663033336]   .dark-mode-toggle[_ngcontent-ng-c3663033336] {
+  background-color: var(--dl-color-theme-accent2);
+}
+.dark-mode[_ngcontent-ng-c3663033336]   .dark-mode-toggle[_ngcontent-ng-c3663033336]   fa-icon[_ngcontent-ng-c3663033336] {
+  color: var(--dl-color-theme-neutral-light);
+}
+.user-dropdown[_ngcontent-ng-c3663033336] {
+  position: relative;
+  display: inline-block;
+}
+.user-icon[_ngcontent-ng-c3663033336] {
+  background-color: #37474f;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-icon[_ngcontent-ng-c3663033336]   .user-initial[_ngcontent-ng-c3663033336] {
+  font-weight: bold;
+}
+.dropdown-content[_ngcontent-ng-c3663033336] {
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  right: 0;
+  top: 50px;
+  border-radius: 8px;
+  z-index: 1;
+}
+.user-name[_ngcontent-ng-c3663033336] {
+  font-weight: bold;
+  display: block;
+}
+.user-email[_ngcontent-ng-c3663033336] {
+  color: gray;
+  display: block;
+  margin-top: 5px;
+}
+.sign-out-btn[_ngcontent-ng-c3663033336] {
+  background-color: white;
+  color: #37474f;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-top: 10px;
+}
+.sign-out-btn[_ngcontent-ng-c3663033336]:hover {
+  background-color: #f0f0f0;
+}
+.logo-container[_ngcontent-ng-c3663033336] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo-icon[_ngcontent-ng-c3663033336] {
+  font-size: 24px;
+  color: #147487;
+}
+.logo-text[_ngcontent-ng-c3663033336] {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+}
+.logo-tube[_ngcontent-ng-c3663033336] {
+  color: black;
+}
+.logo-music[_ngcontent-ng-c3663033336] {
+  color: #147487;
+}
+.navbar-container[_ngcontent-ng-c3663033336] {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition:
+    background-color 200ms ease,
+    box-shadow 200ms ease,
+    backdrop-filter 200ms ease,
+    padding 200ms ease;
+}
+.navbar-container.navbar-scrolled[_ngcontent-ng-c3663033336] {
+  background-color: rgba(13, 18, 28, 0.78);
+  backdrop-filter: saturate(140%) blur(8px);
+  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+.navbar-container.navbar-scrolled[_ngcontent-ng-c3663033336]   .navbar-navbar-interactive[_ngcontent-ng-c3663033336] {
+  padding-top: var(--dl-space-space-unit);
+  padding-bottom: var(--dl-space-space-unit);
+}
+.logo-container[_ngcontent-ng-c3663033336] {
+  cursor: pointer;
+  text-decoration: none;
+}
+.logo-container[_ngcontent-ng-c3663033336]:focus-visible {
+  outline: 2px solid #147487;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.navbar-mobile-logo[_ngcontent-ng-c3663033336] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+.thq-link-pro[_ngcontent-ng-c3663033336] {
+  background:
+    linear-gradient(
+      135deg,
+      #fbbf24 0%,
+      #f59e0b 100%);
+  color: #ffffff !important;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.32);
+  transition: transform 150ms ease;
+}
+.thq-link-pro[_ngcontent-ng-c3663033336]:hover {
+  transform: translateY(-1px);
+}
+.user-icon[_ngcontent-ng-c3663033336] {
+  position: relative;
+}
+.user-icon-pro[_ngcontent-ng-c3663033336] {
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #f59e0b, 0 4px 14px rgba(245, 158, 11, 0.4);
+  transition: box-shadow 200ms ease;
+}
+.user-icon-pro[_ngcontent-ng-c3663033336]:hover {
+  box-shadow: 0 0 0 2px #fbbf24, 0 6px 18px rgba(245, 158, 11, 0.55);
+}
+.user-pro-star[_ngcontent-ng-c3663033336] {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background:
+    linear-gradient(
+      135deg,
+      #fbbf24 0%,
+      #f59e0b 100%);
+  color: #1f1400;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  box-shadow: 0 4px 8px rgba(245, 158, 11, 0.4);
+  pointer-events: none;
+}
+.user-pro-star[_ngcontent-ng-c3663033336]   i[_ngcontent-ng-c3663033336] {
+  font-size: 9px;
+}
+/*# sourceMappingURL=navbar.component.css.map */</style><style ng-app-id="ng">@import "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap";
+
+
+
+[_nghost-ng-c305335744] {
+  display: contents;
+}
+.footer-footer1[_ngcontent-ng-c305335744] {
+  width: 100%;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #1e293b;
+  color: white;
+  padding: 4rem 1rem;
+}
+.footer-max-width[_ngcontent-ng-c305335744] {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer-content[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-fourunits);
+  width: 100%;
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: var(--dl-radius-radius-radius4);
+  margin-bottom: 2rem;
+}
+.footer-newsletter[_ngcontent-ng-c305335744] {
+  gap: 24px;
+  width: 500px;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.footer-image1[_ngcontent-ng-c305335744] {
+  height: 2rem;
+}
+.footer-actions[_ngcontent-ng-c305335744] {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.footer-form[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-unit);
+  width: 100%;
+  display: flex;
+  align-self: stretch;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+.footer-container[_ngcontent-ng-c305335744] {
+  width: 365px;
+  display: flex;
+  align-items: flex-start;
+}
+.footer-text-input[_ngcontent-ng-c305335744] {
+  gap: 8px;
+  width: 100%;
+  height: 32px;
+  display: flex;
+  font-size: 16px;
+  box-sizing: content-box;
+  text-align: left;
+  align-items: center;
+  font-family: Roboto;
+  font-weight: 400;
+  background-color: transparent;
+}
+.footer-content2[_ngcontent-ng-c305335744] {
+  fill: var(--dl-color-theme-neutral-dark);
+  color: var(--dl-color-theme-neutral-dark);
+  height: auto;
+  font-size: 12px;
+  align-self: stretch;
+  font-style: Regular;
+  text-align: left;
+  font-family: "Roboto";
+  font-weight: 400;
+  line-height: 150%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.footer-links[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-twounits);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.footer-column1[_ngcontent-ng-c305335744] {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.logo-container[_ngcontent-ng-c305335744] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo-icon[_ngcontent-ng-c305335744] {
+  font-size: 24px;
+  color: #b2d1e6;
+}
+.logo-text[_ngcontent-ng-c305335744] {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+}
+.logo-tube[_ngcontent-ng-c305335744] {
+  color: white;
+}
+.logo-music[_ngcontent-ng-c305335744] {
+  color: #b2d1e6;
+}
+.footer-description[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  max-width: 250px;
+  line-height: 1.5;
+}
+.login-button[_ngcontent-ng-c305335744] {
+  background-color: #b2d1e6;
+  color: #1a1a1a;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  width: fit-content;
+  transition: background-color 0.3s ease;
+}
+.login-button[_ngcontent-ng-c305335744]:hover {
+  background-color: #9dbfd8;
+}
+.footer-column-title[_ngcontent-ng-c305335744] {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #e2e8f0;
+}
+.footer-footer-links1[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.footer-footer-links1[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+.footer-footer-links1[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744]:hover {
+  color: #e2e8f0;
+}
+.footer-column2[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-unit);
+  width: auto;
+  display: flex;
+  overflow: hidden;
+  flex-grow: 1;
+  max-width: 300px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+.footer-footer-links2[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.footer-footer-links2[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+.footer-footer-links2[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744]:hover {
+  color: #e2e8f0;
+}
+.footer-column3[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-unit);
+  width: auto;
+  display: flex;
+  overflow: hidden;
+  flex-grow: 1;
+  max-width: 300px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+.footer-social-links[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+  display: flex;
+  gap: 1rem;
+}
+.footer-social-link[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+.footer-social-link[_ngcontent-ng-c305335744]:hover {
+  color: #e2e8f0;
+}
+.footer-link14[_ngcontent-ng-c305335744] {
+  gap: 12px;
+  display: flex;
+  padding: 8px 0;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-link15[_ngcontent-ng-c305335744] {
+  gap: 12px;
+  display: flex;
+  padding: 8px 0;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-link16[_ngcontent-ng-c305335744] {
+  gap: 12px;
+  display: flex;
+  padding: 8px 0;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-link17[_ngcontent-ng-c305335744] {
+  gap: 12px;
+  display: flex;
+  padding: 8px 0;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-link18[_ngcontent-ng-c305335744] {
+  gap: 12px;
+  display: flex;
+  padding: 8px 0;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-credits[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-twounits);
+  width: 100%;
+  display: flex;
+  align-self: stretch;
+  margin-top: var(--dl-space-space-unit);
+  align-items: flex-start;
+  flex-direction: column;
+  border-top: 1px solid #334155;
+  padding-top: 2rem;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+.footer-row[_ngcontent-ng-c305335744] {
+  gap: 64px;
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+.footer-footer-links3[_ngcontent-ng-c305335744] {
+  gap: 24px;
+  display: flex;
+  align-items: center;
+}
+.footer-footer-links3[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744] {
+  color: var(--dl-color-gray-500);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+.footer-footer-links3[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744]:hover {
+  color: var(--dl-color-gray-700);
+  text-decoration: underline;
+}
+@media (max-width: 991px) {
+  .footer-newsletter[_ngcontent-ng-c305335744] {
+    width: 300px;
+  }
+  .footer-form[_ngcontent-ng-c305335744] {
+    width: 100%;
+    flex-direction: column;
+  }
+  .footer-container[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-text-input[_ngcontent-ng-c305335744] {
+    width: 100%;
+    padding: var(--dl-space-space-halfunit);
+  }
+  .footer-button[_ngcontent-ng-c305335744] {
+    width: 100%;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-halfunit);
+    padding-right: var(--dl-space-space-halfunit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+}
+@media (max-width: 767px) {
+  .footer-content[_ngcontent-ng-c305335744] {
+    flex-direction: column;
+  }
+  .footer-newsletter[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-form[_ngcontent-ng-c305335744] {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .footer-container[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-button[_ngcontent-ng-c305335744] {
+    width: 208px;
+  }
+  .footer-links[_ngcontent-ng-c305335744] {
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .footer-column1[_ngcontent-ng-c305335744] {
+    align-items: center;
+  }
+  .footer-column1-title[_ngcontent-ng-c305335744] {
+    text-align: center;
+  }
+  .footer-footer-links1[_ngcontent-ng-c305335744] {
+    align-self: center;
+  }
+  .footer-column2[_ngcontent-ng-c305335744] {
+    align-items: center;
+  }
+  .footer-column2-title[_ngcontent-ng-c305335744] {
+    text-align: center;
+  }
+  .footer-footer-links2[_ngcontent-ng-c305335744] {
+    align-self: center;
+  }
+  .footer-column3[_ngcontent-ng-c305335744] {
+    align-items: center;
+  }
+  .footer-social-link1-title[_ngcontent-ng-c305335744] {
+    text-align: center;
+  }
+  .footer-social-links[_ngcontent-ng-c305335744] {
+    align-self: center;
+  }
+  .footer-row[_ngcontent-ng-c305335744] {
+    flex-direction: column;
+  }
+}
+@media (max-width: 479px) {
+  .footer-actions[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-form[_ngcontent-ng-c305335744] {
+    width: 100%;
+    flex-direction: column;
+  }
+  .footer-container[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-button[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-links[_ngcontent-ng-c305335744] {
+    flex-direction: column;
+  }
+  .footer-column1[_ngcontent-ng-c305335744] {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-footer-links1[_ngcontent-ng-c305335744] {
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-column2[_ngcontent-ng-c305335744] {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-footer-links2[_ngcontent-ng-c305335744] {
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-column3[_ngcontent-ng-c305335744] {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-social-links[_ngcontent-ng-c305335744] {
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-credits[_ngcontent-ng-c305335744] {
+    gap: 0;
+  }
+  .footer-row[_ngcontent-ng-c305335744] {
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-footer-links3[_ngcontent-ng-c305335744] {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+@media (max-width: 768px) {
+  .footer-footer1[_ngcontent-ng-c305335744] {
+    padding: 3rem 1rem;
+  }
+  .footer-links[_ngcontent-ng-c305335744] {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+  }
+  .footer-column-title[_ngcontent-ng-c305335744] {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .footer-footer-links1[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744] {
+    font-size: 0.9rem;
+  }
+}
+.hello[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+h1[_ngcontent-ng-c305335744], 
+h2[_ngcontent-ng-c305335744], 
+h3[_ngcontent-ng-c305335744], 
+h4[_ngcontent-ng-c305335744], 
+h5[_ngcontent-ng-c305335744], 
+h6[_ngcontent-ng-c305335744] {
+  font-family: "Roboto", sans-serif;
+}
+body[_ngcontent-ng-c305335744], 
+p[_ngcontent-ng-c305335744], 
+div[_ngcontent-ng-c305335744], 
+span[_ngcontent-ng-c305335744] {
+  font-family: serif;
+}
+.social-icon[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  font-size: 18px;
+  width: 24px;
+}
+.footer-link14[_ngcontent-ng-c305335744], 
+.footer-link15[_ngcontent-ng-c305335744], 
+.footer-link16[_ngcontent-ng-c305335744] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0px;
+}
+.footer-social-link[_ngcontent-ng-c305335744] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 150ms ease, transform 150ms ease;
+}
+.footer-social-link[_ngcontent-ng-c305335744]:hover, 
+.footer-social-link[_ngcontent-ng-c305335744]:focus-visible {
+  color: #ffffff;
+  transform: translateY(-1px);
+  outline: none;
+}
+.footer-social-link[_ngcontent-ng-c305335744]   .social-icon[_ngcontent-ng-c305335744] {
+  font-size: 18px;
+  color: inherit;
+}
+.logo-container[_ngcontent-ng-c305335744] {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+@media (max-width: 768px) {
+  .footer-content[_ngcontent-ng-c305335744] {
+    gap: 24px;
+  }
+  .footer-links[_ngcontent-ng-c305335744] {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .footer-column1[_ngcontent-ng-c305335744], 
+   .footer-column2[_ngcontent-ng-c305335744], 
+   .footer-column3[_ngcontent-ng-c305335744] {
+    width: 100%;
+    align-items: flex-start;
+  }
+  .footer-row[_ngcontent-ng-c305335744] {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .footer-footer-links3[_ngcontent-ng-c305335744] {
+    flex-wrap: wrap;
+    gap: 12px 18px;
+  }
+  .login-button[_ngcontent-ng-c305335744] {
+    width: 100%;
+    max-width: 320px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    font-size: 16px;
+  }
+  .footer-social-links[_ngcontent-ng-c305335744] {
+    flex-wrap: wrap;
+    gap: 14px 18px;
+  }
+}
+/*# sourceMappingURL=footer.component.css.map */</style><style ng-app-id="ng">
+
+[_nghost-ng-c889458302] {
+  display: block;
+}
+.audio-shell[_ngcontent-ng-c889458302] {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 64px) clamp(20px, 5vw, 56px) 80px;
+  color: #0f172a;
+}
+.audio-hero[_ngcontent-ng-c889458302] {
+  text-align: center;
+  padding: 8px 0 24px;
+}
+.audio-eyebrow[_ngcontent-ng-c889458302] {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 12px;
+  color: #147487;
+  background: rgba(20, 116, 135, 0.1);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.audio-hero[_ngcontent-ng-c889458302]   h1[_ngcontent-ng-c889458302] {
+  margin: 0 0 12px;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.1;
+  font-weight: 800;
+}
+.audio-lead[_ngcontent-ng-c889458302] {
+  margin: 0 auto 14px;
+  max-width: 640px;
+  color: #475569;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.audio-lead[_ngcontent-ng-c889458302]   a[_ngcontent-ng-c889458302] {
+  color: #147487;
+  font-weight: 600;
+}
+.audio-quota[_ngcontent-ng-c889458302] {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(20, 116, 135, 0.08);
+  color: #147487;
+  font-size: 13px;
+  font-weight: 600;
+}
+.audio-quota[_ngcontent-ng-c889458302]   mat-icon[_ngcontent-ng-c889458302] {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+.audio-quota-pro[_ngcontent-ng-c889458302] {
+  background:
+    linear-gradient(
+      135deg,
+      #fbbf24 0%,
+      #f59e0b 100%);
+  color: #ffffff;
+}
+.audio-card[_ngcontent-ng-c889458302] {
+  margin: 24px 0 36px;
+  padding: clamp(20px, 4vw, 32px);
+  background: #ffffff;
+  border: 1px solid rgba(20, 116, 135, 0.16);
+  border-radius: 18px;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.06);
+}
+.audio-field[_ngcontent-ng-c889458302], 
+.audio-field-inline[_ngcontent-ng-c889458302] {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.audio-field[_ngcontent-ng-c889458302]   span[_ngcontent-ng-c889458302], 
+.audio-field-inline[_ngcontent-ng-c889458302]   span[_ngcontent-ng-c889458302] {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+.audio-field[_ngcontent-ng-c889458302]   input[_ngcontent-ng-c889458302], 
+.audio-field-inline[_ngcontent-ng-c889458302]   select[_ngcontent-ng-c889458302], 
+.audio-field-inline[_ngcontent-ng-c889458302]   input[_ngcontent-ng-c889458302] {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(20, 116, 135, 0.18);
+  font-size: 15px;
+  background: #ffffff;
+  color: #0f172a;
+}
+.audio-field-inline[_ngcontent-ng-c889458302] {
+  flex: 1 1 200px;
+  min-width: 200px;
+}
+.audio-options[_ngcontent-ng-c889458302] {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.audio-info-meta[_ngcontent-ng-c889458302] {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.audio-info-meta[_ngcontent-ng-c889458302]   img[_ngcontent-ng-c889458302] {
+  width: 220px;
+  max-width: 40vw;
+  border-radius: 12px;
+  display: block;
+}
+.audio-info-text[_ngcontent-ng-c889458302] {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.audio-info-text[_ngcontent-ng-c889458302]   h3[_ngcontent-ng-c889458302] {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+}
+.audio-info-channel[_ngcontent-ng-c889458302] {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 10px;
+  color: #475569;
+  font-size: 13px;
+}
+.audio-info-channel[_ngcontent-ng-c889458302]   mat-icon[_ngcontent-ng-c889458302] {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+.audio-info-stats[_ngcontent-ng-c889458302] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 12px;
+  color: #475569;
+}
+.audio-info-stats[_ngcontent-ng-c889458302]   li[_ngcontent-ng-c889458302] {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.audio-info-stats[_ngcontent-ng-c889458302]   mat-icon[_ngcontent-ng-c889458302] {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
+.audio-captcha[_ngcontent-ng-c889458302] {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.32);
+  border-radius: 12px;
+}
+.audio-captcha-label[_ngcontent-ng-c889458302] {
+  font-size: 13px;
+  color: #92400e;
+}
+.audio-captcha-label[_ngcontent-ng-c889458302]   strong[_ngcontent-ng-c889458302] {
+  font-weight: 700;
+  color: #b45309;
+}
+.audio-captcha[_ngcontent-ng-c889458302]   input[_ngcontent-ng-c889458302] {
+  width: 80px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  font-size: 15px;
+  text-align: center;
+}
+.audio-captcha-refresh[_ngcontent-ng-c889458302] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #b45309;
+  cursor: pointer;
+}
+.audio-captcha-refresh[_ngcontent-ng-c889458302]:hover {
+  background: rgba(245, 158, 11, 0.12);
+}
+.audio-actions[_ngcontent-ng-c889458302] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.audio-primary[_ngcontent-ng-c889458302], 
+.audio-secondary[_ngcontent-ng-c889458302] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  transition:
+    transform 150ms ease,
+    box-shadow 200ms ease,
+    background 150ms ease;
+  position: relative;
+}
+.audio-primary[_ngcontent-ng-c889458302] {
+  background:
+    linear-gradient(
+      135deg,
+      #06b6d4 0%,
+      #38bdf8 100%);
+  color: #ffffff;
+  box-shadow: 0 12px 24px rgba(6, 182, 212, 0.32);
+}
+.audio-primary[_ngcontent-ng-c889458302]:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+.audio-primary[_ngcontent-ng-c889458302]:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.audio-primary-block[_ngcontent-ng-c889458302] {
+  width: 100%;
+  justify-content: center;
+}
+.audio-primary-large[_ngcontent-ng-c889458302] {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+.audio-secondary[_ngcontent-ng-c889458302] {
+  background: rgba(20, 116, 135, 0.08);
+  color: #147487;
+}
+.audio-secondary[_ngcontent-ng-c889458302]:hover {
+  background: rgba(20, 116, 135, 0.16);
+}
+.audio-secondary.disabled[_ngcontent-ng-c889458302] {
+  opacity: 0.6;
+}
+.audio-pro-pill[_ngcontent-ng-c889458302] {
+  background:
+    linear-gradient(
+      135deg,
+      #fbbf24 0%,
+      #f59e0b 100%);
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  margin-left: 6px;
+}
+.spin[_ngcontent-ng-c889458302] {
+  animation: _ngcontent-ng-c889458302_audio-spin 1s linear infinite;
+}
+@keyframes _ngcontent-ng-c889458302_audio-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.audio-progress[_ngcontent-ng-c889458302] {
+  text-align: center;
+  padding: 8px 0;
+}
+.audio-progress[_ngcontent-ng-c889458302]   h3[_ngcontent-ng-c889458302] {
+  margin: 0 0 16px;
+  color: #0f172a;
+}
+.audio-progress-bar[_ngcontent-ng-c889458302] {
+  width: 100%;
+  height: 14px;
+  background: rgba(20, 116, 135, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.audio-progress-fill[_ngcontent-ng-c889458302] {
+  height: 100%;
+  background:
+    linear-gradient(
+      135deg,
+      #06b6d4 0%,
+      #38bdf8 100%);
+  transition: width 200ms ease-out;
+  width: 0%;
+}
+.audio-progress-label[_ngcontent-ng-c889458302] {
+  margin: 4px 0 0;
+  font-weight: 600;
+  color: #0f172a;
+}
+.audio-progress-hint[_ngcontent-ng-c889458302] {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #64748b;
+}
+.audio-completed[_ngcontent-ng-c889458302]   h3[_ngcontent-ng-c889458302] {
+  margin: 0 0 6px;
+  color: #047857;
+}
+.audio-completed-sub[_ngcontent-ng-c889458302] {
+  margin: 0 0 14px;
+  color: #475569;
+  font-size: 14px;
+}
+.audio-error[_ngcontent-ng-c889458302]   h3[_ngcontent-ng-c889458302] {
+  margin: 0 0 8px;
+  color: #b91c1c;
+}
+.audio-error[_ngcontent-ng-c889458302]   p[_ngcontent-ng-c889458302] {
+  margin: 0 0 6px;
+  color: #475569;
+}
+.audio-error-code[_ngcontent-ng-c889458302] {
+  font-family: monospace;
+  font-size: 12px;
+  color: #94a3b8;
+}
+.audio-features[_ngcontent-ng-c889458302] {
+  margin: 56px 0;
+}
+.audio-features[_ngcontent-ng-c889458302]   h2[_ngcontent-ng-c889458302], 
+.audio-faq[_ngcontent-ng-c889458302]   h2[_ngcontent-ng-c889458302], 
+.audio-cta[_ngcontent-ng-c889458302]   h2[_ngcontent-ng-c889458302] {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 18px;
+  color: #0f172a;
+  text-align: center;
+}
+.audio-feature-grid[_ngcontent-ng-c889458302] {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.audio-feature[_ngcontent-ng-c889458302] {
+  background: #ffffff;
+  border: 1px solid rgba(20, 116, 135, 0.12);
+  border-radius: 14px;
+  padding: 18px;
+}
+.audio-feature[_ngcontent-ng-c889458302]   h3[_ngcontent-ng-c889458302] {
+  margin: 8px 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.audio-feature[_ngcontent-ng-c889458302]   p[_ngcontent-ng-c889458302] {
+  margin: 0;
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
+}
+.audio-feature[_ngcontent-ng-c889458302]   p[_ngcontent-ng-c889458302]   a[_ngcontent-ng-c889458302] {
+  color: #147487;
+}
+.audio-feature-icon[_ngcontent-ng-c889458302] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(20, 116, 135, 0.1);
+  color: #147487;
+}
+.audio-faq[_ngcontent-ng-c889458302]   details[_ngcontent-ng-c889458302] {
+  background: #ffffff;
+  border: 1px solid rgba(20, 116, 135, 0.12);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+}
+.audio-faq[_ngcontent-ng-c889458302]   summary[_ngcontent-ng-c889458302] {
+  cursor: pointer;
+  font-weight: 600;
+  color: #0f172a;
+}
+.audio-faq[_ngcontent-ng-c889458302]   p[_ngcontent-ng-c889458302] {
+  margin: 8px 0 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.audio-cta[_ngcontent-ng-c889458302] {
+  margin: 40px 0 0;
+  text-align: center;
+  padding: 32px;
+  background:
+    linear-gradient(
+      160deg,
+      #0f172a 0%,
+      #1e293b 100%);
+  border-radius: 18px;
+  color: #f8fafc;
+}
+.audio-cta[_ngcontent-ng-c889458302]   h2[_ngcontent-ng-c889458302] {
+  color: #ffffff;
+}
+.audio-cta[_ngcontent-ng-c889458302]   p[_ngcontent-ng-c889458302] {
+  color: rgba(248, 250, 252, 0.78);
+  margin-bottom: 18px;
+}
+.audio-cta-price[_ngcontent-ng-c889458302] {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.audio-cta-price[_ngcontent-ng-c889458302]   small[_ngcontent-ng-c889458302] {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.85;
+  margin-left: 2px;
+}
+.audio-cta-trust[_ngcontent-ng-c889458302] {
+  margin: 14px 0 0;
+  font-size: 12px;
+  color: rgba(248, 250, 252, 0.65);
+}
+.audio-modal[_ngcontent-ng-c889458302] {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.audio-modal-card[_ngcontent-ng-c889458302] {
+  position: relative;
+  width: min(460px, 100%);
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 28px;
+  color: #0f172a;
+}
+.audio-modal-card[_ngcontent-ng-c889458302]   h3[_ngcontent-ng-c889458302] {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.audio-modal-card[_ngcontent-ng-c889458302]   p[_ngcontent-ng-c889458302] {
+  margin: 0 0 14px;
+  color: #475569;
+  line-height: 1.5;
+}
+.audio-modal-card[_ngcontent-ng-c889458302]   ul[_ngcontent-ng-c889458302] {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.audio-modal-card[_ngcontent-ng-c889458302]   li[_ngcontent-ng-c889458302] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #0f172a;
+}
+.audio-modal-card[_ngcontent-ng-c889458302]   li[_ngcontent-ng-c889458302]   mat-icon[_ngcontent-ng-c889458302] {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #06b6d4;
+}
+.audio-modal-close[_ngcontent-ng-c889458302] {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: 0;
+  color: #64748b;
+  cursor: pointer;
+}
+.audio-modal-close[_ngcontent-ng-c889458302]:hover {
+  color: #0f172a;
+}
+.audio-modal-trust[_ngcontent-ng-c889458302] {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: #64748b;
+  text-align: center;
+}
+.audio-modal-sub[_ngcontent-ng-c889458302] {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #0f172a;
+  text-align: center;
+  font-style: italic;
+}
+@media (max-width: 600px) {
+  .audio-info-meta[_ngcontent-ng-c889458302] {
+    flex-direction: column;
+  }
+  .audio-info-meta[_ngcontent-ng-c889458302]   img[_ngcontent-ng-c889458302] {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+.audio-secondary.is-saved[_ngcontent-ng-c889458302] {
+  background:
+    linear-gradient(
+      135deg,
+      #ef4444 0%,
+      #b91c1c 100%);
+  color: #ffffff;
+}
+.audio-secondary.is-saved[_ngcontent-ng-c889458302]   mat-icon[_ngcontent-ng-c889458302] {
+  color: #ffffff;
+}
+/*# sourceMappingURL=audio-download.component.css.map */</style><style ng-app-id="ng">mat-icon,mat-icon.mat-primary,mat-icon.mat-accent,mat-icon.mat-warn{color:var(--mat-icon-color)}.mat-icon{-webkit-user-select:none;user-select:none;background-repeat:no-repeat;display:inline-block;fill:currentColor;height:24px;width:24px;overflow:hidden}.mat-icon.mat-icon-inline{font-size:inherit;height:inherit;line-height:inherit;width:inherit}.mat-icon.mat-ligature-font[fontIcon]::before{content:attr(fontIcon)}[dir=rtl] .mat-icon-rtl-mirror{transform:scale(-1, 1)}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon{display:block}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button .mat-icon{margin:auto}</style><title>YouTube to MP3 — Fast, Free, Safe | TubeMusic.io</title><meta name="description" content="Convert YouTube videos to MP3 in seconds. No ads, no malware, no fake redirects. 2 free downloads per day — go PRO for unlimited."><meta name="keywords" content="youtube to mp3, youtube audio download, free mp3 converter, no ads mp3, safe youtube downloader"></head>
+<body class="mat-typography"><!--nghm-->
+  <app-root _nghost-ng-c951744504="" ng-version="18.1.4" ngh="4" ng-server-context="ssg"><div _ngcontent-ng-c951744504="" class="home-container"><app-toast _ngcontent-ng-c951744504="" _nghost-ng-c721834416="" ngh="0"><!--bindings={
+  "ng-reflect-ng-if": null
+}--></app-toast><app-navbar _ngcontent-ng-c951744504="" _nghost-ng-c3663033336="" ngh="1"><header _ngcontent-ng-c3663033336="" class="navbar-container"><header _ngcontent-ng-c3663033336="" data-thq="thq-navbar" class="navbar-navbar-interactive"><a _ngcontent-ng-c3663033336="" routerlink="/" aria-label="TubeMusic home" class="logo-container" ng-reflect-router-link="/" href="/"><i _ngcontent-ng-c3663033336="" aria-hidden="true" class="fa fa-play-circle logo-icon"></i><span _ngcontent-ng-c3663033336="" class="logo-text"><span _ngcontent-ng-c3663033336="" class="logo-tube">Tube</span><span _ngcontent-ng-c3663033336="" class="logo-music">Music</span></span></a><div _ngcontent-ng-c3663033336="" data-thq="thq-navbar-nav" class="navbar-desktop-menu"><nav _ngcontent-ng-c3663033336="" class="navbar-links1"><span _ngcontent-ng-c3663033336="" routerlink="/" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/">Home</span><span _ngcontent-ng-c3663033336="" routerlink="/about" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/about">About</span><span _ngcontent-ng-c3663033336="" routerlink="/contact" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/contact">Contact</span><span _ngcontent-ng-c3663033336="" routerlink="/copyright-free-music" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/copyright-free-music">Gallery</span><span _ngcontent-ng-c3663033336="" routerlink="/audio-download" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/audio-download">Download</span><span _ngcontent-ng-c3663033336="" routerlink="/ai-music-free" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/ai-music-free">AI Music</span><span _ngcontent-ng-c3663033336="" routerlink="/pro" class="thq-link thq-body-small thq-link-pro" tabindex="0" ng-reflect-router-link="/pro">PRO</span><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span _ngcontent-ng-c3663033336="" routerlink="/faq" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/faq">FAQ</span></nav><div _ngcontent-ng-c3663033336="" class="navbar-buttons1"><button _ngcontent-ng-c3663033336="" routerlink="/sign-in" class="navbar-action11 thq-button-animated thq-button-filled" tabindex="0" ng-reflect-router-link="/sign-in"><span _ngcontent-ng-c3663033336="" class="thq-body-small">Log In</span></button><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><button _ngcontent-ng-c3663033336="" routerlink="/sign-up" class="navbar-action21 thq-button-outline thq-button-animated" tabindex="0" ng-reflect-router-link="/sign-up"><span _ngcontent-ng-c3663033336="" class="thq-body-small"> Register</span></button><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div></div><div _ngcontent-ng-c3663033336="" data-thq="thq-burger-menu" class="navbar-burger-menu"><svg _ngcontent-ng-c3663033336="" viewBox="0 0 1024 1024" class="navbar-icon1"><path _ngcontent-ng-c3663033336="" d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path></svg></div><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></header></header></app-navbar><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><router-outlet _ngcontent-ng-c951744504=""></router-outlet><app-audio-download _nghost-ng-c889458302="" ngh="3"><section _ngcontent-ng-c889458302="" class="audio-shell"><header _ngcontent-ng-c889458302="" class="audio-hero"><span _ngcontent-ng-c889458302="" class="audio-eyebrow">YouTube → MP3</span><h1 _ngcontent-ng-c889458302="">Convert YouTube to MP3 — fast, free, safe</h1><p _ngcontent-ng-c889458302="" class="audio-lead"> No ads. No malware. No fake redirects. 2 free downloads every 24 hours per browser. <a _ngcontent-ng-c889458302="" routerlink="/pro" ng-reflect-router-link="/pro" href="/pro">Go PRO</a> for unlimited. </p><!--bindings={
+  "ng-reflect-ng-if": null
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></header><article _ngcontent-ng-c889458302="" class="audio-card"><div _ngcontent-ng-c889458302=""><label _ngcontent-ng-c889458302="" class="audio-field"><span _ngcontent-ng-c889458302="">YouTube URL</span><input _ngcontent-ng-c889458302="" type="url" placeholder="https://youtube.com/watch?v=..." ng-reflect-model="" ng-reflect-is-disabled="false" value="" class="ng-untouched ng-pristine ng-valid"></label><button _ngcontent-ng-c889458302="" class="audio-primary"><mat-icon _ngcontent-ng-c889458302="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">search</mat-icon><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--> Get audio </button></div><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></article><section _ngcontent-ng-c889458302="" class="audio-features"><h2 _ngcontent-ng-c889458302="">Why choose our downloader</h2><div _ngcontent-ng-c889458302="" class="audio-feature-grid"><article _ngcontent-ng-c889458302="" class="audio-feature"><span _ngcontent-ng-c889458302="" class="audio-feature-icon"><mat-icon _ngcontent-ng-c889458302="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">flash_on</mat-icon></span><h3 _ngcontent-ng-c889458302="">Lightning fast</h3><p _ngcontent-ng-c889458302="">Server-side conversion with progress streaming. Most tracks are ready in under 30 seconds.</p></article><article _ngcontent-ng-c889458302="" class="audio-feature"><span _ngcontent-ng-c889458302="" class="audio-feature-icon"><mat-icon _ngcontent-ng-c889458302="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">headphones</mat-icon></span><h3 _ngcontent-ng-c889458302="">Best-in-class quality</h3><p _ngcontent-ng-c889458302="">Always max quality — never re-encoded. Choose MP3 for universal compatibility or M4A for Apple devices.</p></article><article _ngcontent-ng-c889458302="" class="audio-feature"><span _ngcontent-ng-c889458302="" class="audio-feature-icon"><mat-icon _ngcontent-ng-c889458302="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">verified_user</mat-icon></span><h3 _ngcontent-ng-c889458302="">Copyright aware</h3><p _ngcontent-ng-c889458302="">Pair with our <a _ngcontent-ng-c889458302="" routerlink="/home" ng-reflect-router-link="/home" href="/home">copyright checker</a> before publishing — never get a strike again.</p></article><article _ngcontent-ng-c889458302="" class="audio-feature"><span _ngcontent-ng-c889458302="" class="audio-feature-icon"><mat-icon _ngcontent-ng-c889458302="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">devices</mat-icon></span><h3 _ngcontent-ng-c889458302="">Works everywhere</h3><p _ngcontent-ng-c889458302="">Mobile, desktop, tablet. Built for content creators on the go — no install, no signup.</p></article><article _ngcontent-ng-c889458302="" class="audio-feature"><span _ngcontent-ng-c889458302="" class="audio-feature-icon"><mat-icon _ngcontent-ng-c889458302="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">block</mat-icon></span><h3 _ngcontent-ng-c889458302="">No ads, no malware</h3><p _ngcontent-ng-c889458302="">Unlike most YouTube to MP3 sites, we never pop-up, redirect, or attach toolbars. Pure download.</p></article><article _ngcontent-ng-c889458302="" class="audio-feature"><span _ngcontent-ng-c889458302="" class="audio-feature-icon"><mat-icon _ngcontent-ng-c889458302="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">savings</mat-icon></span><h3 _ngcontent-ng-c889458302="">100% free to start</h3><p _ngcontent-ng-c889458302="">2 downloads per day, every day, forever — no card required. Go PRO any time you need more.</p></article></div></section><section _ngcontent-ng-c889458302="" class="audio-faq"><h2 _ngcontent-ng-c889458302="">Frequently asked questions</h2><details _ngcontent-ng-c889458302=""><summary _ngcontent-ng-c889458302="">Is this really free?</summary><p _ngcontent-ng-c889458302="">Yes — every visitor gets 2 free MP3 downloads every 24 hours. No signup required. PRO unlocks unlimited downloads, plus longer files (up to 1h) and AI music.</p></details><details _ngcontent-ng-c889458302=""><summary _ngcontent-ng-c889458302="">Why MP3 vs M4A?</summary><p _ngcontent-ng-c889458302="">Both are great. MP3 is the universal format that plays everywhere. M4A (AAC) keeps better quality at the same bitrate and is the default on Apple devices. Pick whichever your editor handles cleanest.</p></details><details _ngcontent-ng-c889458302=""><summary _ngcontent-ng-c889458302="">Why captcha for everyone, even PRO?</summary><p _ngcontent-ng-c889458302="">Bots constantly try to scrape this endpoint. The captcha keeps the service fast and free for real humans. It’s a single click — never an interstitial.</p></details><details _ngcontent-ng-c889458302=""><summary _ngcontent-ng-c889458302="">My download failed. What now?</summary><p _ngcontent-ng-c889458302="">Hit Retry. Free users get one retry, PRO users get unlimited retries plus a Report button so our team can investigate the specific track.</p></details><details _ngcontent-ng-c889458302=""><summary _ngcontent-ng-c889458302="">Are downloads safe?</summary><p _ngcontent-ng-c889458302="">Yes. We never inject ads, redirect to malware sites, or repackage the audio. Files come straight from our audio provider over HTTPS.</p></details><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--></section><section _ngcontent-ng-c889458302="" class="audio-cta"><h2 _ngcontent-ng-c889458302="">Tired of YouTube MP3 sites that don’t work?</h2><p _ngcontent-ng-c889458302="">Go PRO and enjoy unlimited downloads, AI music generation, and the full royalty-free library.</p><a _ngcontent-ng-c889458302="" routerlink="/pro" class="audio-primary audio-primary-large" ng-reflect-router-link="/pro" href="/pro"><span _ngcontent-ng-c889458302="" class="audio-cta-price">$2.90<small _ngcontent-ng-c889458302="">/mo</small></span><span _ngcontent-ng-c889458302="">Go PRO</span></a><p _ngcontent-ng-c889458302="" class="audio-cta-trust">Secure payment · Satisfied or refunded · Cancel anytime</p></section></section><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></app-audio-download><!--container--><app-footer _ngcontent-ng-c951744504="" _nghost-ng-c305335744="" ngh="2"><footer _ngcontent-ng-c305335744="" class="footer-footer1 thq-section-padding" style="margin-bottom: -30px;"><div _ngcontent-ng-c305335744="" class="footer-max-width thq-section-max-width"><div _ngcontent-ng-c305335744="" class="footer-content"><div _ngcontent-ng-c305335744="" class="footer-links"><div _ngcontent-ng-c305335744="" class="footer-column1"><a _ngcontent-ng-c305335744="" routerlink="/" aria-label="TubeMusic home" class="logo-container" ng-reflect-router-link="/" href="/"><i _ngcontent-ng-c305335744="" aria-hidden="true" class="fa fa-play-circle logo-icon"></i><span _ngcontent-ng-c305335744="" class="logo-text"><span _ngcontent-ng-c305335744="" class="logo-tube">Tube</span><span _ngcontent-ng-c305335744="" class="logo-music">Music</span></span></a><p _ngcontent-ng-c305335744="" class="footer-description thq-body-small"> TubeMusic is a 100% free platform that lets you find copyright‑free and royalty‑free music for your YouTube videos. You can check the copyright status of each song before using it or browse our ready-made library of copyright‑free tracks. </p><button _ngcontent-ng-c305335744="" routerlink="/sign-in" class="login-button thq-btn-primary" tabindex="0" ng-reflect-router-link="/sign-in"> Log In </button></div><div _ngcontent-ng-c305335744="" class="footer-column2"><strong _ngcontent-ng-c305335744="" class="thq-body-large footer-column2-title"> Quick Links </strong><div _ngcontent-ng-c305335744="" class="footer-footer-links2"><a _ngcontent-ng-c305335744="" href="/" rel="noreferrer noopener" class="thq-body-small"> Home </a><a _ngcontent-ng-c305335744="" href="/about" rel="noreferrer noopener" class="thq-body-small"> About </a><a _ngcontent-ng-c305335744="" href="/contact" rel="noreferrer noopener" class="thq-body-small"> Contact </a><a _ngcontent-ng-c305335744="" href="/copyright-free-music" rel="noreferrer noopener" class="thq-body-small"> Gallery </a><a _ngcontent-ng-c305335744="" href="/audio-download" rel="noreferrer noopener" class="thq-body-small"> Download </a><a _ngcontent-ng-c305335744="" href="/faq" rel="noreferrer noopener" class="thq-body-small"> FAQs </a></div></div><div _ngcontent-ng-c305335744="" class="footer-column3"><strong _ngcontent-ng-c305335744="" class="thq-body-large footer-social-link1-title"> Connect with Us </strong><div _ngcontent-ng-c305335744="" class="footer-social-links"><a _ngcontent-ng-c305335744="" href="https://www.instagram.com/tubemusic_io/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="footer-social-link"><i _ngcontent-ng-c305335744="" class="fab fa-instagram social-icon"></i><span _ngcontent-ng-c305335744="" class="thq-body-small">Instagram</span></a><a _ngcontent-ng-c305335744="" href="https://x.com/tubemusic_io" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)" class="footer-social-link"><i _ngcontent-ng-c305335744="" class="fab fa-x-twitter social-icon"></i><span _ngcontent-ng-c305335744="" class="thq-body-small">X</span></a><a _ngcontent-ng-c305335744="" href="https://www.youtube.com/@tubemusic-g6f" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="footer-social-link"><i _ngcontent-ng-c305335744="" class="fab fa-youtube social-icon"></i><span _ngcontent-ng-c305335744="" class="thq-body-small">YouTube</span></a></div></div></div></div><div _ngcontent-ng-c305335744="" class="footer-credits"><div _ngcontent-ng-c305335744="" class="thq-divider-horizontal"></div><div _ngcontent-ng-c305335744="" class="footer-row"><span _ngcontent-ng-c305335744="" class="thq-body-small">© TubeMusic.io All Rights Reserved.</span><div _ngcontent-ng-c305335744="" class="footer-footer-links3"><a _ngcontent-ng-c305335744="" href="/privacy-policy" class="thq-body-small">Privacy Policy</a><a _ngcontent-ng-c305335744="" href="/terms" class="thq-body-small">Terms And Conditions</a><a _ngcontent-ng-c305335744="" href="/copyright-policy" class="thq-body-small">Copyright Policy</a><a _ngcontent-ng-c305335744="" href="/dmca" class="thq-body-small">DMCA</a><a _ngcontent-ng-c305335744="" href="/refund-policy" class="thq-body-small">Refund Policy</a></div></div></div></div></footer></app-footer><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--></div></app-root>
+<link rel="modulepreload" href="chunk-JUOSWX6S.js"><script src="polyfills.js" type="module"></script><script src="main.js" type="module"></script>
+
+<script id="ng-state" type="application/json">{"__nghData__":[{"t":{"0":"t0"},"c":{"0":[]}},{"t":{"23":"t2","27":"t3","28":"t4","29":"t5","33":"t6"},"c":{"23":[{"i":"t2","r":1}],"27":[{"i":"t3","r":1}],"28":[{"i":"t4","r":1}],"29":[],"33":[]}},{},{"t":{"11":"t44","12":"t45","14":"t46","15":"t49","16":"t50","17":"t51","18":"t52","77":"t53","92":"t54"},"c":{"11":[],"12":[],"14":[{"i":"t46","r":1,"t":{"6":"t47","7":"t48"},"c":{"6":[{"i":"t47","r":1,"n":{"1":"0f"}}],"7":[]}}],"15":[],"16":[],"17":[],"18":[],"77":[{"i":"t53","r":1,"x":5}],"92":[]},"n":{"26":"25f","34":"33f","42":"41f","53":"52f","61":"60f","69":"68f"}},{"t":{"2":"t1","4":"t13"},"c":{"2":[{"i":"t1","r":1}],"3":[{"i":"c889458302","r":1}],"4":[{"i":"t13","r":1}]}}]}</script></body></html>

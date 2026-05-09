@@ -1,56 +1,238 @@
-<div class="upload-container">
+<div class="admin-shell">
+  <header class="admin-head">
+    <h1>Admin</h1>
+    <nav class="admin-tabs">
+      <button
+        class="admin-tab"
+        [class.active]="activeTab === 'bulk'"
+        (click)="activeTab = 'bulk'"
+      >
+        <mat-icon>upload_file</mat-icon> Bulk import
+      </button>
+      <button
+        class="admin-tab"
+        [class.active]="activeTab === 'logs'"
+        (click)="switchTab('logs')"
+      >
+        <mat-icon>fact_check</mat-icon> Checker logs
+      </button>
+      <button
+        class="admin-tab"
+        [class.active]="activeTab === 'keys'"
+        (click)="switchTab('keys')"
+      >
+        <mat-icon>vpn_key</mat-icon> API keys
+      </button>
+    </nav>
+  </header>
+
+  <section *ngIf="activeTab === 'bulk'" class="upload-container">
     <div class="upload-card">
       <div class="upload-header">
         <h2>Upload YouTube Links</h2>
         <p>Enter a YouTube link or upload a text file</p>
       </div>
-  
+
       <div class="upload-content">
         <form>
-          <!-- Input field for a single YouTube link -->
           <div class="form-group">
             <label for="youtubeLink">YouTube Link</label>
-            <input 
-              type="text" 
-              id="youtubeLink" 
-              placeholder="Enter YouTube link" 
-              [(ngModel)]="youtubeLink" 
-              name="youtubeLink" 
+            <input
+              type="text"
+              id="youtubeLink"
+              placeholder="Enter YouTube link"
+              [(ngModel)]="youtubeLink"
+              name="youtubeLink"
               class="input-field"
             />
           </div>
-  
-          <!-- File upload option for a text file containing YouTube links -->
+
           <div class="form-group file-upload">
             <label for="fileInput">Upload Text File</label>
-            <input 
-              type="file" 
-              id="fileInput" 
-              (change)="onFileSelected($event)" 
-              accept=".txt" 
+            <input
+              type="file"
+              id="fileInput"
+              (change)="onFileSelected($event)"
+              accept=".txt"
               class="input-file"
             />
           </div>
         </form>
       </div>
-  
-      <!-- Display the number of links -->
+
       <div *ngIf="linkCount > 0" class="link-count">
         <p>Total YouTube Links: {{ linkCount }}</p>
       </div>
-  
-      <div class="upload-actions">
 
-        <button 
-          type="button" 
-          class="btn-submit" 
-          (click)="processLinks()"
-        >
+      <div class="upload-actions">
+        <button type="button" class="btn-submit" (click)="processLinks()">
           Submit
         </button>
-        <div *ngIf="clicked"  class="lds-ring"><div></div><div></div><div></div><div></div></div>
-
+        <div *ngIf="clicked" class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
+  </section>
+
+  <section *ngIf="activeTab === 'logs'" class="logs-card">
+    <div class="logs-toolbar">
+      <input
+        type="text"
+        placeholder="Filter by video_id…"
+        [(ngModel)]="logFilter.video_id"
+        (keydown.enter)="loadLogs(1)"
+      />
+      <label class="logs-checkbox">
+        <input
+          type="checkbox"
+          [(ngModel)]="logFilter.flagged"
+          (change)="loadLogs(1)"
+        />
+        Only flagged
+      </label>
+      <button class="btn-submit" (click)="loadLogs(1)">
+        <mat-icon>refresh</mat-icon> Refresh
+      </button>
+    </div>
+
+    <p class="logs-empty" *ngIf="!loadingLogs && logs.length === 0">
+      No checker logs yet. Logs auto-expire after 5 days.
+    </p>
+    <p class="logs-loading" *ngIf="loadingLogs">Loading…</p>
+    <p class="logs-error" *ngIf="logError">{{ logError }}</p>
+
+    <table class="logs-table" *ngIf="logs.length">
+      <thead>
+        <tr>
+          <th>When</th>
+          <th>Video</th>
+          <th>Channel</th>
+          <th>Result</th>
+          <th>Score</th>
+          <th>IP</th>
+          <th>Flag</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of logs" [class.row-flagged]="log.flagged">
+          <td>{{ log.createdAt | date: 'MMM d, HH:mm' }}</td>
+          <td>
+            <a
+              [href]="log.url"
+              target="_blank"
+              rel="noopener"
+              class="logs-title"
+              [title]="log.title || log.video_id"
+            >
+              {{ log.title || log.video_id }}
+            </a>
+          </td>
+          <td>{{ log.channel || '—' }}</td>
+          <td>
+            <span class="logs-pill" [class.pill-ok]="log.copyright_free" [class.pill-bad]="!log.copyright_free">
+              {{ log.copyright_free ? 'Free' : 'Copyrighted' }}
+            </span>
+          </td>
+          <td>{{ log.score ?? '—' }}</td>
+          <td class="logs-ip">{{ log.ip || '—' }}</td>
+          <td>
+            <button
+              class="logs-flag-btn"
+              *ngIf="!log.flagged"
+              (click)="openFlagDialog(log)"
+              title="Flag as wrong"
+            >
+              <mat-icon>flag</mat-icon>
+            </button>
+            <span class="logs-pill pill-flagged" *ngIf="log.flagged">
+              flagged
+              <span *ngIf="log.flag_reason"> · {{ log.flag_reason }}</span>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="logs-pagination" *ngIf="logTotal > logFilter.limit">
+      <button
+        (click)="loadLogs(logFilter.page - 1)"
+        [disabled]="logFilter.page <= 1"
+      >
+        ←
+      </button>
+      <span>Page {{ logFilter.page }} · {{ logTotal }} total</span>
+      <button
+        (click)="loadLogs(logFilter.page + 1)"
+        [disabled]="logFilter.page * logFilter.limit >= logTotal"
+      >
+        →
+      </button>
+    </div>
+  </section>
+
+  <section *ngIf="activeTab === 'keys'" class="keys-card">
+    <h2>YouTube Data API key rotator</h2>
+    <p *ngIf="!keyStatus" class="logs-loading">Loading status…</p>
+    <div *ngIf="keyStatus" class="keys-grid">
+      <div class="keys-stat">
+        <span class="keys-stat-label">Total keys</span>
+        <span class="keys-stat-value">{{ keyStatus.total }}</span>
+      </div>
+      <div class="keys-stat">
+        <span class="keys-stat-label">Available now</span>
+        <span class="keys-stat-value keys-stat-good">{{ keyStatus.available }}</span>
+      </div>
+      <div class="keys-stat">
+        <span class="keys-stat-label">Cooled down</span>
+        <span
+          class="keys-stat-value"
+          [class.keys-stat-warn]="keyStatus.cooledDown > 0"
+        >
+          {{ keyStatus.cooledDown }}
+        </span>
+      </div>
+    </div>
+    <button class="btn-submit" (click)="loadKeys()">
+      <mat-icon>refresh</mat-icon> Refresh status
+    </button>
+  </section>
+</div>
+
+<div class="flag-modal" *ngIf="flagTarget" (click)="closeFlagDialog()">
+  <div class="flag-modal-card" (click)="$event.stopPropagation()">
+    <button
+      class="flag-modal-close"
+      (click)="closeFlagDialog()"
+      aria-label="Close"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <h3>Flag this result</h3>
+    <p class="flag-target-title">{{ flagTarget.title || flagTarget.video_id }}</p>
+    <p class="flag-target-meta">
+      <span class="logs-pill" [class.pill-ok]="flagTarget.copyright_free" [class.pill-bad]="!flagTarget.copyright_free">
+        Reported as {{ flagTarget.copyright_free ? 'Free' : 'Copyrighted' }}
+      </span>
+    </p>
+    <label class="flag-field">
+      <span>Why is this wrong?</span>
+      <textarea
+        rows="4"
+        placeholder="e.g. YouTube Studio shows a copyright claim from 'Sony Music'."
+        [(ngModel)]="flagReason"
+      ></textarea>
+    </label>
+    <div class="flag-actions">
+      <button class="btn-submit" (click)="submitFlag()" [disabled]="flagging">
+        <mat-icon *ngIf="!flagging">flag</mat-icon>
+        <mat-icon *ngIf="flagging" class="spin">autorenew</mat-icon>
+        {{ flagging ? 'Flagging…' : 'Submit flag' }}
+      </button>
+      <button class="btn-cancel" (click)="closeFlagDialog()">Cancel</button>
+    </div>
   </div>
-  
+</div>

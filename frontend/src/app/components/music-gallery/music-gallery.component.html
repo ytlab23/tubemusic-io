@@ -102,6 +102,79 @@
             </button>
           </div>
         </div>
+
+        <button
+          class="icon-btn"
+          (click)="toggleAdvancedFilters()"
+          [class.active]="showAdvancedFilters || uploadDateFilter || minViews != null || maxViews != null"
+          title="More filters"
+          aria-label="More filters"
+        >
+          <mat-icon>tune</mat-icon>
+        </button>
+
+        <div class="view-toggle" role="group" aria-label="View mode">
+          <button
+            class="icon-btn"
+            [class.active]="viewMode === 'grid'"
+            (click)="viewMode = 'grid'; updateUrl()"
+            title="Grid view"
+            aria-label="Grid view"
+          >
+            <mat-icon>grid_view</mat-icon>
+          </button>
+          <button
+            class="icon-btn"
+            [class.active]="viewMode === 'list'"
+            (click)="viewMode = 'list'; updateUrl()"
+            title="List view"
+            aria-label="List view"
+          >
+            <mat-icon>view_list</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="advanced-filters" *ngIf="showAdvancedFilters">
+      <div class="adv-row">
+        <label class="adv-field">
+          <span>Uploaded</span>
+          <select [(ngModel)]="uploadDateFilter" (change)="applyAdvancedFilters()">
+            <option *ngFor="let opt of uploadDateOptions" [value]="opt.value">
+              {{ opt.label }}
+            </option>
+          </select>
+        </label>
+        <label class="adv-field">
+          <span>Min views</span>
+          <input
+            type="number"
+            min="0"
+            placeholder="e.g. 1000"
+            [(ngModel)]="minViews"
+            (change)="applyAdvancedFilters()"
+          />
+        </label>
+        <label class="adv-field">
+          <span>Max views</span>
+          <input
+            type="number"
+            min="0"
+            placeholder="e.g. 1000000"
+            [(ngModel)]="maxViews"
+            (change)="applyAdvancedFilters()"
+          />
+        </label>
+        <label class="adv-field">
+          <span>Per page</span>
+          <select [(ngModel)]="perPage" (change)="onPerPageChange()">
+            <option *ngFor="let n of perPageOptions" [value]="n">{{ n }}</option>
+          </select>
+        </label>
+        <button class="clear-btn" (click)="clearAdvancedFilters()">
+          <mat-icon>clear</mat-icon> Clear
+        </button>
       </div>
     </div>
   </section>
@@ -117,21 +190,29 @@
       <p>No videos found. Try adjusting your filters.</p>
     </div>
 
-    <div *ngIf="!loading && videos.length > 0" class="music-grid">
+    <div
+      *ngIf="!loading && videos.length > 0 && viewMode === 'grid'"
+      class="music-grid"
+    >
       <div
         *ngFor="let video of videos"
         class="music-card"
         (click)="openVideoDialog(video)"
       >
         <div class="thumbnail-wrapper">
-          <img [src]="video.thumbnail" [alt]="video.name" />
+          <img
+            [src]="(video.thumbnail | ytThumb:'sddefault')"
+            [alt]="video.name"
+            loading="lazy"
+          />
           <span class="duration">{{ video.duration }}</span>
           <button
             class="save-btn"
+            [class.is-saved]="isSaved(video)"
             (click)="saveMusic(video, $event)"
-            title="Save"
+            [title]="isSaved(video) ? 'Remove from favorites' : 'Save'"
           >
-            <mat-icon>favorite_border</mat-icon>
+            <mat-icon>{{ isSaved(video) ? 'favorite' : 'favorite_border' }}</mat-icon>
           </button>
         </div>
         <div class="video-info">
@@ -147,6 +228,75 @@
               {{ formatNumber(video.likes) }}</span
             >
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="!loading && videos.length > 0 && viewMode === 'list'"
+      class="music-list"
+    >
+      <div
+        *ngFor="let video of videos"
+        class="music-row"
+        (click)="openVideoDialog(video)"
+      >
+        <img
+          class="row-thumb"
+          [src]="(video.thumbnail | ytThumb:'mqdefault')"
+          [alt]="video.name"
+          loading="lazy"
+        />
+        <div class="row-main">
+          <p class="row-title">{{ video.name }}</p>
+          <div class="row-meta">
+            <span class="row-author" *ngIf="video.author">{{ video.author }}</span>
+            <span *ngIf="video.upload_date">
+              <mat-icon>calendar_today</mat-icon>
+              {{ formatDate(video.upload_date) }}
+            </span>
+            <span *ngIf="video.duration">
+              <mat-icon>schedule</mat-icon>
+              {{ video.duration }}
+            </span>
+            <span *ngIf="video.views != null">
+              <mat-icon>visibility</mat-icon>
+              {{ formatNumber(video.views) }}
+            </span>
+            <span *ngIf="video.likes != null">
+              <mat-icon>thumb_up</mat-icon>
+              {{ formatNumber(video.likes) }}
+            </span>
+          </div>
+        </div>
+        <div class="row-actions" (click)="$event.stopPropagation()">
+          <button
+            class="row-btn"
+            (click)="openVideoDialog(video)"
+            title="Play"
+            aria-label="Play"
+          >
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+          <button
+            class="row-btn"
+            [class.is-saved]="isSaved(video)"
+            (click)="saveMusic(video, $event)"
+            [title]="isSaved(video) ? 'Remove from favorites' : 'Save'"
+            [attr.aria-label]="isSaved(video) ? 'Remove from favorites' : 'Save'"
+          >
+            <mat-icon>{{ isSaved(video) ? 'favorite' : 'favorite_border' }}</mat-icon>
+          </button>
+          <a
+            class="row-btn"
+            [routerLink]="['/audio-download']"
+            [queryParams]="{ url: 'https://youtube.com/watch?v=' + video.video_id }"
+            title="Download"
+            aria-label="Download"
+            (click)="$event.stopPropagation()"
+          >
+            <mat-icon>download</mat-icon>
+          </a>
         </div>
       </div>
     </div>

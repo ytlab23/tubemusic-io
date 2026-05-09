@@ -14,7 +14,11 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
     }
 
     try {
-        const secretKey = process.env.SECRET_KEY || 'SECRET_KEY';
+        const secretKey = process.env.SECRET_KEY;
+        if (!secretKey) {
+            res.status(500).json({ message: 'Server misconfigured: SECRET_KEY missing' });
+            return;
+        }
         const decoded = jwt.verify(token, secretKey) as any;
         req.user = decoded;
         next();

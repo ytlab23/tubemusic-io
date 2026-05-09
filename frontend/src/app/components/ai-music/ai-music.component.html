@@ -1,0 +1,452 @@
+<div class="ai-shell">
+  <header class="ai-hero">
+    <span class="ai-eyebrow">AI Music · Free</span>
+    <h1>Make original music for your videos in minutes</h1>
+    <p class="ai-lead">
+      Pick genre, mood, instruments — even an artist vibe — and we generate a royalty-free track you can drop straight into your edit. 1 free generation per visitor.
+      <a routerLink="/pro">Go PRO</a> for 10 per month + max-quality model.
+    </p>
+    <div class="ai-status" *ngIf="status && !status.enabled">
+      <mat-icon>warning</mat-icon>
+      Generation engine is not yet configured on this server. You can still build prompts; once Gemini credentials are set, generation goes live without any UI changes.
+    </div>
+  </header>
+
+  <section class="ai-modes">
+    <button
+      *ngFor="let m of modes"
+      class="ai-mode"
+      [class.active]="activeMode === m.id"
+      (click)="selectMode(m.id)"
+    >
+      <mat-icon>{{ m.icon }}</mat-icon>
+      <strong>{{ m.label }}</strong>
+      <span>{{ m.hint }}</span>
+    </button>
+  </section>
+
+  <section class="ai-form">
+    <div class="ai-form-body">
+      <ng-container [ngSwitch]="activeMode">
+        <!-- BUILDER MODE: pixel-blocks UI -->
+        <div *ngSwitchCase="'builder'" class="ai-builder">
+          <div class="ai-block">
+            <label class="ai-block-label">
+              <mat-icon>library_music</mat-icon> Genre
+            </label>
+            <div class="ai-chip-row">
+              <button
+                *ngFor="let g of catalogue?.genres"
+                class="ai-chip"
+                [class.active]="builderGenre === g.slug"
+                (click)="setGenre(g.slug)"
+                [title]="g.bpmRange[0] + '–' + g.bpmRange[1] + ' BPM' + (g.repetitive ? ' · pattern-based' : '')"
+              >
+                {{ g.label }}
+              </button>
+            </div>
+          </div>
+
+          <div class="ai-block">
+            <label class="ai-block-label">
+              <mat-icon>mood</mat-icon> Mood
+            </label>
+            <div class="ai-chip-row">
+              <button
+                *ngFor="let m of catalogue?.moods"
+                class="ai-chip"
+                [class.active]="builderMood === m.slug"
+                (click)="setMood(m.slug)"
+              >
+                {{ m.label | titlecase }}
+              </button>
+            </div>
+          </div>
+
+          <div class="ai-block ai-block-grid">
+            <div>
+              <label class="ai-block-label">
+                <mat-icon>bolt</mat-icon> Energy
+              </label>
+              <div class="ai-chip-row">
+                <button
+                  *ngFor="let e of catalogue?.energies"
+                  class="ai-chip"
+                  [class.active]="builderEnergy === e.slug"
+                  (click)="setEnergy($any(e.slug))"
+                >
+                  {{ e.label }}
+                </button>
+              </div>
+            </div>
+            <div>
+              <label class="ai-block-label">
+                <mat-icon>schedule</mat-icon> Era
+              </label>
+              <div class="ai-chip-row">
+                <button
+                  *ngFor="let e of catalogue?.eras"
+                  class="ai-chip"
+                  [class.active]="builderEra === e.slug"
+                  (click)="setEra(e.slug)"
+                >
+                  {{ e.slug | uppercase }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-block">
+            <label class="ai-block-label">
+              <mat-icon>queue_music</mat-icon> Instruments
+              <span class="ai-block-sublabel">pick up to 5</span>
+            </label>
+            <div class="ai-chip-row">
+              <button
+                *ngFor="let inst of catalogue?.instruments"
+                class="ai-chip"
+                [class.active]="isInstrumentSelected(inst.slug)"
+                (click)="toggleInstrument(inst.slug)"
+              >
+                {{ inst.label }}
+              </button>
+            </div>
+          </div>
+
+          <div class="ai-block">
+            <label class="ai-block-label">
+              <mat-icon>star</mat-icon> Inspired by (optional)
+            </label>
+            <p class="ai-block-hint">
+              We translate the vibe into descriptive style language — we never send the artist name to the model (the safety filter blocks them anyway).
+            </p>
+            <input
+              type="text"
+              class="ai-artist-search"
+              placeholder="Search artists…"
+              [(ngModel)]="builderArtistFilter"
+            />
+            <div class="ai-chip-row ai-chip-row-scroll">
+              <button
+                *ngFor="let a of filteredArtists()"
+                class="ai-chip ai-chip-artist"
+                [class.active]="builderInspiredBy === a.slug"
+                (click)="setInspiredBy(a.slug)"
+                [title]="a.genreHint ? 'Vibe: ' + a.genreHint : ''"
+              >
+                {{ a.label }}
+              </button>
+            </div>
+          </div>
+
+          <div class="ai-block ai-block-grid-3">
+            <div>
+              <label class="ai-block-label">
+                <mat-icon>mic</mat-icon> Vocals
+              </label>
+              <div class="ai-chip-row">
+                <button
+                  *ngFor="let v of catalogue?.vocals"
+                  class="ai-chip"
+                  [class.active]="builderVocals === v.slug"
+                  (click)="setVocals($any(v.slug))"
+                >
+                  {{ v.label }}
+                </button>
+              </div>
+            </div>
+            <div *ngIf="builderVocals !== 'instrumental'">
+              <label class="ai-block-label">
+                <mat-icon>translate</mat-icon> Language
+              </label>
+              <select [(ngModel)]="language" (change)="refreshPreview()">
+                <option *ngFor="let l of (status?.languages || [])" [value]="l">
+                  {{ l | titlecase }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <label class="ai-block-label">
+                <mat-icon>speed</mat-icon> BPM (optional)
+              </label>
+              <input
+                type="number"
+                min="40"
+                max="220"
+                placeholder="auto"
+                [(ngModel)]="builderBpm"
+                (change)="refreshPreview()"
+              />
+            </div>
+          </div>
+
+          <div class="ai-block">
+            <label class="ai-block-label">
+              <mat-icon>edit_note</mat-icon> Custom notes (optional)
+            </label>
+            <textarea
+              rows="3"
+              placeholder="Anything else — e.g. 'starts soft and builds at 0:15', 'pizzicato strings on the bridge'…"
+              [(ngModel)]="builderCustomNotes"
+              (input)="refreshPreview()"
+            ></textarea>
+          </div>
+
+          <div class="ai-block">
+            <label class="ai-block-label">
+              <mat-icon>auto_awesome</mat-icon> Make it unique suffix
+              <span class="ai-block-sublabel">recommended — adds non-repetitive arrangement instructions</span>
+            </label>
+            <label class="ai-toggle">
+              <input
+                type="checkbox"
+                [(ngModel)]="builderUniqueSuffix"
+                (change)="refreshPreview()"
+              />
+              <span>
+                Append "make it unique, ups and downs, evolving layers"
+                <span *ngIf="catalogue?.genres && builderGenre">
+                  <span *ngFor="let g of catalogue?.genres">
+                    <small *ngIf="g.slug === builderGenre && g.repetitive" class="ai-toggle-note">
+                      → softened automatically for {{ g.label }} (repetition-friendly genres)
+                    </small>
+                  </span>
+                </span>
+              </span>
+            </label>
+          </div>
+
+          <details class="ai-prompt-preview" [open]="!!previewedPrompt">
+            <summary>
+              <mat-icon>visibility</mat-icon>
+              Live prompt preview
+              <span *ngIf="previewLoading" class="ai-preview-spinner"></span>
+            </summary>
+            <pre *ngIf="previewedPrompt">{{ previewedPrompt }}</pre>
+            <p *ngIf="!previewedPrompt" class="ai-block-hint">
+              Pick at least a genre, mood, or inspiration to see what we'll send to Lyria.
+            </p>
+          </details>
+        </div>
+
+        <!-- PROMPT MODE -->
+        <label *ngSwitchCase="'prompt'" class="ai-field">
+          <span>Describe the music you want</span>
+          <textarea
+            rows="6"
+            placeholder="e.g. Lo-fi jazz beat, late-night cafe vibes, soft brushed drums, mellow piano."
+            [(ngModel)]="prompt"
+          ></textarea>
+        </label>
+
+        <!-- LYRICS MODE -->
+        <label *ngSwitchCase="'lyrics'" class="ai-field">
+          <span>Paste your lyrics</span>
+          <textarea
+            rows="8"
+            placeholder="Verse 1...&#10;Chorus..."
+            [(ngModel)]="lyrics"
+          ></textarea>
+        </label>
+
+        <!-- IMAGE MODE -->
+        <label *ngSwitchCase="'image'" class="ai-field">
+          <span>Image URL</span>
+          <input
+            type="url"
+            placeholder="https://…"
+            [(ngModel)]="imageUrl"
+          />
+          <small class="ai-help">We’ll read the image’s mood and pick instruments to match.</small>
+        </label>
+
+        <!-- MUSIC VIDEO MODE -->
+        <div *ngSwitchCase="'music_video'" class="ai-video-block">
+          <label class="ai-field">
+            <span>YouTube video URL</span>
+            <input
+              type="url"
+              placeholder="https://youtube.com/watch?v=..."
+              [(ngModel)]="videoUrl"
+            />
+          </label>
+          <button class="ai-secondary" (click)="primeFromVideo()" [disabled]="loading">
+            <mat-icon>auto_fix_high</mat-icon>
+            Build prompt from video
+          </button>
+          <div class="ai-derived" *ngIf="derivedPrompt">
+            <h4>Derived prompt</h4>
+            <p>{{ derivedPrompt }}</p>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="ai-options" *ngIf="activeMode !== 'builder'">
+        <label class="ai-field ai-field-inline">
+          <span>Language</span>
+          <select [(ngModel)]="language">
+            <option *ngFor="let l of (status?.languages || [])" [value]="l">
+              {{ l | titlecase }}
+            </option>
+            <option *ngIf="!status?.languages?.length" value="instrumental">Instrumental</option>
+          </select>
+        </label>
+        <label class="ai-field ai-field-inline">
+          <span>Length</span>
+          <select [(ngModel)]="durationSeconds">
+            <option *ngFor="let d of durations" [value]="d">{{ d }}s</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <aside class="ai-sidebar">
+      <h3>Quality</h3>
+      <div class="ai-quality-options">
+        <label
+          *ngFor="let model of (status?.models || [])"
+          class="ai-quality-option"
+          [class.active]="modelSlug === model.slug"
+          [class.disabled]="model.proOnly && !isPro"
+        >
+          <input
+            type="radio"
+            name="lyriaModel"
+            [value]="model.slug"
+            [(ngModel)]="modelSlug"
+            [disabled]="!!(model.proOnly && !isPro)"
+          />
+          <span>
+            <strong>
+              {{ model.label }}
+              <span class="ai-pro-pill" *ngIf="model.proOnly">PRO</span>
+            </strong>
+            <small>{{ model.description }}</small>
+          </span>
+        </label>
+      </div>
+
+      <h3>Length</h3>
+      <select [(ngModel)]="durationSeconds" class="ai-length-select">
+        <option *ngFor="let d of durations" [value]="d">{{ d }} seconds</option>
+      </select>
+
+      <h3>What you get</h3>
+      <ul>
+        <li><mat-icon>music_note</mat-icon> Royalty-free MP3 — yours forever</li>
+        <li><mat-icon>verified</mat-icon> Safe across YouTube, TikTok, Reels</li>
+        <li><mat-icon>shield</mat-icon> Captcha + rate-limit protection</li>
+      </ul>
+      <button
+        class="ai-primary"
+        (click)="generate()"
+        [disabled]="loading"
+      >
+        <mat-icon *ngIf="!loading">play_arrow</mat-icon>
+        <mat-icon *ngIf="loading" class="spin">autorenew</mat-icon>
+        {{ loading ? 'Working… (10–25s)' : (freeUsed && !isPro ? 'Go PRO to generate again' : 'Generate' + (isPro ? '' : ' (free)')) }}
+      </button>
+      <p class="ai-fineprint" *ngIf="!freeUsed && !isPro">
+        1 free generation per visitor. PRO unlocks 10/month + max-quality model.
+      </p>
+      <p class="ai-fineprint" *ngIf="freeUsed && !isPro">
+        You’ve used your free generation.
+        <a routerLink="/pro">Go PRO</a> for 10/month.
+      </p>
+      <p class="ai-pending" *ngIf="pendingMessage">{{ pendingMessage }}</p>
+      <p class="ai-blocked" *ngIf="blockedMessage">
+        <mat-icon>block</mat-icon> {{ blockedMessage }}
+      </p>
+    </aside>
+  </section>
+
+  <section class="ai-result" *ngIf="result">
+    <div class="ai-result-card">
+      <header class="ai-result-head">
+        <span class="ai-eyebrow">Your track</span>
+        <span class="ai-result-meta">
+          {{ (result.bytes / 1024) | number:'1.0-0' }} KB ·
+          {{ result.mimeType }}
+          <span *ngIf="result.model"> · {{ result.model.replace('lyria-3-', 'Lyria 3 ') }}</span>
+        </span>
+      </header>
+      <audio
+        controls
+        preload="auto"
+        [src]="result.dataUrl"
+        class="ai-result-player"
+      ></audio>
+      <div class="ai-result-actions">
+        <button class="ai-primary" (click)="downloadResult()">
+          <mat-icon>download</mat-icon>
+          Download {{ result.fileName.endsWith('.mp3') ? 'MP3' : 'M4A' }} (max quality)
+        </button>
+        <button class="ai-secondary" (click)="startOver()">
+          <mat-icon>refresh</mat-icon> Make another
+        </button>
+        <a routerLink="/account" class="ai-secondary">
+          <mat-icon>history</mat-icon> View history
+        </a>
+      </div>
+      <details class="ai-result-detail" *ngIf="result.caption">
+        <summary>Track description</summary>
+        <p>{{ result.caption }}</p>
+      </details>
+      <details class="ai-result-detail">
+        <summary>Prompt used</summary>
+        <pre>{{ result.prompt }}</pre>
+      </details>
+    </div>
+  </section>
+
+  <section class="ai-section-edit">
+    <h3>
+      <mat-icon>info</mat-icon>
+      Section editing — coming soon
+    </h3>
+    <p>
+      Lyria's current API generates a full clip per call — there's no API to
+      "edit only seconds 0:10–0:30". Workarounds today:
+    </p>
+    <ul>
+      <li><strong>Regenerate</strong> with a sharper prompt (the same builder, with custom notes like "starts soft and builds at 0:15").</li>
+      <li><strong>Edit the MP3</strong> in your DAW (Audacity, GarageBand, Descript) — our downloads are 192 kbps stereo, lossless to splice.</li>
+    </ul>
+    <p class="ai-section-edit-roadmap">
+      <mat-icon>schedule</mat-icon>
+      On our roadmap: in-browser splicing of multiple Lyria generations into a single track via the Web Audio API.
+    </p>
+  </section>
+
+  <section class="ai-related">
+    <h2>Want safe-to-use music right now?</h2>
+    <p>Browse our hand-vetted library while your AI track renders.</p>
+    <div class="ai-related-actions">
+      <a routerLink="/copyright-free-music" class="ai-secondary">Open the library</a>
+      <a routerLink="/home" class="ai-secondary">Check a song instead</a>
+    </div>
+  </section>
+</div>
+
+<div class="ai-modal" *ngIf="showProModal" (click)="closeProModal()">
+  <div class="ai-modal-card" (click)="$event.stopPropagation()">
+    <button class="ai-modal-close" (click)="closeProModal()" aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h3>Tired of 1-generation-per-day limits?</h3>
+    <p>
+      Go PRO and enjoy <strong>10× AI music generations every month</strong> + the max-quality Pro model on top of unlimited MP3 downloads, no ads, no malware, and human support.
+    </p>
+    <ul>
+      <li><mat-icon>check</mat-icon> 10 AI music generations / month</li>
+      <li><mat-icon>check</mat-icon> Lyria 3 Pro model (max quality)</li>
+      <li><mat-icon>check</mat-icon> Unlimited MP3 downloads</li>
+      <li><mat-icon>check</mat-icon> Full royalty-free library</li>
+      <li><mat-icon>check</mat-icon> Cancel anytime · refund on the last billed month</li>
+    </ul>
+    <a routerLink="/pro" class="ai-primary ai-primary-block">
+      Go PRO — $2.90/mo
+    </a>
+    <p class="ai-trust">Secure payment · Satisfied or refunded</p>
+  </div>
+</div>

@@ -1,9 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { FavoritesService } from '../../services/favorites.service';
+import { ToastService } from '../../services/toast.service';
 
 interface DialogData {
-  url: string;
+  url: any;
   title?: string;
   thumbnail?: string;
   tags?: string[];
@@ -13,6 +15,7 @@ interface DialogData {
   views?: number;
   likes?: number;
   videoId?: string;
+  video_id?: string;
   genre?: string;
   subGenre1?: string;
   subGenre2?: string;
@@ -26,15 +29,56 @@ interface DialogData {
 @Component({
   selector: 'app-music-dialog',
   templateUrl: './music-dialog.component.html',
-  styleUrls: ['./music-dialog.component.css']
+  styleUrls: ['./music-dialog.component.css'],
 })
 export class MusicDialogComponent {
-  
   constructor(
-    public dialogRef: MatDialogRef<MusicDialogComponent>, 
+    public dialogRef: MatDialogRef<MusicDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private router: Router
+    private router: Router,
+    private favorites: FavoritesService,
+    private toast: ToastService
   ) {}
+
+  get effectiveVideoId(): string | undefined {
+    return this.data.videoId || this.data.video_id;
+  }
+
+  isSaved(): boolean {
+    const id = this.effectiveVideoId;
+    return !!id && this.favorites.isSaved(id);
+  }
+
+  toggleSave(): void {
+    const id = this.effectiveVideoId;
+    if (!id) {
+      this.toast.showToast('error', 'Missing video id');
+      return;
+    }
+    const tags = (this.data.tags && this.data.tags.length
+      ? this.data.tags
+      : [this.data.genre, this.data.mood]
+    ).filter(Boolean) as string[];
+    this.favorites
+      .toggle({
+        videoId: id,
+        title: this.data.title,
+        thumbnail: this.data.thumbnail,
+        url: `https://youtube.com/watch?v=${id}`,
+        tags,
+        source: 'gallery',
+      })
+      .subscribe((saved) => {
+        this.toast.showToast(
+          saved ? 'success' : 'info',
+          saved
+            ? this.favorites.isLoggedIn()
+              ? 'Saved to your favorites'
+              : 'Saved on this device'
+            : 'Removed from favorites'
+        );
+      });
+  }
 
   onClose(): void {
     this.dialogRef.close();
@@ -44,6 +88,13 @@ export class MusicDialogComponent {
     const url = `https://youtube.com/watch?v=${this.data.videoId}`;
     this.dialogRef.close();
     this.router.navigate(['/audio-download'], { queryParams: { url } });
+  }
+
+  checkThisSong(): void {
+    const id = this.effectiveVideoId;
+    const url = id ? `https://youtube.com/watch?v=${id}` : null;
+    this.dialogRef.close();
+    this.router.navigate(['/home'], url ? { queryParams: { url } } : {});
   }
 
   formatNumber(num: number): string {

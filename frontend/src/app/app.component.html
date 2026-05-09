@@ -4,9 +4,9 @@
 
     <app-toast></app-toast>
 
-    <app-navbar> </app-navbar>
-    <router-outlet> </router-outlet>
-    <app-footer></app-footer>
+    <app-navbar *ngIf="!hideChrome"></app-navbar>
+    <router-outlet></router-outlet>
+    <app-footer *ngIf="!hideChrome"></app-footer>
 
 </div>
 

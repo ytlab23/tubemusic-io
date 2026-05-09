@@ -92,7 +92,57 @@ export class MusicCheckerService {
   }
 
   getChannels(): Observable<any> {
-    // return this.http.get<any>(`http://localhost:3000/youtube/channels`);
     return this.http.get<any>(`${this.apiUrl}/youtube/channels`);
+  }
+
+  /** Rich YouTube Data v3 metadata via the rotated key pool. */
+  getVideoInfo(videoIdOrUrl: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/youtube/video-info`, {
+      params: { url: videoIdOrUrl },
+    });
+  }
+
+  /** Rotator status for admin diagnostics. */
+  getYoutubeKeyStatus(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/youtube/keys-status`);
+  }
+
+  /** Admin: list checker logs. */
+  getCheckerLogs(
+    opts: {
+      page?: number;
+      limit?: number;
+      flagged?: boolean;
+      video_id?: string;
+    } = {}
+  ): Observable<any> {
+    const params: any = {
+      page: String(opts.page ?? 1),
+      limit: String(opts.limit ?? 50),
+    };
+    if (opts.flagged) params.flagged = 'true';
+    if (opts.video_id) params.video_id = opts.video_id;
+    const token =
+      typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const headers = token
+      ? new HttpHeaders().set('Authorization', `Bearer ${token}`)
+      : undefined;
+    return this.http.get<any>(`${this.apiUrl}/youtube/checks`, {
+      params,
+      headers,
+    });
+  }
+
+  flagCheck(id: string, reason: string): Observable<any> {
+    const token =
+      typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const headers = token
+      ? new HttpHeaders().set('Authorization', `Bearer ${token}`)
+      : undefined;
+    return this.http.post<any>(
+      `${this.apiUrl}/youtube/checks/${id}/flag`,
+      { reason },
+      { headers }
+    );
   }
 }

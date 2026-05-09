@@ -1,7 +1,10 @@
 import { Component, Renderer2, ElementRef, OnInit, OnDestroy} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { SignupService } from '../../services/signup.service';
 import { ToastService } from '../../services/toast.service';
 import { Title, Meta } from '@angular/platform-browser';
+import { PaymentsService } from '../../services/payments.service';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-signin',
@@ -10,7 +13,9 @@ import { Title, Meta } from '@angular/platform-browser';
 })
 export class SigninComponent implements OnInit {
 
-  constructor(private userService: SignupService, private toastService: ToastService, private renderer: Renderer2, private el: ElementRef, private titleService: Title, private metaService: Meta) {}
+  redirectTarget = '/';
+
+  constructor(private userService: SignupService, private toastService: ToastService, private renderer: Renderer2, private el: ElementRef, private titleService: Title, private metaService: Meta, private route: ActivatedRoute, private payments: PaymentsService, private favorites: FavoritesService) {}
 
   username: string = '';
   password: string = '';
@@ -23,6 +28,12 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     this.setMetaData();
+    this.route.queryParams.subscribe((params) => {
+      const r = params['redirect'];
+      if (typeof r === 'string' && r.startsWith('/')) {
+        this.redirectTarget = r;
+      }
+    });
   }
 
   setMetaData() {
@@ -49,10 +60,22 @@ export class SigninComponent implements OnInit {
           }
           this.toastService.showToast('success', 'User logged in successfully')
           localStorage.setItem('token', response.body.token)
+          const target = this.redirectTarget || '/';
+          // Sync PRO entitlement + push device-local saves to the user's account
+          // before the redirect so the next page paint already shows them.
+          this.payments.refreshEntitlement().subscribe();
+          this.favorites.promoteLocalToServer().subscribe((res) => {
+            if (res.promoted > 0) {
+              this.toastService.showToast(
+                'success',
+                `Synced ${res.promoted} saved track${res.promoted === 1 ? '' : 's'} to your account`
+              );
+            }
+          });
           setTimeout(() => {
-            window.location.href = '/';
+            window.location.href = target;
           } , 2000);
-          
+
           this.data = {
             email: '',
             password: ''

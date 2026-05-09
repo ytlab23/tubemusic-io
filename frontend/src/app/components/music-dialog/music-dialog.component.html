@@ -117,6 +117,26 @@
   </div>
 
   <div mat-dialog-actions class="dialog-footer">
+    <button
+      mat-raised-button
+      color="accent"
+      class="check-song-btn"
+      (click)="checkThisSong()"
+      *ngIf="data.videoId || (data.url && (data.url + '').length)"
+    >
+      <mat-icon>verified</mat-icon>
+      Check this song
+    </button>
+    <button
+      mat-raised-button
+      class="save-song-btn"
+      [class.is-saved]="isSaved()"
+      (click)="toggleSave()"
+      *ngIf="effectiveVideoId"
+    >
+      <mat-icon>{{ isSaved() ? 'favorite' : 'favorite_border' }}</mat-icon>
+      {{ isSaved() ? 'Saved' : 'Save' }}
+    </button>
     <button mat-raised-button color="primary" (click)="downloadAudio()" *ngIf="data.videoId">
       <mat-icon>download</mat-icon>
       Download Audio

@@ -1,0 +1,1802 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="plan.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&amp;family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<link rel="stylesheet" href="styles.css"><style ng-app-id="ng">@import "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap";
+
+
+
+h1[_ngcontent-ng-c951744504], 
+h2[_ngcontent-ng-c951744504], 
+h3[_ngcontent-ng-c951744504], 
+h4[_ngcontent-ng-c951744504], 
+h5[_ngcontent-ng-c951744504], 
+h6[_ngcontent-ng-c951744504] {
+  font-family: "Roboto", sans-serif;
+}
+body[_ngcontent-ng-c951744504], 
+p[_ngcontent-ng-c951744504], 
+div[_ngcontent-ng-c951744504], 
+span[_ngcontent-ng-c951744504] {
+  font-family: serif;
+}
+.home-container[_ngcontent-ng-c951744504] {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+/*# sourceMappingURL=app.component.css.map */</style><style ng-app-id="ng">
+
+.toast[_ngcontent-ng-c721834416] {
+  position: fixed;
+  top: 89px;
+  right: 20px;
+  padding: 15px;
+  color: white;
+  border-radius: 5px;
+  z-index: 9999;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.toast.success[_ngcontent-ng-c721834416] {
+  background-color: green;
+}
+.toast.error[_ngcontent-ng-c721834416] {
+  background-color: red;
+}
+.toast.info[_ngcontent-ng-c721834416] {
+  background-color: blue;
+}
+.toast.warning[_ngcontent-ng-c721834416] {
+  background-color: orange;
+}
+/*# sourceMappingURL=toast.component.css.map */</style><style ng-app-id="ng">
+
+[_nghost-ng-c3663033336] {
+  display: contents;
+}
+.navbar-container[_ngcontent-ng-c3663033336] {
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  background-color: transparent;
+}
+.navbar-navbar-interactive[_ngcontent-ng-c3663033336] {
+  width: 100%;
+  display: flex;
+  max-width: var(--dl-size-size-maxwidth);
+  align-items: center;
+  padding-top: var(--dl-space-space-twounits);
+  padding-left: var(--dl-space-space-threeunits);
+  padding-right: var(--dl-space-space-threeunits);
+  padding-bottom: var(--dl-space-space-twounits);
+  justify-content: space-between;
+}
+.navbar-image1[_ngcontent-ng-c3663033336] {
+  height: 3rem;
+}
+.navbar-desktop-menu[_ngcontent-ng-c3663033336] {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+.navbar-links1[_ngcontent-ng-c3663033336] {
+  gap: var(--dl-space-space-twounits);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin-left: var(--dl-space-space-twounits);
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.navbar-buttons1[_ngcontent-ng-c3663033336] {
+  gap: var(--dl-space-space-twounits);
+  display: flex;
+  align-items: center;
+  margin-left: var(--dl-space-space-twounits);
+}
+.navbar-action11[_ngcontent-ng-c3663033336] {
+  display: flex;
+  flex-direction: row;
+}
+.navbar-action21[_ngcontent-ng-c3663033336] {
+  display: flex;
+  flex-direction: row;
+}
+.navbar-burger-menu[_ngcontent-ng-c3663033336] {
+  display: none;
+}
+.navbar-icon1[_ngcontent-ng-c3663033336] {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+}
+.navbar-mobile-menu[_ngcontent-ng-c3663033336] {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  padding: var(--dl-space-space-twounits);
+  z-index: 100;
+  position: absolute;
+  flex-direction: column;
+  background-color: var(--dl-color-theme-neutral-light);
+}
+.navbar-nav[_ngcontent-ng-c3663033336] {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.navbar-top[_ngcontent-ng-c3663033336] {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--dl-space-space-threeunits);
+  justify-content: space-between;
+}
+.navbar-logo[_ngcontent-ng-c3663033336] {
+  height: 3rem;
+}
+.navbar-close-menu[_ngcontent-ng-c3663033336] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar-icon3[_ngcontent-ng-c3663033336] {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+}
+.navbar-links2[_ngcontent-ng-c3663033336] {
+  gap: var(--dl-space-space-unit);
+  flex: 0 0 auto;
+  display: flex;
+  align-self: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.navbar-buttons2[_ngcontent-ng-c3663033336] {
+  gap: var(--dl-space-space-twounits);
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: center;
+}
+@media (max-width: 767px) {
+  .navbar-navbar-interactive[_ngcontent-ng-c3663033336] {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .navbar-desktop-menu[_ngcontent-ng-c3663033336] {
+    display: none;
+  }
+  .navbar-burger-menu[_ngcontent-ng-c3663033336] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-width: 479px) {
+  .navbar-navbar-interactive[_ngcontent-ng-c3663033336] {
+    padding: var(--dl-space-space-unit);
+  }
+  .navbar-mobile-menu[_ngcontent-ng-c3663033336] {
+    padding: var(--dl-space-space-unit);
+  }
+}
+.dark-mode-toggle[_ngcontent-ng-c3663033336] {
+  background-color: var(--dl-color-theme-accent1);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.dark-mode-toggle[_ngcontent-ng-c3663033336]:hover {
+  transform: scale(1.1);
+}
+.dark-mode-toggle[_ngcontent-ng-c3663033336]   fa-icon[_ngcontent-ng-c3663033336] {
+  font-size: 24px;
+  color: var(--dl-color-theme-neutral-dark);
+}
+.dark-mode[_ngcontent-ng-c3663033336]   .dark-mode-toggle[_ngcontent-ng-c3663033336] {
+  background-color: var(--dl-color-theme-accent2);
+}
+.dark-mode[_ngcontent-ng-c3663033336]   .dark-mode-toggle[_ngcontent-ng-c3663033336]   fa-icon[_ngcontent-ng-c3663033336] {
+  color: var(--dl-color-theme-neutral-light);
+}
+.user-dropdown[_ngcontent-ng-c3663033336] {
+  position: relative;
+  display: inline-block;
+}
+.user-icon[_ngcontent-ng-c3663033336] {
+  background-color: #37474f;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-icon[_ngcontent-ng-c3663033336]   .user-initial[_ngcontent-ng-c3663033336] {
+  font-weight: bold;
+}
+.dropdown-content[_ngcontent-ng-c3663033336] {
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  right: 0;
+  top: 50px;
+  border-radius: 8px;
+  z-index: 1;
+}
+.user-name[_ngcontent-ng-c3663033336] {
+  font-weight: bold;
+  display: block;
+}
+.user-email[_ngcontent-ng-c3663033336] {
+  color: gray;
+  display: block;
+  margin-top: 5px;
+}
+.sign-out-btn[_ngcontent-ng-c3663033336] {
+  background-color: white;
+  color: #37474f;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-top: 10px;
+}
+.sign-out-btn[_ngcontent-ng-c3663033336]:hover {
+  background-color: #f0f0f0;
+}
+.logo-container[_ngcontent-ng-c3663033336] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo-icon[_ngcontent-ng-c3663033336] {
+  font-size: 24px;
+  color: #147487;
+}
+.logo-text[_ngcontent-ng-c3663033336] {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+}
+.logo-tube[_ngcontent-ng-c3663033336] {
+  color: black;
+}
+.logo-music[_ngcontent-ng-c3663033336] {
+  color: #147487;
+}
+.navbar-container[_ngcontent-ng-c3663033336] {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition:
+    background-color 200ms ease,
+    box-shadow 200ms ease,
+    backdrop-filter 200ms ease,
+    padding 200ms ease;
+}
+.navbar-container.navbar-scrolled[_ngcontent-ng-c3663033336] {
+  background-color: rgba(13, 18, 28, 0.78);
+  backdrop-filter: saturate(140%) blur(8px);
+  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+.navbar-container.navbar-scrolled[_ngcontent-ng-c3663033336]   .navbar-navbar-interactive[_ngcontent-ng-c3663033336] {
+  padding-top: var(--dl-space-space-unit);
+  padding-bottom: var(--dl-space-space-unit);
+}
+.logo-container[_ngcontent-ng-c3663033336] {
+  cursor: pointer;
+  text-decoration: none;
+}
+.logo-container[_ngcontent-ng-c3663033336]:focus-visible {
+  outline: 2px solid #147487;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.navbar-mobile-logo[_ngcontent-ng-c3663033336] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+.thq-link-pro[_ngcontent-ng-c3663033336] {
+  background:
+    linear-gradient(
+      135deg,
+      #fbbf24 0%,
+      #f59e0b 100%);
+  color: #ffffff !important;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.32);
+  transition: transform 150ms ease;
+}
+.thq-link-pro[_ngcontent-ng-c3663033336]:hover {
+  transform: translateY(-1px);
+}
+.user-icon[_ngcontent-ng-c3663033336] {
+  position: relative;
+}
+.user-icon-pro[_ngcontent-ng-c3663033336] {
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #f59e0b, 0 4px 14px rgba(245, 158, 11, 0.4);
+  transition: box-shadow 200ms ease;
+}
+.user-icon-pro[_ngcontent-ng-c3663033336]:hover {
+  box-shadow: 0 0 0 2px #fbbf24, 0 6px 18px rgba(245, 158, 11, 0.55);
+}
+.user-pro-star[_ngcontent-ng-c3663033336] {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background:
+    linear-gradient(
+      135deg,
+      #fbbf24 0%,
+      #f59e0b 100%);
+  color: #1f1400;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  box-shadow: 0 4px 8px rgba(245, 158, 11, 0.4);
+  pointer-events: none;
+}
+.user-pro-star[_ngcontent-ng-c3663033336]   i[_ngcontent-ng-c3663033336] {
+  font-size: 9px;
+}
+/*# sourceMappingURL=navbar.component.css.map */</style><style ng-app-id="ng">@import "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap";
+
+
+
+[_nghost-ng-c305335744] {
+  display: contents;
+}
+.footer-footer1[_ngcontent-ng-c305335744] {
+  width: 100%;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #1e293b;
+  color: white;
+  padding: 4rem 1rem;
+}
+.footer-max-width[_ngcontent-ng-c305335744] {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer-content[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-fourunits);
+  width: 100%;
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: var(--dl-radius-radius-radius4);
+  margin-bottom: 2rem;
+}
+.footer-newsletter[_ngcontent-ng-c305335744] {
+  gap: 24px;
+  width: 500px;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.footer-image1[_ngcontent-ng-c305335744] {
+  height: 2rem;
+}
+.footer-actions[_ngcontent-ng-c305335744] {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.footer-form[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-unit);
+  width: 100%;
+  display: flex;
+  align-self: stretch;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+.footer-container[_ngcontent-ng-c305335744] {
+  width: 365px;
+  display: flex;
+  align-items: flex-start;
+}
+.footer-text-input[_ngcontent-ng-c305335744] {
+  gap: 8px;
+  width: 100%;
+  height: 32px;
+  display: flex;
+  font-size: 16px;
+  box-sizing: content-box;
+  text-align: left;
+  align-items: center;
+  font-family: Roboto;
+  font-weight: 400;
+  background-color: transparent;
+}
+.footer-content2[_ngcontent-ng-c305335744] {
+  fill: var(--dl-color-theme-neutral-dark);
+  color: var(--dl-color-theme-neutral-dark);
+  height: auto;
+  font-size: 12px;
+  align-self: stretch;
+  font-style: Regular;
+  text-align: left;
+  font-family: "Roboto";
+  font-weight: 400;
+  line-height: 150%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.footer-links[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-twounits);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.footer-column1[_ngcontent-ng-c305335744] {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.logo-container[_ngcontent-ng-c305335744] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo-icon[_ngcontent-ng-c305335744] {
+  font-size: 24px;
+  color: #b2d1e6;
+}
+.logo-text[_ngcontent-ng-c305335744] {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+}
+.logo-tube[_ngcontent-ng-c305335744] {
+  color: white;
+}
+.logo-music[_ngcontent-ng-c305335744] {
+  color: #b2d1e6;
+}
+.footer-description[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  max-width: 250px;
+  line-height: 1.5;
+}
+.login-button[_ngcontent-ng-c305335744] {
+  background-color: #b2d1e6;
+  color: #1a1a1a;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  width: fit-content;
+  transition: background-color 0.3s ease;
+}
+.login-button[_ngcontent-ng-c305335744]:hover {
+  background-color: #9dbfd8;
+}
+.footer-column-title[_ngcontent-ng-c305335744] {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #e2e8f0;
+}
+.footer-footer-links1[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.footer-footer-links1[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+.footer-footer-links1[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744]:hover {
+  color: #e2e8f0;
+}
+.footer-column2[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-unit);
+  width: auto;
+  display: flex;
+  overflow: hidden;
+  flex-grow: 1;
+  max-width: 300px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+.footer-footer-links2[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.footer-footer-links2[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+.footer-footer-links2[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744]:hover {
+  color: #e2e8f0;
+}
+.footer-column3[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-unit);
+  width: auto;
+  display: flex;
+  overflow: hidden;
+  flex-grow: 1;
+  max-width: 300px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+.footer-social-links[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+  display: flex;
+  gap: 1rem;
+}
+.footer-social-link[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+.footer-social-link[_ngcontent-ng-c305335744]:hover {
+  color: #e2e8f0;
+}
+.footer-link14[_ngcontent-ng-c305335744] {
+  gap: 12px;
+  display: flex;
+  padding: 8px 0;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-link15[_ngcontent-ng-c305335744] {
+  gap: 12px;
+  display: flex;
+  padding: 8px 0;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-link16[_ngcontent-ng-c305335744] {
+  gap: 12px;
+  display: flex;
+  padding: 8px 0;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-link17[_ngcontent-ng-c305335744] {
+  gap: 12px;
+  display: flex;
+  padding: 8px 0;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-link18[_ngcontent-ng-c305335744] {
+  gap: 12px;
+  display: flex;
+  padding: 8px 0;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-credits[_ngcontent-ng-c305335744] {
+  gap: var(--dl-space-space-twounits);
+  width: 100%;
+  display: flex;
+  align-self: stretch;
+  margin-top: var(--dl-space-space-unit);
+  align-items: flex-start;
+  flex-direction: column;
+  border-top: 1px solid #334155;
+  padding-top: 2rem;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+.footer-row[_ngcontent-ng-c305335744] {
+  gap: 64px;
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+.footer-footer-links3[_ngcontent-ng-c305335744] {
+  gap: 24px;
+  display: flex;
+  align-items: center;
+}
+.footer-footer-links3[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744] {
+  color: var(--dl-color-gray-500);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+.footer-footer-links3[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744]:hover {
+  color: var(--dl-color-gray-700);
+  text-decoration: underline;
+}
+@media (max-width: 991px) {
+  .footer-newsletter[_ngcontent-ng-c305335744] {
+    width: 300px;
+  }
+  .footer-form[_ngcontent-ng-c305335744] {
+    width: 100%;
+    flex-direction: column;
+  }
+  .footer-container[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-text-input[_ngcontent-ng-c305335744] {
+    width: 100%;
+    padding: var(--dl-space-space-halfunit);
+  }
+  .footer-button[_ngcontent-ng-c305335744] {
+    width: 100%;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-halfunit);
+    padding-right: var(--dl-space-space-halfunit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+}
+@media (max-width: 767px) {
+  .footer-content[_ngcontent-ng-c305335744] {
+    flex-direction: column;
+  }
+  .footer-newsletter[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-form[_ngcontent-ng-c305335744] {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .footer-container[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-button[_ngcontent-ng-c305335744] {
+    width: 208px;
+  }
+  .footer-links[_ngcontent-ng-c305335744] {
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .footer-column1[_ngcontent-ng-c305335744] {
+    align-items: center;
+  }
+  .footer-column1-title[_ngcontent-ng-c305335744] {
+    text-align: center;
+  }
+  .footer-footer-links1[_ngcontent-ng-c305335744] {
+    align-self: center;
+  }
+  .footer-column2[_ngcontent-ng-c305335744] {
+    align-items: center;
+  }
+  .footer-column2-title[_ngcontent-ng-c305335744] {
+    text-align: center;
+  }
+  .footer-footer-links2[_ngcontent-ng-c305335744] {
+    align-self: center;
+  }
+  .footer-column3[_ngcontent-ng-c305335744] {
+    align-items: center;
+  }
+  .footer-social-link1-title[_ngcontent-ng-c305335744] {
+    text-align: center;
+  }
+  .footer-social-links[_ngcontent-ng-c305335744] {
+    align-self: center;
+  }
+  .footer-row[_ngcontent-ng-c305335744] {
+    flex-direction: column;
+  }
+}
+@media (max-width: 479px) {
+  .footer-actions[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-form[_ngcontent-ng-c305335744] {
+    width: 100%;
+    flex-direction: column;
+  }
+  .footer-container[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-button[_ngcontent-ng-c305335744] {
+    width: 100%;
+  }
+  .footer-links[_ngcontent-ng-c305335744] {
+    flex-direction: column;
+  }
+  .footer-column1[_ngcontent-ng-c305335744] {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-footer-links1[_ngcontent-ng-c305335744] {
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-column2[_ngcontent-ng-c305335744] {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-footer-links2[_ngcontent-ng-c305335744] {
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-column3[_ngcontent-ng-c305335744] {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-social-links[_ngcontent-ng-c305335744] {
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-credits[_ngcontent-ng-c305335744] {
+    gap: 0;
+  }
+  .footer-row[_ngcontent-ng-c305335744] {
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-footer-links3[_ngcontent-ng-c305335744] {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+@media (max-width: 768px) {
+  .footer-footer1[_ngcontent-ng-c305335744] {
+    padding: 3rem 1rem;
+  }
+  .footer-links[_ngcontent-ng-c305335744] {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+  }
+  .footer-column-title[_ngcontent-ng-c305335744] {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .footer-footer-links1[_ngcontent-ng-c305335744]   a[_ngcontent-ng-c305335744] {
+    font-size: 0.9rem;
+  }
+}
+.hello[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+h1[_ngcontent-ng-c305335744], 
+h2[_ngcontent-ng-c305335744], 
+h3[_ngcontent-ng-c305335744], 
+h4[_ngcontent-ng-c305335744], 
+h5[_ngcontent-ng-c305335744], 
+h6[_ngcontent-ng-c305335744] {
+  font-family: "Roboto", sans-serif;
+}
+body[_ngcontent-ng-c305335744], 
+p[_ngcontent-ng-c305335744], 
+div[_ngcontent-ng-c305335744], 
+span[_ngcontent-ng-c305335744] {
+  font-family: serif;
+}
+.social-icon[_ngcontent-ng-c305335744] {
+  color: #94a3b8;
+  font-size: 18px;
+  width: 24px;
+}
+.footer-link14[_ngcontent-ng-c305335744], 
+.footer-link15[_ngcontent-ng-c305335744], 
+.footer-link16[_ngcontent-ng-c305335744] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0px;
+}
+.footer-social-link[_ngcontent-ng-c305335744] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 150ms ease, transform 150ms ease;
+}
+.footer-social-link[_ngcontent-ng-c305335744]:hover, 
+.footer-social-link[_ngcontent-ng-c305335744]:focus-visible {
+  color: #ffffff;
+  transform: translateY(-1px);
+  outline: none;
+}
+.footer-social-link[_ngcontent-ng-c305335744]   .social-icon[_ngcontent-ng-c305335744] {
+  font-size: 18px;
+  color: inherit;
+}
+.logo-container[_ngcontent-ng-c305335744] {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+@media (max-width: 768px) {
+  .footer-content[_ngcontent-ng-c305335744] {
+    gap: 24px;
+  }
+  .footer-links[_ngcontent-ng-c305335744] {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .footer-column1[_ngcontent-ng-c305335744], 
+   .footer-column2[_ngcontent-ng-c305335744], 
+   .footer-column3[_ngcontent-ng-c305335744] {
+    width: 100%;
+    align-items: flex-start;
+  }
+  .footer-row[_ngcontent-ng-c305335744] {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .footer-footer-links3[_ngcontent-ng-c305335744] {
+    flex-wrap: wrap;
+    gap: 12px 18px;
+  }
+  .login-button[_ngcontent-ng-c305335744] {
+    width: 100%;
+    max-width: 320px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    font-size: 16px;
+  }
+  .footer-social-links[_ngcontent-ng-c305335744] {
+    flex-wrap: wrap;
+    gap: 14px 18px;
+  }
+}
+/*# sourceMappingURL=footer.component.css.map */</style><style ng-app-id="ng">
+
+[_nghost-ng-c406145637] {
+  display: block;
+}
+.ai-shell[_ngcontent-ng-c406145637] {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 64px) clamp(20px, 5vw, 56px) 80px;
+  color: #0f172a;
+}
+.ai-hero[_ngcontent-ng-c406145637] {
+  text-align: center;
+  padding: 24px 0 32px;
+}
+.ai-eyebrow[_ngcontent-ng-c406145637] {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 12px;
+  color: #147487;
+  background: rgba(20, 116, 135, 0.1);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+.ai-hero[_ngcontent-ng-c406145637]   h1[_ngcontent-ng-c406145637] {
+  margin: 0 0 14px;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.1;
+  font-weight: 800;
+  color: #0f172a;
+}
+.ai-lead[_ngcontent-ng-c406145637] {
+  margin: 0 auto;
+  max-width: 640px;
+  color: #475569;
+  line-height: 1.6;
+  font-size: 15px;
+}
+.ai-lead[_ngcontent-ng-c406145637]   a[_ngcontent-ng-c406145637] {
+  color: #147487;
+  font-weight: 600;
+}
+.ai-status[_ngcontent-ng-c406145637] {
+  margin: 24px auto 0;
+  max-width: 640px;
+  padding: 12px 14px;
+  background: #fff7ed;
+  border: 1px solid #fdba74;
+  color: #9a3412;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.ai-modes[_ngcontent-ng-c406145637] {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 28px 0;
+}
+.ai-mode[_ngcontent-ng-c406145637] {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(20, 116, 135, 0.18);
+  background: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 150ms ease,
+    transform 150ms ease,
+    box-shadow 200ms ease;
+}
+.ai-mode[_ngcontent-ng-c406145637]:hover {
+  border-color: rgba(20, 116, 135, 0.45);
+  transform: translateY(-1px);
+}
+.ai-mode.active[_ngcontent-ng-c406145637] {
+  border-color: #147487;
+  box-shadow: 0 10px 28px rgba(20, 116, 135, 0.18);
+  background: rgba(20, 116, 135, 0.05);
+}
+.ai-mode[_ngcontent-ng-c406145637]   mat-icon[_ngcontent-ng-c406145637] {
+  color: #147487;
+}
+.ai-mode[_ngcontent-ng-c406145637]   strong[_ngcontent-ng-c406145637] {
+  font-size: 15px;
+  color: #0f172a;
+}
+.ai-mode[_ngcontent-ng-c406145637]   span[_ngcontent-ng-c406145637] {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.4;
+}
+.ai-form[_ngcontent-ng-c406145637] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 20px;
+}
+.ai-form-body[_ngcontent-ng-c406145637] {
+  background: #ffffff;
+  border: 1px solid rgba(20, 116, 135, 0.16);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ai-sidebar[_ngcontent-ng-c406145637] {
+  background:
+    linear-gradient(
+      160deg,
+      #0f172a 0%,
+      #1e293b 100%);
+  border-radius: 16px;
+  padding: 22px;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ai-sidebar[_ngcontent-ng-c406145637]   h3[_ngcontent-ng-c406145637] {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+.ai-sidebar[_ngcontent-ng-c406145637]   ul[_ngcontent-ng-c406145637] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+.ai-sidebar[_ngcontent-ng-c406145637]   li[_ngcontent-ng-c406145637] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(248, 250, 252, 0.85);
+}
+.ai-sidebar[_ngcontent-ng-c406145637]   li[_ngcontent-ng-c406145637]   mat-icon[_ngcontent-ng-c406145637] {
+  color: #67e8f9;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+.ai-field[_ngcontent-ng-c406145637] {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ai-field[_ngcontent-ng-c406145637]   span[_ngcontent-ng-c406145637] {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+.ai-field[_ngcontent-ng-c406145637]   textarea[_ngcontent-ng-c406145637], 
+.ai-field[_ngcontent-ng-c406145637]   input[_ngcontent-ng-c406145637], 
+.ai-field[_ngcontent-ng-c406145637]   select[_ngcontent-ng-c406145637] {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(20, 116, 135, 0.18);
+  font-size: 15px;
+  color: #0f172a;
+  background: #ffffff;
+  font-family: inherit;
+  resize: vertical;
+}
+.ai-field[_ngcontent-ng-c406145637]   textarea[_ngcontent-ng-c406145637] {
+  min-height: 140px;
+}
+.ai-field[_ngcontent-ng-c406145637]   input[_ngcontent-ng-c406145637]:focus, 
+.ai-field[_ngcontent-ng-c406145637]   textarea[_ngcontent-ng-c406145637]:focus, 
+.ai-field[_ngcontent-ng-c406145637]   select[_ngcontent-ng-c406145637]:focus {
+  outline: 2px solid rgba(20, 116, 135, 0.4);
+  outline-offset: 0;
+  border-color: #147487;
+}
+.ai-help[_ngcontent-ng-c406145637] {
+  color: #64748b;
+  font-size: 12px;
+}
+.ai-options[_ngcontent-ng-c406145637] {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ai-field-inline[_ngcontent-ng-c406145637] {
+  flex: 1 1 140px;
+  min-width: 140px;
+}
+.ai-video-block[_ngcontent-ng-c406145637] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ai-derived[_ngcontent-ng-c406145637] {
+  background: #f1f5f9;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.ai-derived[_ngcontent-ng-c406145637]   h4[_ngcontent-ng-c406145637] {
+  margin: 0 0 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #475569;
+}
+.ai-derived[_ngcontent-ng-c406145637]   p[_ngcontent-ng-c406145637] {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #0f172a;
+}
+.ai-primary[_ngcontent-ng-c406145637], 
+.ai-secondary[_ngcontent-ng-c406145637] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  transition:
+    transform 150ms ease,
+    box-shadow 200ms ease,
+    background 150ms ease;
+}
+.ai-primary[_ngcontent-ng-c406145637] {
+  background:
+    linear-gradient(
+      135deg,
+      #06b6d4 0%,
+      #38bdf8 100%);
+  color: #ffffff;
+  box-shadow: 0 12px 24px rgba(6, 182, 212, 0.32);
+}
+.ai-primary[_ngcontent-ng-c406145637]:hover {
+  transform: translateY(-1px);
+}
+.ai-primary[_ngcontent-ng-c406145637]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.ai-primary-block[_ngcontent-ng-c406145637] {
+  width: 100%;
+}
+.ai-secondary[_ngcontent-ng-c406145637] {
+  background: rgba(20, 116, 135, 0.08);
+  color: #147487;
+}
+.ai-secondary[_ngcontent-ng-c406145637]:hover {
+  background: rgba(20, 116, 135, 0.16);
+}
+.spin[_ngcontent-ng-c406145637] {
+  animation: _ngcontent-ng-c406145637_ai-spin 1s linear infinite;
+}
+@keyframes _ngcontent-ng-c406145637_ai-spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ai-fineprint[_ngcontent-ng-c406145637] {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(248, 250, 252, 0.7);
+}
+.ai-fineprint[_ngcontent-ng-c406145637]   a[_ngcontent-ng-c406145637] {
+  color: #67e8f9;
+}
+.ai-pending[_ngcontent-ng-c406145637] {
+  margin: 0;
+  font-size: 12px;
+  color: #fde68a;
+  background: rgba(202, 138, 4, 0.18);
+  border: 1px solid rgba(202, 138, 4, 0.4);
+  padding: 10px;
+  border-radius: 10px;
+  line-height: 1.4;
+}
+.ai-related[_ngcontent-ng-c406145637] {
+  margin: 56px 0 0;
+  text-align: center;
+}
+.ai-related[_ngcontent-ng-c406145637]   h2[_ngcontent-ng-c406145637] {
+  margin: 0 0 6px;
+  font-size: 22px;
+  color: #0f172a;
+}
+.ai-related[_ngcontent-ng-c406145637]   p[_ngcontent-ng-c406145637] {
+  margin: 0 0 18px;
+  color: #64748b;
+}
+.ai-related-actions[_ngcontent-ng-c406145637] {
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ai-modal[_ngcontent-ng-c406145637] {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+.ai-modal-card[_ngcontent-ng-c406145637] {
+  position: relative;
+  width: min(440px, 100%);
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 28px;
+  color: #0f172a;
+}
+.ai-modal-card[_ngcontent-ng-c406145637]   h3[_ngcontent-ng-c406145637] {
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 700;
+}
+.ai-modal-card[_ngcontent-ng-c406145637]   p[_ngcontent-ng-c406145637] {
+  margin: 0 0 14px;
+  color: #475569;
+  line-height: 1.5;
+}
+.ai-modal-card[_ngcontent-ng-c406145637]   ul[_ngcontent-ng-c406145637] {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ai-modal-card[_ngcontent-ng-c406145637]   li[_ngcontent-ng-c406145637] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #0f172a;
+}
+.ai-modal-card[_ngcontent-ng-c406145637]   li[_ngcontent-ng-c406145637]   mat-icon[_ngcontent-ng-c406145637] {
+  color: #06b6d4;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+.ai-modal-close[_ngcontent-ng-c406145637] {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: 0;
+  color: #64748b;
+  cursor: pointer;
+}
+.ai-modal-close[_ngcontent-ng-c406145637]:hover {
+  color: #0f172a;
+}
+.ai-trust[_ngcontent-ng-c406145637] {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: #64748b;
+  text-align: center;
+}
+@media (max-width: 720px) {
+  .ai-form[_ngcontent-ng-c406145637] {
+    grid-template-columns: 1fr;
+  }
+}
+.ai-result[_ngcontent-ng-c406145637] {
+  margin-top: 24px;
+}
+.ai-result-card[_ngcontent-ng-c406145637] {
+  background:
+    linear-gradient(
+      160deg,
+      #0f172a 0%,
+      #1e293b 100%);
+  border-radius: 18px;
+  padding: 22px;
+  color: #f8fafc;
+  box-shadow: 0 28px 56px rgba(15, 23, 42, 0.18);
+}
+.ai-result-head[_ngcontent-ng-c406145637] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  gap: 10px;
+}
+.ai-result-head[_ngcontent-ng-c406145637]   .ai-eyebrow[_ngcontent-ng-c406145637] {
+  background: rgba(56, 189, 248, 0.18);
+  color: #67e8f9;
+}
+.ai-result-meta[_ngcontent-ng-c406145637] {
+  font-size: 12px;
+  color: rgba(248, 250, 252, 0.62);
+}
+.ai-result-player[_ngcontent-ng-c406145637] {
+  width: 100%;
+  margin-bottom: 14px;
+  outline: none;
+}
+.ai-result-actions[_ngcontent-ng-c406145637] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.ai-result-detail[_ngcontent-ng-c406145637] {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(56, 189, 248, 0.12);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  color: rgba(248, 250, 252, 0.85);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.ai-result-detail[_ngcontent-ng-c406145637]   summary[_ngcontent-ng-c406145637] {
+  cursor: pointer;
+  font-weight: 600;
+  color: #ffffff;
+}
+.ai-result-detail[_ngcontent-ng-c406145637]   p[_ngcontent-ng-c406145637] {
+  margin: 8px 0 0;
+  white-space: pre-wrap;
+}
+.ai-result-detail[_ngcontent-ng-c406145637]   pre[_ngcontent-ng-c406145637] {
+  margin: 8px 0 0;
+  white-space: pre-wrap;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    monospace;
+  font-size: 12px;
+}
+.ai-builder[_ngcontent-ng-c406145637] {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.ai-block[_ngcontent-ng-c406145637] {
+  background: #ffffff;
+  border: 1px solid rgba(20, 116, 135, 0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.ai-block-grid[_ngcontent-ng-c406145637] {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.ai-block-grid[_ngcontent-ng-c406145637]    > div[_ngcontent-ng-c406145637] {
+  background: #ffffff;
+  border: 1px solid rgba(20, 116, 135, 0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.ai-block-grid-3[_ngcontent-ng-c406145637] {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.ai-block-grid-3[_ngcontent-ng-c406145637]    > div[_ngcontent-ng-c406145637] {
+  background: #ffffff;
+  border: 1px solid rgba(20, 116, 135, 0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.ai-block-label[_ngcontent-ng-c406145637] {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+.ai-block-label[_ngcontent-ng-c406145637]   mat-icon[_ngcontent-ng-c406145637] {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: #147487;
+}
+.ai-block-sublabel[_ngcontent-ng-c406145637] {
+  margin-left: auto;
+  font-weight: 500;
+  font-size: 11px;
+  color: #94a3b8;
+}
+.ai-block-hint[_ngcontent-ng-c406145637] {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.45;
+}
+.ai-chip-row[_ngcontent-ng-c406145637] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ai-chip-row-scroll[_ngcontent-ng-c406145637] {
+  max-height: 168px;
+  overflow-y: auto;
+  padding: 4px 2px;
+}
+.ai-chip[_ngcontent-ng-c406145637] {
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(20, 116, 135, 0.18);
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    transform 120ms ease;
+}
+.ai-chip[_ngcontent-ng-c406145637]:hover {
+  background: rgba(20, 116, 135, 0.06);
+}
+.ai-chip.active[_ngcontent-ng-c406145637] {
+  background: #147487;
+  border-color: #147487;
+  color: #ffffff;
+}
+.ai-chip-artist[_ngcontent-ng-c406145637] {
+  background: #f8fafc;
+}
+.ai-artist-search[_ngcontent-ng-c406145637] {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(20, 116, 135, 0.18);
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-family: inherit;
+}
+.ai-block-grid[_ngcontent-ng-c406145637]    > div[_ngcontent-ng-c406145637]   select[_ngcontent-ng-c406145637], 
+.ai-block-grid-3[_ngcontent-ng-c406145637]    > div[_ngcontent-ng-c406145637]   select[_ngcontent-ng-c406145637], 
+.ai-block-grid-3[_ngcontent-ng-c406145637]    > div[_ngcontent-ng-c406145637]   input[_ngcontent-ng-c406145637], 
+.ai-block[_ngcontent-ng-c406145637]   textarea[_ngcontent-ng-c406145637] {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(20, 116, 135, 0.18);
+  font-family: inherit;
+  font-size: 13px;
+}
+.ai-block[_ngcontent-ng-c406145637]   textarea[_ngcontent-ng-c406145637] {
+  resize: vertical;
+  min-height: 60px;
+}
+.ai-toggle[_ngcontent-ng-c406145637] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #0f172a;
+  cursor: pointer;
+}
+.ai-toggle[_ngcontent-ng-c406145637]   input[_ngcontent-ng-c406145637] {
+  width: 16px;
+  height: 16px;
+  accent-color: #147487;
+}
+.ai-toggle-note[_ngcontent-ng-c406145637] {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: #b45309;
+}
+.ai-prompt-preview[_ngcontent-ng-c406145637] {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  border: 1px solid rgba(56, 189, 248, 0.18);
+}
+.ai-prompt-preview[_ngcontent-ng-c406145637]   summary[_ngcontent-ng-c406145637] {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #67e8f9;
+}
+.ai-prompt-preview[_ngcontent-ng-c406145637]   summary[_ngcontent-ng-c406145637]   mat-icon[_ngcontent-ng-c406145637] {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+.ai-preview-spinner[_ngcontent-ng-c406145637] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(103, 232, 249, 0.4);
+  border-top-color: #67e8f9;
+  animation: _ngcontent-ng-c406145637_ai-spin 0.8s linear infinite;
+  margin-left: 6px;
+}
+.ai-prompt-preview[_ngcontent-ng-c406145637]   pre[_ngcontent-ng-c406145637] {
+  margin: 8px 0 0;
+  white-space: pre-wrap;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(226, 232, 240, 0.92);
+}
+.ai-quality-options[_ngcontent-ng-c406145637] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.ai-quality-option[_ngcontent-ng-c406145637] {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(56, 189, 248, 0.16);
+  background: rgba(15, 23, 42, 0.55);
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.ai-quality-option[_ngcontent-ng-c406145637]:hover {
+  border-color: rgba(56, 189, 248, 0.42);
+}
+.ai-quality-option.active[_ngcontent-ng-c406145637] {
+  border-color: #67e8f9;
+  background: rgba(56, 189, 248, 0.18);
+}
+.ai-quality-option.disabled[_ngcontent-ng-c406145637] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.ai-quality-option[_ngcontent-ng-c406145637]   input[_ngcontent-ng-c406145637] {
+  margin-top: 4px;
+  accent-color: #67e8f9;
+}
+.ai-quality-option[_ngcontent-ng-c406145637]   strong[_ngcontent-ng-c406145637] {
+  display: block;
+  font-size: 13px;
+  color: #ffffff;
+}
+.ai-quality-option[_ngcontent-ng-c406145637]   small[_ngcontent-ng-c406145637] {
+  display: block;
+  font-size: 11px;
+  color: rgba(248, 250, 252, 0.65);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.ai-pro-pill[_ngcontent-ng-c406145637] {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background:
+    linear-gradient(
+      135deg,
+      #fbbf24 0%,
+      #f59e0b 100%);
+  color: #1f1400;
+  vertical-align: middle;
+}
+.ai-length-select[_ngcontent-ng-c406145637] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(56, 189, 248, 0.16);
+  background: rgba(15, 23, 42, 0.55);
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+.ai-blocked[_ngcontent-ng-c406145637] {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 10px 0 0;
+  padding: 10px;
+  background: rgba(220, 38, 38, 0.18);
+  border: 1px solid rgba(220, 38, 38, 0.45);
+  color: #fca5a5;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.ai-blocked[_ngcontent-ng-c406145637]   mat-icon[_ngcontent-ng-c406145637] {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+.ai-section-edit[_ngcontent-ng-c406145637] {
+  margin: 28px 0 0;
+  padding: 22px 24px;
+  background: rgba(20, 116, 135, 0.06);
+  border: 1px dashed rgba(20, 116, 135, 0.32);
+  border-radius: 14px;
+  color: #0f172a;
+}
+.ai-section-edit[_ngcontent-ng-c406145637]   h3[_ngcontent-ng-c406145637] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #147487;
+}
+.ai-section-edit[_ngcontent-ng-c406145637]   h3[_ngcontent-ng-c406145637]   mat-icon[_ngcontent-ng-c406145637] {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+.ai-section-edit[_ngcontent-ng-c406145637]   p[_ngcontent-ng-c406145637] {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #475569;
+}
+.ai-section-edit[_ngcontent-ng-c406145637]   ul[_ngcontent-ng-c406145637] {
+  margin: 0 0 8px;
+  padding-left: 22px;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.ai-section-edit-roadmap[_ngcontent-ng-c406145637] {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+.ai-section-edit-roadmap[_ngcontent-ng-c406145637]   mat-icon[_ngcontent-ng-c406145637] {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
+@media (max-width: 720px) {
+  .ai-block-grid[_ngcontent-ng-c406145637] {
+    grid-template-columns: 1fr;
+  }
+}
+/*# sourceMappingURL=ai-music.component.css.map */</style><style ng-app-id="ng">mat-icon,mat-icon.mat-primary,mat-icon.mat-accent,mat-icon.mat-warn{color:var(--mat-icon-color)}.mat-icon{-webkit-user-select:none;user-select:none;background-repeat:no-repeat;display:inline-block;fill:currentColor;height:24px;width:24px;overflow:hidden}.mat-icon.mat-icon-inline{font-size:inherit;height:inherit;line-height:inherit;width:inherit}.mat-icon.mat-ligature-font[fontIcon]::before{content:attr(fontIcon)}[dir=rtl] .mat-icon-rtl-mirror{transform:scale(-1, 1)}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon{display:block}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button .mat-icon{margin:auto}</style><title>Free AI Music Generator | TubeMusic.io</title><meta name="description" content="Generate original royalty-free music with AI — pick genre, mood, instruments, even an artist vibe. 1 free generation, then go PRO for max quality."></head>
+<body class="mat-typography"><!--nghm-->
+  <app-root _nghost-ng-c951744504="" ng-version="18.1.4" ngh="4" ng-server-context="ssg"><div _ngcontent-ng-c951744504="" class="home-container"><app-toast _ngcontent-ng-c951744504="" _nghost-ng-c721834416="" ngh="0"><!--bindings={
+  "ng-reflect-ng-if": null
+}--></app-toast><app-navbar _ngcontent-ng-c951744504="" _nghost-ng-c3663033336="" ngh="1"><header _ngcontent-ng-c3663033336="" class="navbar-container"><header _ngcontent-ng-c3663033336="" data-thq="thq-navbar" class="navbar-navbar-interactive"><a _ngcontent-ng-c3663033336="" routerlink="/" aria-label="TubeMusic home" class="logo-container" ng-reflect-router-link="/" href="/"><i _ngcontent-ng-c3663033336="" aria-hidden="true" class="fa fa-play-circle logo-icon"></i><span _ngcontent-ng-c3663033336="" class="logo-text"><span _ngcontent-ng-c3663033336="" class="logo-tube">Tube</span><span _ngcontent-ng-c3663033336="" class="logo-music">Music</span></span></a><div _ngcontent-ng-c3663033336="" data-thq="thq-navbar-nav" class="navbar-desktop-menu"><nav _ngcontent-ng-c3663033336="" class="navbar-links1"><span _ngcontent-ng-c3663033336="" routerlink="/" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/">Home</span><span _ngcontent-ng-c3663033336="" routerlink="/about" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/about">About</span><span _ngcontent-ng-c3663033336="" routerlink="/contact" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/contact">Contact</span><span _ngcontent-ng-c3663033336="" routerlink="/copyright-free-music" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/copyright-free-music">Gallery</span><span _ngcontent-ng-c3663033336="" routerlink="/audio-download" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/audio-download">Download</span><span _ngcontent-ng-c3663033336="" routerlink="/ai-music-free" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/ai-music-free">AI Music</span><span _ngcontent-ng-c3663033336="" routerlink="/pro" class="thq-link thq-body-small thq-link-pro" tabindex="0" ng-reflect-router-link="/pro">PRO</span><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span _ngcontent-ng-c3663033336="" routerlink="/faq" class="thq-link thq-body-small" tabindex="0" ng-reflect-router-link="/faq">FAQ</span></nav><div _ngcontent-ng-c3663033336="" class="navbar-buttons1"><button _ngcontent-ng-c3663033336="" routerlink="/sign-in" class="navbar-action11 thq-button-animated thq-button-filled" tabindex="0" ng-reflect-router-link="/sign-in"><span _ngcontent-ng-c3663033336="" class="thq-body-small">Log In</span></button><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><button _ngcontent-ng-c3663033336="" routerlink="/sign-up" class="navbar-action21 thq-button-outline thq-button-animated" tabindex="0" ng-reflect-router-link="/sign-up"><span _ngcontent-ng-c3663033336="" class="thq-body-small"> Register</span></button><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div></div><div _ngcontent-ng-c3663033336="" data-thq="thq-burger-menu" class="navbar-burger-menu"><svg _ngcontent-ng-c3663033336="" viewBox="0 0 1024 1024" class="navbar-icon1"><path _ngcontent-ng-c3663033336="" d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path></svg></div><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></header></header></app-navbar><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><router-outlet _ngcontent-ng-c951744504=""></router-outlet><app-ai-music _nghost-ng-c406145637="" ngh="3"><div _ngcontent-ng-c406145637="" class="ai-shell"><header _ngcontent-ng-c406145637="" class="ai-hero"><span _ngcontent-ng-c406145637="" class="ai-eyebrow">AI Music · Free</span><h1 _ngcontent-ng-c406145637="">Make original music for your videos in minutes</h1><p _ngcontent-ng-c406145637="" class="ai-lead"> Pick genre, mood, instruments — even an artist vibe — and we generate a royalty-free track you can drop straight into your edit. 1 free generation per visitor. <a _ngcontent-ng-c406145637="" routerlink="/pro" ng-reflect-router-link="/pro" href="/pro">Go PRO</a> for 10 per month + max-quality model. </p><!--bindings={
+  "ng-reflect-ng-if": null
+}--></header><section _ngcontent-ng-c406145637="" class="ai-modes"><button _ngcontent-ng-c406145637="" class="ai-mode active"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">tune</mat-icon><strong _ngcontent-ng-c406145637="">Builder</strong><span _ngcontent-ng-c406145637="">Pick genre, mood, instruments — no prompt-writing required</span></button><button _ngcontent-ng-c406145637="" class="ai-mode"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">edit_note</mat-icon><strong _ngcontent-ng-c406145637="">From a prompt</strong><span _ngcontent-ng-c406145637="">Describe the vibe, instruments, or mood</span></button><button _ngcontent-ng-c406145637="" class="ai-mode"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">lyrics</mat-icon><strong _ngcontent-ng-c406145637="">From lyrics</strong><span _ngcontent-ng-c406145637="">Paste lyrics and we’ll arrange a track around them</span></button><button _ngcontent-ng-c406145637="" class="ai-mode"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">image</mat-icon><strong _ngcontent-ng-c406145637="">From an image</strong><span _ngcontent-ng-c406145637="">Drop an image URL — we’ll match its mood</span></button><button _ngcontent-ng-c406145637="" class="ai-mode"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">movie</mat-icon><strong _ngcontent-ng-c406145637="">From a YouTube video</strong><span _ngcontent-ng-c406145637="">Paste a YouTube link — we’ll seed from its metadata</span></button><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--></section><section _ngcontent-ng-c406145637="" class="ai-form"><div _ngcontent-ng-c406145637="" class="ai-form-body"><div _ngcontent-ng-c406145637="" class="ai-builder"><div _ngcontent-ng-c406145637="" class="ai-block"><label _ngcontent-ng-c406145637="" class="ai-block-label"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">library_music</mat-icon> Genre </label><div _ngcontent-ng-c406145637="" class="ai-chip-row"><!--bindings={
+  "ng-reflect-ng-for-of": null
+}--></div></div><div _ngcontent-ng-c406145637="" class="ai-block"><label _ngcontent-ng-c406145637="" class="ai-block-label"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">mood</mat-icon> Mood </label><div _ngcontent-ng-c406145637="" class="ai-chip-row"><!--bindings={
+  "ng-reflect-ng-for-of": null
+}--></div></div><div _ngcontent-ng-c406145637="" class="ai-block ai-block-grid"><div _ngcontent-ng-c406145637=""><label _ngcontent-ng-c406145637="" class="ai-block-label"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">bolt</mat-icon> Energy </label><div _ngcontent-ng-c406145637="" class="ai-chip-row"><!--bindings={
+  "ng-reflect-ng-for-of": null
+}--></div></div><div _ngcontent-ng-c406145637=""><label _ngcontent-ng-c406145637="" class="ai-block-label"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">schedule</mat-icon> Era </label><div _ngcontent-ng-c406145637="" class="ai-chip-row"><!--bindings={
+  "ng-reflect-ng-for-of": null
+}--></div></div></div><div _ngcontent-ng-c406145637="" class="ai-block"><label _ngcontent-ng-c406145637="" class="ai-block-label"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">queue_music</mat-icon> Instruments <span _ngcontent-ng-c406145637="" class="ai-block-sublabel">pick up to 5</span></label><div _ngcontent-ng-c406145637="" class="ai-chip-row"><!--bindings={
+  "ng-reflect-ng-for-of": null
+}--></div></div><div _ngcontent-ng-c406145637="" class="ai-block"><label _ngcontent-ng-c406145637="" class="ai-block-label"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">star</mat-icon> Inspired by (optional) </label><p _ngcontent-ng-c406145637="" class="ai-block-hint"> We translate the vibe into descriptive style language — we never send the artist name to the model (the safety filter blocks them anyway). </p><input _ngcontent-ng-c406145637="" type="text" placeholder="Search artists…" class="ai-artist-search ng-untouched ng-pristine ng-valid" ng-reflect-model="" value=""><div _ngcontent-ng-c406145637="" class="ai-chip-row ai-chip-row-scroll"><!--bindings={
+  "ng-reflect-ng-for-of": ""
+}--></div></div><div _ngcontent-ng-c406145637="" class="ai-block ai-block-grid-3"><div _ngcontent-ng-c406145637=""><label _ngcontent-ng-c406145637="" class="ai-block-label"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">mic</mat-icon> Vocals </label><div _ngcontent-ng-c406145637="" class="ai-chip-row"><!--bindings={
+  "ng-reflect-ng-for-of": null
+}--></div></div><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><div _ngcontent-ng-c406145637=""><label _ngcontent-ng-c406145637="" class="ai-block-label"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">speed</mat-icon> BPM (optional) </label><input _ngcontent-ng-c406145637="" type="number" min="40" max="220" placeholder="auto" ng-reflect-min="40" ng-reflect-max="220" value="" class="ng-untouched ng-pristine ng-valid"></div></div><div _ngcontent-ng-c406145637="" class="ai-block"><label _ngcontent-ng-c406145637="" class="ai-block-label"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">edit_note</mat-icon> Custom notes (optional) </label><textarea _ngcontent-ng-c406145637="" rows="3" placeholder="Anything else — e.g. 'starts soft and builds at 0:15', 'pizzicato strings on the bridge'…" ng-reflect-model="" class="ng-untouched ng-pristine ng-valid"></textarea></div><div _ngcontent-ng-c406145637="" class="ai-block"><label _ngcontent-ng-c406145637="" class="ai-block-label"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">auto_awesome</mat-icon> Make it unique suffix <span _ngcontent-ng-c406145637="" class="ai-block-sublabel">recommended — adds non-repetitive arrangement instructions</span></label><label _ngcontent-ng-c406145637="" class="ai-toggle"><input _ngcontent-ng-c406145637="" type="checkbox" ng-reflect-model="true" class="ng-untouched ng-pristine ng-valid" checked=""><span _ngcontent-ng-c406145637=""> Append "make it unique, ups and downs, evolving layers" <!--bindings={
+  "ng-reflect-ng-if": null
+}--></span></label></div><details _ngcontent-ng-c406145637="" class="ai-prompt-preview"><summary _ngcontent-ng-c406145637=""><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">visibility</mat-icon> Live prompt preview <!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></summary><!--bindings={
+  "ng-reflect-ng-if": ""
+}--><p _ngcontent-ng-c406145637="" class="ai-block-hint"> Pick at least a genre, mood, or inspiration to see what we'll send to Lyria. </p><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--></details></div><!--bindings={
+  "ng-reflect-ng-switch-case": "builder"
+}--><!--bindings={
+  "ng-reflect-ng-switch-case": "prompt"
+}--><!--bindings={
+  "ng-reflect-ng-switch-case": "lyrics"
+}--><!--bindings={
+  "ng-reflect-ng-switch-case": "image"
+}--><!--bindings={
+  "ng-reflect-ng-switch-case": "music_video"
+}--><!--ng-container--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div><aside _ngcontent-ng-c406145637="" class="ai-sidebar"><h3 _ngcontent-ng-c406145637="">Quality</h3><div _ngcontent-ng-c406145637="" class="ai-quality-options"><!--bindings={
+  "ng-reflect-ng-for-of": ""
+}--></div><h3 _ngcontent-ng-c406145637="">Length</h3><select _ngcontent-ng-c406145637="" class="ai-length-select ng-untouched ng-pristine ng-valid" ng-reflect-model="30"><option _ngcontent-ng-c406145637="" value="15" ng-reflect-value="15">15 seconds</option><option _ngcontent-ng-c406145637="" value="20" ng-reflect-value="20">20 seconds</option><option _ngcontent-ng-c406145637="" value="30" ng-reflect-value="30">30 seconds</option><!--bindings={
+  "ng-reflect-ng-for-of": "15,20,30"
+}--></select><h3 _ngcontent-ng-c406145637="">What you get</h3><ul _ngcontent-ng-c406145637=""><li _ngcontent-ng-c406145637=""><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">music_note</mat-icon> Royalty-free MP3 — yours forever</li><li _ngcontent-ng-c406145637=""><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">verified</mat-icon> Safe across YouTube, TikTok, Reels</li><li _ngcontent-ng-c406145637=""><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">shield</mat-icon> Captcha + rate-limit protection</li></ul><button _ngcontent-ng-c406145637="" class="ai-primary"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">play_arrow</mat-icon><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--> Generate (free) </button><p _ngcontent-ng-c406145637="" class="ai-fineprint"> 1 free generation per visitor. PRO unlocks 10/month + max-quality model. </p><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": ""
+}--><!--bindings={
+  "ng-reflect-ng-if": ""
+}--></aside></section><!--bindings={
+  "ng-reflect-ng-if": null
+}--><section _ngcontent-ng-c406145637="" class="ai-section-edit"><h3 _ngcontent-ng-c406145637=""><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">info</mat-icon> Section editing — coming soon </h3><p _ngcontent-ng-c406145637=""> Lyria's current API generates a full clip per call — there's no API to "edit only seconds 0:10–0:30". Workarounds today: </p><ul _ngcontent-ng-c406145637=""><li _ngcontent-ng-c406145637=""><strong _ngcontent-ng-c406145637="">Regenerate</strong> with a sharper prompt (the same builder, with custom notes like "starts soft and builds at 0:15").</li><li _ngcontent-ng-c406145637=""><strong _ngcontent-ng-c406145637="">Edit the MP3</strong> in your DAW (Audacity, GarageBand, Descript) — our downloads are 192 kbps stereo, lossless to splice.</li></ul><p _ngcontent-ng-c406145637="" class="ai-section-edit-roadmap"><mat-icon _ngcontent-ng-c406145637="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="2">schedule</mat-icon> On our roadmap: in-browser splicing of multiple Lyria generations into a single track via the Web Audio API. </p></section><section _ngcontent-ng-c406145637="" class="ai-related"><h2 _ngcontent-ng-c406145637="">Want safe-to-use music right now?</h2><p _ngcontent-ng-c406145637="">Browse our hand-vetted library while your AI track renders.</p><div _ngcontent-ng-c406145637="" class="ai-related-actions"><a _ngcontent-ng-c406145637="" routerlink="/copyright-free-music" class="ai-secondary" ng-reflect-router-link="/copyright-free-music" href="/copyright-free-music">Open the library</a><a _ngcontent-ng-c406145637="" routerlink="/home" class="ai-secondary" ng-reflect-router-link="/home" href="/home">Check a song instead</a></div></section></div><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></app-ai-music><!--container--><app-footer _ngcontent-ng-c951744504="" _nghost-ng-c305335744="" ngh="2"><footer _ngcontent-ng-c305335744="" class="footer-footer1 thq-section-padding" style="margin-bottom: -30px;"><div _ngcontent-ng-c305335744="" class="footer-max-width thq-section-max-width"><div _ngcontent-ng-c305335744="" class="footer-content"><div _ngcontent-ng-c305335744="" class="footer-links"><div _ngcontent-ng-c305335744="" class="footer-column1"><a _ngcontent-ng-c305335744="" routerlink="/" aria-label="TubeMusic home" class="logo-container" ng-reflect-router-link="/" href="/"><i _ngcontent-ng-c305335744="" aria-hidden="true" class="fa fa-play-circle logo-icon"></i><span _ngcontent-ng-c305335744="" class="logo-text"><span _ngcontent-ng-c305335744="" class="logo-tube">Tube</span><span _ngcontent-ng-c305335744="" class="logo-music">Music</span></span></a><p _ngcontent-ng-c305335744="" class="footer-description thq-body-small"> TubeMusic is a 100% free platform that lets you find copyright‑free and royalty‑free music for your YouTube videos. You can check the copyright status of each song before using it or browse our ready-made library of copyright‑free tracks. </p><button _ngcontent-ng-c305335744="" routerlink="/sign-in" class="login-button thq-btn-primary" tabindex="0" ng-reflect-router-link="/sign-in"> Log In </button></div><div _ngcontent-ng-c305335744="" class="footer-column2"><strong _ngcontent-ng-c305335744="" class="thq-body-large footer-column2-title"> Quick Links </strong><div _ngcontent-ng-c305335744="" class="footer-footer-links2"><a _ngcontent-ng-c305335744="" href="/" rel="noreferrer noopener" class="thq-body-small"> Home </a><a _ngcontent-ng-c305335744="" href="/about" rel="noreferrer noopener" class="thq-body-small"> About </a><a _ngcontent-ng-c305335744="" href="/contact" rel="noreferrer noopener" class="thq-body-small"> Contact </a><a _ngcontent-ng-c305335744="" href="/copyright-free-music" rel="noreferrer noopener" class="thq-body-small"> Gallery </a><a _ngcontent-ng-c305335744="" href="/audio-download" rel="noreferrer noopener" class="thq-body-small"> Download </a><a _ngcontent-ng-c305335744="" href="/faq" rel="noreferrer noopener" class="thq-body-small"> FAQs </a></div></div><div _ngcontent-ng-c305335744="" class="footer-column3"><strong _ngcontent-ng-c305335744="" class="thq-body-large footer-social-link1-title"> Connect with Us </strong><div _ngcontent-ng-c305335744="" class="footer-social-links"><a _ngcontent-ng-c305335744="" href="https://www.instagram.com/tubemusic_io/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="footer-social-link"><i _ngcontent-ng-c305335744="" class="fab fa-instagram social-icon"></i><span _ngcontent-ng-c305335744="" class="thq-body-small">Instagram</span></a><a _ngcontent-ng-c305335744="" href="https://x.com/tubemusic_io" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)" class="footer-social-link"><i _ngcontent-ng-c305335744="" class="fab fa-x-twitter social-icon"></i><span _ngcontent-ng-c305335744="" class="thq-body-small">X</span></a><a _ngcontent-ng-c305335744="" href="https://www.youtube.com/@tubemusic-g6f" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="footer-social-link"><i _ngcontent-ng-c305335744="" class="fab fa-youtube social-icon"></i><span _ngcontent-ng-c305335744="" class="thq-body-small">YouTube</span></a></div></div></div></div><div _ngcontent-ng-c305335744="" class="footer-credits"><div _ngcontent-ng-c305335744="" class="thq-divider-horizontal"></div><div _ngcontent-ng-c305335744="" class="footer-row"><span _ngcontent-ng-c305335744="" class="thq-body-small">© TubeMusic.io All Rights Reserved.</span><div _ngcontent-ng-c305335744="" class="footer-footer-links3"><a _ngcontent-ng-c305335744="" href="/privacy-policy" class="thq-body-small">Privacy Policy</a><a _ngcontent-ng-c305335744="" href="/terms" class="thq-body-small">Terms And Conditions</a><a _ngcontent-ng-c305335744="" href="/copyright-policy" class="thq-body-small">Copyright Policy</a><a _ngcontent-ng-c305335744="" href="/dmca" class="thq-body-small">DMCA</a><a _ngcontent-ng-c305335744="" href="/refund-policy" class="thq-body-small">Refund Policy</a></div></div></div></div></footer></app-footer><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--></div></app-root>
+<link rel="modulepreload" href="chunk-JUOSWX6S.js"><script src="polyfills.js" type="module"></script><script src="main.js" type="module"></script>
+
+<script id="ng-state" type="application/json">{"__nghData__":[{"t":{"0":"t0"},"c":{"0":[]}},{"t":{"23":"t2","27":"t3","28":"t4","29":"t5","33":"t6"},"c":{"23":[{"i":"t2","r":1}],"27":[{"i":"t3","r":1}],"28":[{"i":"t4","r":1}],"29":[],"33":[]}},{},{"t":{"11":"t16","13":"t17","17":"t18","18":"t31","19":"t32","20":"t33","21":"t34","22":"t35","27":"t36","31":"t37","48":"t38","49":"t39","51":"t40","52":"t41","53":"t42","54":"t43","55":"t44","86":"t45"},"c":{"11":[],"13":[{"i":"t17","r":1,"n":{"2":"1f"},"x":5}],"17":[{"i":"t18","r":1,"n":{"4":"3f","11":"10f","19":"18f","26":"25f","33":"32f","42":"41f","53":"52f","61":"60f","67":"66f","73":"72f","85":"84f"},"t":{"7":"t19","14":"t20","22":"t21","29":"t22","38":"t23","48":"t24","56":"t25","57":"t26","81":"t27","87":"t28","88":"t29","89":"t30"},"c":{"7":[],"14":[],"22":[],"29":[],"38":[],"48":[],"56":[],"57":[],"81":[],"87":[],"88":[],"89":[{"i":"t30","r":1}]}}],"18":[],"19":[],"20":[],"21":[],"22":[],"27":[],"31":[{"i":"t37","r":1,"x":3}],"48":[{"i":"t38","r":1,"n":{"1":"0f"}}],"49":[],"51":[{"i":"t40","r":1}],"52":[],"53":[],"54":[],"55":[],"86":[]},"e":{"16":6},"n":{"37":"36f","41":"40f","45":"44f","59":"58f","74":"73f"}},{"t":{"2":"t1","4":"t8"},"c":{"2":[{"i":"t1","r":1}],"3":[{"i":"c406145637","r":1}],"4":[{"i":"t8","r":1}]}}]}</script></body></html>

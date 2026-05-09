@@ -1,0 +1,804 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="plan.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&amp;family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<link rel="stylesheet" href="styles.css"><style ng-app-id="ng">@import "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap";
+
+
+
+h1[_ngcontent-ng-c951744504], 
+h2[_ngcontent-ng-c951744504], 
+h3[_ngcontent-ng-c951744504], 
+h4[_ngcontent-ng-c951744504], 
+h5[_ngcontent-ng-c951744504], 
+h6[_ngcontent-ng-c951744504] {
+  font-family: "Roboto", sans-serif;
+}
+body[_ngcontent-ng-c951744504], 
+p[_ngcontent-ng-c951744504], 
+div[_ngcontent-ng-c951744504], 
+span[_ngcontent-ng-c951744504] {
+  font-family: serif;
+}
+.home-container[_ngcontent-ng-c951744504] {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+/*# sourceMappingURL=app.component.css.map */</style><style ng-app-id="ng">
+
+.toast[_ngcontent-ng-c721834416] {
+  position: fixed;
+  top: 89px;
+  right: 20px;
+  padding: 15px;
+  color: white;
+  border-radius: 5px;
+  z-index: 9999;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.toast.success[_ngcontent-ng-c721834416] {
+  background-color: green;
+}
+.toast.error[_ngcontent-ng-c721834416] {
+  background-color: red;
+}
+.toast.info[_ngcontent-ng-c721834416] {
+  background-color: blue;
+}
+.toast.warning[_ngcontent-ng-c721834416] {
+  background-color: orange;
+}
+/*# sourceMappingURL=toast.component.css.map */</style><style ng-app-id="ng">
+
+[_nghost-ng-c3570762339] {
+  display: block;
+  --pro-font-color: #0f172a;
+  --pro-blue-font-dark: #346fbb;
+  --pro-nav-color: #64748b;
+  --pro-modal-window-background: rgba(255, 255, 255, 0.78);
+}
+.pro-page[_ngcontent-ng-c3570762339] {
+  position: relative;
+  min-height: 100vh;
+  padding: 80px 24px 80px;
+  color: var(--pro-font-color);
+  overflow: hidden;
+  font-family:
+    "Inter",
+    "Roboto",
+    system-ui,
+    sans-serif;
+  background: #f8fafc;
+}
+.pro-page-bg[_ngcontent-ng-c3570762339] {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.pro-bg-blob[_ngcontent-ng-c3570762339] {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+}
+.pro-bg-blob-1[_ngcontent-ng-c3570762339] {
+  top: -160px;
+  right: -120px;
+  width: 460px;
+  height: 460px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(52, 111, 187, 0.32) 0%,
+      rgba(52, 111, 187, 0) 70%);
+}
+.pro-bg-blob-2[_ngcontent-ng-c3570762339] {
+  bottom: -200px;
+  left: -140px;
+  width: 520px;
+  height: 520px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(245, 158, 11, 0.2) 0%,
+      rgba(245, 158, 11, 0) 70%);
+}
+.pro-bg-grid[_ngcontent-ng-c3570762339] {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  background-image:
+    radial-gradient(
+      circle at 1px 1px,
+      rgba(52, 111, 187, 0.12) 0.5px,
+      transparent 0.5px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+}
+.pro-page-inner[_ngcontent-ng-c3570762339] {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.pro-back-link[_ngcontent-ng-c3570762339] {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: var(--pro-nav-color);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+}
+.pro-back-link[_ngcontent-ng-c3570762339]:hover {
+  color: var(--pro-blue-font-dark);
+}
+.pro-hero[_ngcontent-ng-c3570762339] {
+  text-align: center;
+  padding: 24px 0 60px;
+  margin-bottom: 40px;
+}
+.pro-hero-badge[_ngcontent-ng-c3570762339] {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      135deg,
+      #fbbf24 0%,
+      #f59e0b 100%);
+  color: #1f1400;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 6px 22px rgba(245, 158, 11, 0.3);
+  margin-bottom: 24px;
+}
+.pro-hero-badge[_ngcontent-ng-c3570762339]   mat-icon[_ngcontent-ng-c3570762339] {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
+.pro-hero-title[_ngcontent-ng-c3570762339] {
+  margin: 0 auto 20px;
+  max-width: 740px;
+  font-size: clamp(36px, 5.5vw, 58px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--pro-font-color);
+}
+.pro-hero-title[_ngcontent-ng-c3570762339]   em[_ngcontent-ng-c3570762339] {
+  font-style: normal;
+  color: var(--pro-blue-font-dark);
+  position: relative;
+  white-space: nowrap;
+}
+.pro-hero-title[_ngcontent-ng-c3570762339]   em[_ngcontent-ng-c3570762339]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.06em;
+  height: 0.08em;
+  background: currentColor;
+  opacity: 0.22;
+}
+.pro-hero-subtitle[_ngcontent-ng-c3570762339] {
+  margin: 0 auto 40px;
+  max-width: 640px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--pro-font-color);
+  opacity: 0.78;
+}
+.pro-pricing[_ngcontent-ng-c3570762339] {
+  display: block;
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 28px 32px 24px;
+  border: 1px solid rgba(52, 111, 187, 0.4);
+  border-radius: 20px;
+  background: var(--pro-modal-window-background);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(52, 111, 187, 0.14);
+  box-sizing: border-box;
+}
+.pro-pricing[_ngcontent-ng-c3570762339]   *[_ngcontent-ng-c3570762339], 
+.pro-pricing[_ngcontent-ng-c3570762339]   *[_ngcontent-ng-c3570762339]::before, 
+.pro-pricing[_ngcontent-ng-c3570762339]   *[_ngcontent-ng-c3570762339]::after {
+  box-sizing: border-box;
+}
+.pro-pricing-toggle[_ngcontent-ng-c3570762339] {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 11px;
+  background: rgba(128, 128, 128, 0.12);
+  border: 1px solid rgba(128, 128, 128, 0.18);
+  margin-bottom: 22px;
+}
+.pro-pricing-option[_ngcontent-ng-c3570762339] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--pro-font-color);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.pro-pricing-option.active[_ngcontent-ng-c3570762339] {
+  background: var(--pro-blue-font-dark);
+  color: #fff;
+}
+.pro-pricing-save[_ngcontent-ng-c3570762339] {
+  display: inline-flex;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.2);
+  color: #15803d;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.pro-pricing-option.active[_ngcontent-ng-c3570762339]   .pro-pricing-save[_ngcontent-ng-c3570762339] {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+.pro-pricing-amount[_ngcontent-ng-c3570762339] {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  color: var(--pro-font-color);
+  letter-spacing: -0.025em;
+}
+.pro-pricing-currency[_ngcontent-ng-c3570762339] {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--pro-nav-color);
+  align-self: flex-start;
+  margin-top: 8px;
+}
+.pro-pricing-value[_ngcontent-ng-c3570762339] {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+}
+.pro-pricing-unit[_ngcontent-ng-c3570762339] {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--pro-nav-color);
+  margin-left: 4px;
+}
+.pro-pricing-note[_ngcontent-ng-c3570762339] {
+  margin: 0 0 22px;
+  font-size: 13px;
+  color: var(--pro-nav-color);
+}
+.pro-pricing-error[_ngcontent-ng-c3570762339] {
+  margin: 14px 0 0;
+  font-size: 12px;
+  color: #b91c1c;
+  background: rgba(254, 226, 226, 0.7);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(252, 165, 165, 0.6);
+}
+.pro-pricing-success[_ngcontent-ng-c3570762339] {
+  margin: 14px 0 0;
+  font-size: 12px;
+  color: #047857;
+  background: rgba(209, 250, 229, 0.7);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(110, 231, 183, 0.6);
+}
+.pro-pricing-methods[_ngcontent-ng-c3570762339] {
+  margin: 14px 0 0;
+  font-size: 12px;
+  color: var(--pro-nav-color);
+}
+.pro-pricing-methods[_ngcontent-ng-c3570762339]   strong[_ngcontent-ng-c3570762339] {
+  color: var(--pro-font-color);
+  font-weight: 700;
+}
+.pro-cta-button[_ngcontent-ng-c3570762339] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 26px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--pro-blue-font-dark);
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 10px 28px rgba(52, 111, 187, 0.35);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.pro-cta-button[_ngcontent-ng-c3570762339]   mat-icon[_ngcontent-ng-c3570762339] {
+  flex-shrink: 0;
+  display: block;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+.pro-cta-button[_ngcontent-ng-c3570762339]:hover:not(:disabled) {
+  background: #2b5d9e;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(52, 111, 187, 0.45);
+}
+.pro-cta-button[_ngcontent-ng-c3570762339]:active {
+  transform: translateY(0);
+}
+.pro-cta-button[_ngcontent-ng-c3570762339]:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.pro-cta-button-large[_ngcontent-ng-c3570762339] {
+  padding: 18px 32px;
+  font-size: 16px;
+  width: auto;
+  min-width: 260px;
+  line-height: 1;
+}
+.pro-group[_ngcontent-ng-c3570762339] {
+  margin-bottom: 72px;
+}
+.pro-group-header[_ngcontent-ng-c3570762339] {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 24px;
+  max-width: 720px;
+}
+.pro-group-number[_ngcontent-ng-c3570762339] {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--pro-blue-font-dark);
+  opacity: 0.5;
+  letter-spacing: 0.06em;
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.pro-group-title[_ngcontent-ng-c3570762339] {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--pro-font-color);
+}
+.pro-group-description[_ngcontent-ng-c3570762339] {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--pro-font-color);
+  opacity: 0.72;
+  max-width: 600px;
+}
+.pro-feature-grid[_ngcontent-ng-c3570762339] {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.pro-feature-card[_ngcontent-ng-c3570762339] {
+  position: relative;
+  padding: 22px 22px 20px;
+  border: 1px solid rgba(128, 128, 128, 0.18);
+  border-radius: 14px;
+  background: var(--pro-modal-window-background);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.pro-feature-card[_ngcontent-ng-c3570762339]:hover {
+  border-color: rgba(52, 111, 187, 0.38);
+  transform: translateY(-2px);
+}
+.pro-feature-card.is-coming-soon[_ngcontent-ng-c3570762339] {
+  border-color: rgba(245, 158, 11, 0.45);
+}
+.pro-feature-card.is-coming-soon[_ngcontent-ng-c3570762339]   .pro-feature-icon[_ngcontent-ng-c3570762339] {
+  background: rgba(245, 158, 11, 0.14);
+  color: #b45309;
+}
+.pro-feature-soon-badge[_ngcontent-ng-c3570762339] {
+  position: absolute;
+  top: -10px;
+  right: 14px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      135deg,
+      #f59e0b,
+      #fbbf24);
+  color: #1f2937;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 1;
+}
+.pro-feature-icon[_ngcontent-ng-c3570762339] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: rgba(52, 111, 187, 0.12);
+  color: var(--pro-blue-font-dark);
+  margin-bottom: 14px;
+}
+.pro-feature-icon[_ngcontent-ng-c3570762339]   mat-icon[_ngcontent-ng-c3570762339] {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+.pro-feature-title[_ngcontent-ng-c3570762339] {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--pro-font-color);
+  letter-spacing: -0.005em;
+}
+.pro-feature-detail[_ngcontent-ng-c3570762339] {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--pro-font-color);
+  opacity: 0.72;
+}
+.pro-comparison[_ngcontent-ng-c3570762339] {
+  margin: 20px 0 72px;
+  padding: 32px 28px;
+  border: 1px solid rgba(128, 128, 128, 0.18);
+  border-radius: 20px;
+  background: var(--pro-modal-window-background);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.pro-comparison-title[_ngcontent-ng-c3570762339] {
+  margin: 0 0 22px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--pro-font-color);
+}
+.pro-comparison-table[_ngcontent-ng-c3570762339] {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(128, 128, 128, 0.18);
+}
+.pro-comparison-header[_ngcontent-ng-c3570762339], 
+.pro-comparison-row[_ngcontent-ng-c3570762339] {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+  padding: 14px 18px;
+  align-items: center;
+}
+.pro-comparison-header[_ngcontent-ng-c3570762339] {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--pro-nav-color);
+  background: rgba(128, 128, 128, 0.06);
+}
+.pro-comparison-header[_ngcontent-ng-c3570762339]   .highlight[_ngcontent-ng-c3570762339] {
+  color: var(--pro-blue-font-dark);
+}
+.pro-comparison-row[_ngcontent-ng-c3570762339] {
+  font-size: 14px;
+  border-top: 1px solid rgba(128, 128, 128, 0.12);
+  color: var(--pro-font-color);
+  background: rgba(255, 255, 255, 0.45);
+}
+.pro-comparison-free[_ngcontent-ng-c3570762339] {
+  color: var(--pro-nav-color);
+}
+.pro-comparison-pro[_ngcontent-ng-c3570762339] {
+  color: var(--pro-blue-font-dark);
+  font-weight: 700;
+}
+.pro-check[_ngcontent-ng-c3570762339] {
+  color: var(--pro-blue-font-dark);
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+.pro-faq[_ngcontent-ng-c3570762339] {
+  margin-bottom: 72px;
+}
+.pro-faq-title[_ngcontent-ng-c3570762339] {
+  margin: 0 0 24px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  text-align: center;
+  color: var(--pro-font-color);
+}
+.pro-faq-list[_ngcontent-ng-c3570762339] {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.pro-faq-item[_ngcontent-ng-c3570762339] {
+  border: 1px solid rgba(128, 128, 128, 0.18);
+  border-radius: 12px;
+  background: var(--pro-modal-window-background);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.pro-faq-item[open][_ngcontent-ng-c3570762339] {
+  border-color: rgba(52, 111, 187, 0.38);
+}
+.pro-faq-item[_ngcontent-ng-c3570762339]   summary[_ngcontent-ng-c3570762339] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--pro-font-color);
+  list-style: none;
+}
+.pro-faq-item[_ngcontent-ng-c3570762339]   summary[_ngcontent-ng-c3570762339]::-webkit-details-marker {
+  display: none;
+}
+.pro-faq-caret[_ngcontent-ng-c3570762339] {
+  display: inline-flex;
+  color: var(--pro-nav-color);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.pro-faq-caret[_ngcontent-ng-c3570762339]   mat-icon[_ngcontent-ng-c3570762339] {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+.pro-faq-item[open][_ngcontent-ng-c3570762339]   .pro-faq-caret[_ngcontent-ng-c3570762339] {
+  transform: rotate(90deg);
+  color: var(--pro-blue-font-dark);
+}
+.pro-faq-item[_ngcontent-ng-c3570762339]   p[_ngcontent-ng-c3570762339] {
+  margin: 0;
+  padding: 0 20px 18px;
+  font-size: 14px;
+  line-height: 1.62;
+  color: var(--pro-font-color);
+  opacity: 0.78;
+}
+.pro-final-cta[_ngcontent-ng-c3570762339] {
+  text-align: center;
+  padding: 48px 30px;
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(52, 111, 187, 0.08) 0%,
+      rgba(245, 158, 11, 0.05) 100%);
+  border: 1px solid rgba(52, 111, 187, 0.28);
+}
+.pro-final-cta-icon[_ngcontent-ng-c3570762339] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: var(--pro-blue-font-dark);
+  color: #fff;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 28px rgba(52, 111, 187, 0.35);
+}
+.pro-final-cta-icon[_ngcontent-ng-c3570762339]   mat-icon[_ngcontent-ng-c3570762339] {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+.pro-final-cta[_ngcontent-ng-c3570762339]   h2[_ngcontent-ng-c3570762339] {
+  margin: 0 auto 12px;
+  max-width: 600px;
+  font-size: clamp(22px, 3.4vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--pro-font-color);
+}
+.pro-final-cta[_ngcontent-ng-c3570762339]    > p[_ngcontent-ng-c3570762339] {
+  margin: 0 auto 18px;
+  max-width: 560px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--pro-font-color);
+  opacity: 0.78;
+}
+.pro-final-cta[_ngcontent-ng-c3570762339]   .pro-cta-button-large[_ngcontent-ng-c3570762339] {
+  display: flex;
+  margin: 0 auto;
+  width: fit-content;
+  max-width: 100%;
+}
+.pro-final-fineprint[_ngcontent-ng-c3570762339] {
+  margin: 22px 0 0;
+  font-size: 12px;
+  color: var(--pro-nav-color);
+}
+.pro-final-fineprint[_ngcontent-ng-c3570762339]   a[_ngcontent-ng-c3570762339] {
+  color: var(--pro-blue-font-dark);
+  text-decoration: none;
+}
+.pro-final-fineprint[_ngcontent-ng-c3570762339]   a[_ngcontent-ng-c3570762339]:hover {
+  text-decoration: underline;
+}
+@media (max-width: 900px) {
+  .pro-feature-grid[_ngcontent-ng-c3570762339] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 720px) {
+  .pro-page[_ngcontent-ng-c3570762339] {
+    padding: 64px 18px 64px;
+  }
+  .pro-hero[_ngcontent-ng-c3570762339] {
+    padding: 16px 0 44px;
+  }
+  .pro-hero-subtitle[_ngcontent-ng-c3570762339] {
+    font-size: 16px;
+  }
+  .pro-pricing[_ngcontent-ng-c3570762339] {
+    padding: 24px 22px 20px;
+  }
+  .pro-pricing-value[_ngcontent-ng-c3570762339] {
+    font-size: 54px;
+  }
+  .pro-group[_ngcontent-ng-c3570762339] {
+    margin-bottom: 54px;
+  }
+  .pro-group-header[_ngcontent-ng-c3570762339] {
+    gap: 14px;
+  }
+  .pro-group-title[_ngcontent-ng-c3570762339] {
+    font-size: 22px;
+  }
+  .pro-feature-grid[_ngcontent-ng-c3570762339] {
+    grid-template-columns: 1fr;
+  }
+  .pro-comparison[_ngcontent-ng-c3570762339] {
+    padding: 26px 18px;
+  }
+  .pro-comparison-header[_ngcontent-ng-c3570762339], 
+   .pro-comparison-row[_ngcontent-ng-c3570762339] {
+    grid-template-columns: 1.3fr 1fr 1fr;
+    padding: 12px 14px;
+    gap: 12px;
+    font-size: 12.5px;
+  }
+  .pro-final-cta[_ngcontent-ng-c3570762339] {
+    padding: 38px 22px;
+  }
+  .pro-cta-button-large[_ngcontent-ng-c3570762339] {
+    width: 100%;
+    min-width: 0;
+  }
+}
+/*# sourceMappingURL=pro.component.css.map */</style><style ng-app-id="ng">mat-icon,mat-icon.mat-primary,mat-icon.mat-accent,mat-icon.mat-warn{color:var(--mat-icon-color)}.mat-icon{-webkit-user-select:none;user-select:none;background-repeat:no-repeat;display:inline-block;fill:currentColor;height:24px;width:24px;overflow:hidden}.mat-icon.mat-icon-inline{font-size:inherit;height:inherit;line-height:inherit;width:inherit}.mat-icon.mat-ligature-font[fontIcon]::before{content:attr(fontIcon)}[dir=rtl] .mat-icon-rtl-mirror{transform:scale(-1, 1)}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon{display:block}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button .mat-icon{margin:auto}</style><title>Go PRO | TubeMusic.io</title><meta name="description" content="TubeMusic PRO: unlimited YouTube to MP3 downloads, AI music generation, full royalty-free library, and human support — for $2.90/month. Cancel anytime."></head>
+<body class="mat-typography"><!--nghm-->
+  <app-root _nghost-ng-c951744504="" ng-version="18.1.4" ngh="3" ng-server-context="ssg"><div _ngcontent-ng-c951744504="" class="home-container"><app-toast _ngcontent-ng-c951744504="" _nghost-ng-c721834416="" ngh="0"><!--bindings={
+  "ng-reflect-ng-if": null
+}--></app-toast><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><router-outlet _ngcontent-ng-c951744504=""></router-outlet><app-pro _nghost-ng-c3570762339="" ngh="2"><main _ngcontent-ng-c3570762339="" class="pro-page"><div _ngcontent-ng-c3570762339="" aria-hidden="true" class="pro-page-bg"><div _ngcontent-ng-c3570762339="" class="pro-bg-blob pro-bg-blob-1"></div><div _ngcontent-ng-c3570762339="" class="pro-bg-blob pro-bg-blob-2"></div><div _ngcontent-ng-c3570762339="" class="pro-bg-grid"></div></div><div _ngcontent-ng-c3570762339="" class="pro-page-inner"><a _ngcontent-ng-c3570762339="" routerlink="/" class="pro-back-link" ng-reflect-router-link="/" href="/">← Back to TubeMusic</a><header _ngcontent-ng-c3570762339="" class="pro-hero"><div _ngcontent-ng-c3570762339="" class="pro-hero-badge"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">workspace_premium</mat-icon> TubeMusic Pro </div><h1 _ngcontent-ng-c3570762339="" class="pro-hero-title"> The full creator toolkit, <em _ngcontent-ng-c3570762339="">for less than a coffee</em>. </h1><p _ngcontent-ng-c3570762339="" class="pro-hero-subtitle"> Unlimited YouTube to MP3 downloads, AI music generation, the full royalty-free library, Tubepilot-grade copyright checking, and human support. Built for YouTubers, TikTokers, podcasters, and anyone who ships content. </p><div _ngcontent-ng-c3570762339="" class="pro-pricing"><div _ngcontent-ng-c3570762339="" role="tablist" aria-label="Billing period" class="pro-pricing-toggle"><button _ngcontent-ng-c3570762339="" type="button" role="tab" class="pro-pricing-option" aria-selected="false"> Monthly </button><button _ngcontent-ng-c3570762339="" type="button" role="tab" class="pro-pricing-option active" aria-selected="true"> Yearly <span _ngcontent-ng-c3570762339="" class="pro-pricing-save">Save 43%</span></button></div><div _ngcontent-ng-c3570762339="" class="pro-pricing-amount"><span _ngcontent-ng-c3570762339="" class="pro-pricing-currency">$</span><span _ngcontent-ng-c3570762339="" class="pro-pricing-value">19.90</span><span _ngcontent-ng-c3570762339="" class="pro-pricing-unit">/ year</span></div><p _ngcontent-ng-c3570762339="" class="pro-pricing-note"> Just $1.66/month — save $14.90 vs. monthly </p><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><button _ngcontent-ng-c3570762339="" type="button" class="pro-cta-button">Get Pro<!--ng-container--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">arrow_forward</mat-icon><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--></button><!--bindings={
+  "ng-reflect-ng-if": ""
+}--><!--bindings={
+  "ng-reflect-ng-if": ""
+}--><p _ngcontent-ng-c3570762339="" class="pro-pricing-methods"> Card via <strong _ngcontent-ng-c3570762339="">Whop</strong> · Apple Pay · Google Pay </p></div></header><section _ngcontent-ng-c3570762339="" class="pro-group"><div _ngcontent-ng-c3570762339="" class="pro-group-header"><span _ngcontent-ng-c3570762339="" class="pro-group-number">01</span><div _ngcontent-ng-c3570762339=""><h2 _ngcontent-ng-c3570762339="" class="pro-group-title">Speed &amp; reliability</h2><p _ngcontent-ng-c3570762339="" class="pro-group-description">No daily caps, no captcha gauntlet, no fake redirects. PRO downloads land in seconds.</p></div></div><div _ngcontent-ng-c3570762339="" class="pro-feature-grid"><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">bolt</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Unlimited MP3 downloads</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Free is 2 per 24 hours. PRO removes the cap so you can convert an entire channel back-catalog without throttling.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">flag</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Report wrong copyright results</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Spotted a track our checker called wrong? PRO members can flag it and our team re-runs it by hand within 24 hours.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">rocket_launch</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Long-form audio (up to 1h)</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Free downloads are capped at 20 minutes. PRO transcodes full hour-long tracks, podcast clips, and DJ sets.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">autorenew</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Retry on failed jobs</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">When the audio provider hiccups, PRO gets a one-click retry plus a Report button — free users see the error and have to start over.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">block</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">No ads, no malware, no shady redirects</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Built-in for everyone — but PRO removes the captcha entirely so the flow is paste → click → save.</p></div><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--></div></section><section _ngcontent-ng-c3570762339="" class="pro-group"><div _ngcontent-ng-c3570762339="" class="pro-group-header"><span _ngcontent-ng-c3570762339="" class="pro-group-number">02</span><div _ngcontent-ng-c3570762339=""><h2 _ngcontent-ng-c3570762339="" class="pro-group-title">Creator-grade tools</h2><p _ngcontent-ng-c3570762339="" class="pro-group-description">Make original royalty-free music for your videos, find safe-to-use tracks, and never worry about strikes.</p></div></div><div _ngcontent-ng-c3570762339="" class="pro-feature-grid"><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">auto_awesome</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">10× AI music generations / month</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Free is 1 lifetime generation. PRO unlocks 10 monthly Lyria 3 generations — text, lyrics, image, or seeded from a YouTube link.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">library_music</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Full royalty-free music library</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Hand-vetted catalog sorted by genre, mood, channel, and engagement. Every track is safe across YouTube, TikTok, Reels, and Shorts.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">verified</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Tubepilot-grade copyright checker</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Live YouTube Data v3 stats + the TubePilot copyright pipeline so you see views, channel, license flag, and similar safe tracks in one panel.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">favorite</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Favorites that sync</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Save any track to your account and access it from any device. Free saves are device-local — PRO saves persist server-side.</p></div><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--></div></section><section _ngcontent-ng-c3570762339="" class="pro-group"><div _ngcontent-ng-c3570762339="" class="pro-group-header"><span _ngcontent-ng-c3570762339="" class="pro-group-number">03</span><div _ngcontent-ng-c3570762339=""><h2 _ngcontent-ng-c3570762339="" class="pro-group-title">Formats &amp; integrations</h2><p _ngcontent-ng-c3570762339="" class="pro-group-description">Move tracks straight into the editor your workflow already lives in.</p></div></div><div _ngcontent-ng-c3570762339="" class="pro-feature-grid"><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">audiotrack</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">MP3 &amp; M4A exports</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Universal MP3 for max compatibility, or AAC/M4A for cleaner quality at the same bitrate. Pick what your editor handles best.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">closed_caption</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Lyrics &amp; metadata pass-through</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">When YouTube exposes lyrics, captions, and chapter markers, PRO downloads include them as ID3 tags so your DAW shows them.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">cloud_upload</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Direct download links</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">PRO returns durable file URLs you can paste into Premiere, CapCut, Descript, or your podcast host without re-uploading.</p></div><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--></div></section><section _ngcontent-ng-c3570762339="" class="pro-group"><div _ngcontent-ng-c3570762339="" class="pro-group-header"><span _ngcontent-ng-c3570762339="" class="pro-group-number">04</span><div _ngcontent-ng-c3570762339=""><h2 _ngcontent-ng-c3570762339="" class="pro-group-title">Power &amp; access</h2><p _ngcontent-ng-c3570762339="" class="pro-group-description">Built for creators publishing more than a single track at a time.</p></div></div><div _ngcontent-ng-c3570762339="" class="pro-feature-grid"><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">layers</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Bulk import</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Upload a list of YouTube links and process the full batch instead of doing them one by one.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">support_agent</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Human support</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Real humans replying to billing questions, refund requests, and any track that misbehaves on your uploads.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">star</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Early access to new features</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">Image-seeded music, longer Lyria clips, podcast trailer maker — PRO users get them first.</p></div><div _ngcontent-ng-c3570762339="" class="pro-feature-card"><!--bindings={}--><div _ngcontent-ng-c3570762339="" class="pro-feature-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">lock</mat-icon></div><h3 _ngcontent-ng-c3570762339="" class="pro-feature-title">Priority key pool</h3><p _ngcontent-ng-c3570762339="" class="pro-feature-detail">YouTube Data API rotated across 9 keys. PRO traffic is routed to the warmest pool first so you never see quota errors during peak hours.</p></div><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--></div></section><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--><section _ngcontent-ng-c3570762339="" class="pro-comparison"><h2 _ngcontent-ng-c3570762339="" class="pro-comparison-title">Free vs. Pro at a glance</h2><div _ngcontent-ng-c3570762339="" class="pro-comparison-table"><div _ngcontent-ng-c3570762339="" class="pro-comparison-header"><span _ngcontent-ng-c3570762339="">Feature</span><span _ngcontent-ng-c3570762339="">Free</span><span _ngcontent-ng-c3570762339="" class="highlight">Pro</span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">MP3 downloads / 24h</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">2</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro">Unlimited<!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">Max audio length</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">20 min</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro">Up to 1h<!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">AI music generations</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">1 lifetime</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro">10 / month<!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">Captcha required</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">Yes</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro">No<!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">Royalty-free library</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">Limited</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro">Full<!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">Retry failed downloads</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">—</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate pro-check material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">check_circle</mat-icon><!--ng-container--><!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">Report wrong results</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">—</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro">Priority manual repair<!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">Favorites sync</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">Device-local</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro">Cross-device<!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">Copyright checker depth</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">Basic</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro">Tubepilot-grade<!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">Audio formats</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">MP3</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro">MP3 · M4A<!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">Bulk import</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">—</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate pro-check material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">check_circle</mat-icon><!--ng-container--><!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><div _ngcontent-ng-c3570762339="" class="pro-comparison-row"><span _ngcontent-ng-c3570762339="">Human support</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-free">—</span><span _ngcontent-ng-c3570762339="" class="pro-comparison-pro"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate pro-check material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">check_circle</mat-icon><!--ng-container--><!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></span></div><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--></div></section><section _ngcontent-ng-c3570762339="" class="pro-faq"><h2 _ngcontent-ng-c3570762339="" class="pro-faq-title">Questions, answered</h2><div _ngcontent-ng-c3570762339="" class="pro-faq-list"><details _ngcontent-ng-c3570762339="" class="pro-faq-item"><summary _ngcontent-ng-c3570762339=""><span _ngcontent-ng-c3570762339="">Why is it so cheap?</span><span _ngcontent-ng-c3570762339="" aria-hidden="true" class="pro-faq-caret"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">arrow_forward</mat-icon></span></summary><p _ngcontent-ng-c3570762339="">We're at launch pricing while we grow. Early subscribers lock in this rate forever — even as we add bigger features like image-seeded AI music and longer clips.</p></details><details _ngcontent-ng-c3570762339="" class="pro-faq-item"><summary _ngcontent-ng-c3570762339=""><span _ngcontent-ng-c3570762339="">What payment methods do you accept?</span><span _ngcontent-ng-c3570762339="" aria-hidden="true" class="pro-faq-caret"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">arrow_forward</mat-icon></span></summary><p _ngcontent-ng-c3570762339="">Card payments (Apple Pay, Google Pay, credit/debit) through Whop. Cancel anytime from your Whop dashboard.</p></details><details _ngcontent-ng-c3570762339="" class="pro-faq-item"><summary _ngcontent-ng-c3570762339=""><span _ngcontent-ng-c3570762339="">Can I cancel anytime?</span><span _ngcontent-ng-c3570762339="" aria-hidden="true" class="pro-faq-caret"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">arrow_forward</mat-icon></span></summary><p _ngcontent-ng-c3570762339="">Yes. Cancel from your Whop dashboard and you'll stay PRO until the end of your billing period, then return to the free plan — no questions asked.</p></details><details _ngcontent-ng-c3570762339="" class="pro-faq-item"><summary _ngcontent-ng-c3570762339=""><span _ngcontent-ng-c3570762339="">What if a download fails or a copyright check is wrong?</span><span _ngcontent-ng-c3570762339="" aria-hidden="true" class="pro-faq-caret"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">arrow_forward</mat-icon></span></summary><p _ngcontent-ng-c3570762339="">Free users see an error. PRO members get a one-click retry plus a Report button — our team re-runs the job by hand and emails you when it works.</p></details><details _ngcontent-ng-c3570762339="" class="pro-faq-item"><summary _ngcontent-ng-c3570762339=""><span _ngcontent-ng-c3570762339="">Will free features get removed if I don’t upgrade?</span><span _ngcontent-ng-c3570762339="" aria-hidden="true" class="pro-faq-caret"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">arrow_forward</mat-icon></span></summary><p _ngcontent-ng-c3570762339="">Never. The free plan stays free and keeps the copyright checker, library browsing, and 2 daily MP3 downloads. PRO adds creator tools on top.</p></details><details _ngcontent-ng-c3570762339="" class="pro-faq-item"><summary _ngcontent-ng-c3570762339=""><span _ngcontent-ng-c3570762339="">How do refunds work?</span><span _ngcontent-ng-c3570762339="" aria-hidden="true" class="pro-faq-caret"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">arrow_forward</mat-icon></span></summary><p _ngcontent-ng-c3570762339="">If PRO doesn’t work for you, we refund your last billed month — even on day 29. See our refund policy for details.</p></details><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--></div></section><section _ngcontent-ng-c3570762339="" class="pro-final-cta"><div _ngcontent-ng-c3570762339="" class="pro-final-cta-icon"><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">favorite</mat-icon></div><h2 _ngcontent-ng-c3570762339="">Support a tiny team building something you love</h2><p _ngcontent-ng-c3570762339=""> Every PRO subscription directly funds our servers, AI costs, and the features on our roadmap. Help us stay independent and free for everyone else. </p><button _ngcontent-ng-c3570762339="" type="button" class="pro-cta-button pro-cta-button-large"> Get Pro — $19.90 / year <!--ng-container--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><mat-icon _ngcontent-ng-c3570762339="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="1">arrow_forward</mat-icon><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--></button><p _ngcontent-ng-c3570762339="" class="pro-final-fineprint"> Cancel anytime · Card via Whop · <a _ngcontent-ng-c3570762339="" routerlink="/refund-policy" ng-reflect-router-link="/refund-policy" href="/refund-policy">Refund policy</a></p></section></div></main></app-pro><!--container--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div></app-root>
+<link rel="modulepreload" href="chunk-JUOSWX6S.js"><script src="polyfills.js" type="module"></script><script src="main.js" type="module"></script>
+
+<script id="ng-state" type="application/json">{"__nghData__":[{"t":{"0":"t0"},"c":{"0":[]}},{},{"n":{"11":"10f","70":"69f"},"t":{"36":"t14","37":"t15","39":"t16","40":"t17","41":"t18","42":"t19","43":"t20","49":"t21","61":"t24","66":"t27","76":"t28","77":"t29","78":"t30"},"c":{"36":[{"i":"t14","r":1}],"37":[],"39":[{"i":"t16","r":2,"e":{"0":1}}],"40":[],"41":[{"i":"t18","r":1,"n":{"1":"0f"}}],"42":[],"43":[],"49":[{"i":"t21","r":1,"t":{"10":"t22"},"c":{"10":[{"i":"t22","r":1,"t":{"1":"t23"},"c":{"1":[]},"n":{"4":"3f"},"x":5}]}},{"i":"t21","r":1,"t":{"10":"t22"},"c":{"10":[{"i":"t22","r":1,"t":{"1":"t23"},"c":{"1":[]},"n":{"4":"3f"},"x":4}]}},{"i":"t21","r":1,"t":{"10":"t22"},"c":{"10":[{"i":"t22","r":1,"t":{"1":"t23"},"c":{"1":[]},"n":{"4":"3f"},"x":3}]}},{"i":"t21","r":1,"t":{"10":"t22"},"c":{"10":[{"i":"t22","r":1,"t":{"1":"t23"},"c":{"1":[]},"n":{"4":"3f"},"x":4}]}}],"61":[{"i":"t24","r":1,"t":{"6":"t25","7":"t26"},"c":{"6":[{"i":"t26","r":1}],"7":[]},"x":5},{"i":"t24","r":1,"t":{"6":"t25","7":"t26"},"c":{"6":[{"i":"t25","r":2,"e":{"0":1},"n":{"2":"1f"}}],"7":[]}},{"i":"t24","r":1,"t":{"6":"t25","7":"t26"},"c":{"6":[{"i":"t26","r":1}],"7":[]},"x":4},{"i":"t24","r":1,"t":{"6":"t25","7":"t26"},"c":{"6":[{"i":"t25","r":2,"e":{"0":1},"n":{"2":"1f"}}],"7":[]},"x":2}],"66":[{"i":"t27","r":1,"n":{"6":"5f"},"x":6}],"76":[{"i":"t28","r":2,"e":{"0":1}}],"77":[],"78":[{"i":"t30","r":1,"n":{"1":"0f"}}]}},{"t":{"2":"t1","4":"t13"},"c":{"2":[],"3":[{"i":"c3570762339","r":1}],"4":[]}}]}</script></body></html>

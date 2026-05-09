@@ -17,6 +17,10 @@ import { TermsConditionsComponent } from './components/legal/terms-conditions/te
 import { PrivacyPolicyComponent } from './components/legal/privacy-policy/privacy-policy.component';
 import { CopyrightPolicyComponent } from './components/legal/copyright-policy/copyright-policy.component';
 import { DmcaComponent } from './components/legal/dmca/dmca.component';
+import { RefundPolicyComponent } from './components/legal/refund-policy/refund-policy.component';
+import { ProComponent } from './components/pro/pro.component';
+import { AiMusicComponent } from './components/ai-music/ai-music.component';
+import { AccountComponent } from './components/account/account.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AudioDownloadComponent } from './components/audio-download/audio-download.component';
 import { PageNotFound } from './page-not-found/page-not-found';
@@ -48,6 +52,10 @@ const routes: Routes = [
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'copyright-policy', component: CopyrightPolicyComponent },
   { path: 'dmca', component: DmcaComponent },
+  { path: 'refund-policy', component: RefundPolicyComponent },
+  { path: 'pro', component: ProComponent, data: { hideChrome: true } },
+  { path: 'ai-music-free', component: AiMusicComponent },
+  { path: 'account', component: AccountComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'audio-download', component: AudioDownloadComponent },
 

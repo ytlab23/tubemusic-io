@@ -3,13 +3,13 @@
     <div class="footer-content">
       <div class="footer-links">
         <div class="footer-column1">
-          <div class="logo-container">
+          <a routerLink="/" class="logo-container" aria-label="TubeMusic home">
             <i class="fa fa-play-circle logo-icon" aria-hidden="true"></i>
             <span class="logo-text">
               <span class="logo-tube">Tube</span
               ><span class="logo-music">Music</span>
             </span>
-          </div>
+          </a>
           <p class="footer-description thq-body-small">
             TubeMusic is a 100% free platform that lets you find copyright‑free
             and royalty‑free music for your YouTube videos. You can check the
@@ -58,26 +58,36 @@
             {{ socialLinkTitleCategory }}
           </strong>
           <div class="footer-social-links">
-            <div class="footer-link14">
-              <i class="fab fa-facebook-f social-icon"></i>
-              <span class="thq-body-small" style="color: #94a3b8"
-                >Facebook</span
-              >
-            </div>
-            <div class="footer-link15">
+            <a
+              href="https://www.instagram.com/tubemusic_io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer-social-link"
+              aria-label="Instagram"
+            >
               <i class="fab fa-instagram social-icon"></i>
-              <span class="thq-body-small" style="color: #94a3b8"
-                >Instagram</span
-              >
-            </div>
-            <div class="footer-link16">
+              <span class="thq-body-small">Instagram</span>
+            </a>
+            <a
+              href="https://x.com/tubemusic_io"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer-social-link"
+              aria-label="X (formerly Twitter)"
+            >
+              <i class="fab fa-x-twitter social-icon"></i>
+              <span class="thq-body-small">X</span>
+            </a>
+            <a
+              href="https://www.youtube.com/@tubemusic-g6f"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer-social-link"
+              aria-label="YouTube"
+            >
               <i class="fab fa-youtube social-icon"></i>
-              <span class="thq-body-small" style="color: #94a3b8">YouTube</span>
-            </div>
-            <div class="footer-link16">
-              <i class="fab fa-x social-icon"></i>
-              <span class="thq-body-small" style="color: #94a3b8">X</span>
-            </div>
+              <span class="thq-body-small">YouTube</span>
+            </a>
           </div>
         </div>
       </div>
@@ -93,6 +103,7 @@
             cookiesLink
           }}</a>
           <a href="/dmca" class="thq-body-small">{{ dmcaLink }}</a>
+          <a href="/refund-policy" class="thq-body-small">{{ refundLink }}</a>
         </div>
       </div>
     </div>

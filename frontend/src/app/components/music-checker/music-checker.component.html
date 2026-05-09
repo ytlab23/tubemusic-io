@@ -46,6 +46,46 @@
           <p>Search completed in {{ searchTime }}s</p>
         </div>
 
+        <div class="rich-info" *ngIf="richVideoInfo">
+          <div class="rich-info-thumb">
+            <img
+              [src]="(richVideoInfo.thumbnail | ytThumb:'sddefault')"
+              [alt]="richVideoInfo.title"
+              loading="lazy"
+            />
+          </div>
+          <div class="rich-info-body">
+            <h3 class="rich-info-title">{{ richVideoInfo.title }}</h3>
+            <p class="rich-info-channel">
+              <mat-icon>tv</mat-icon> {{ richVideoInfo.channelTitle }}
+            </p>
+            <div class="rich-info-stats">
+              <span *ngIf="richVideoInfo.viewCount">
+                <mat-icon>visibility</mat-icon>
+                {{ formatNumber(richVideoInfo.viewCount) }} views
+              </span>
+              <span *ngIf="richVideoInfo.likeCount">
+                <mat-icon>thumb_up</mat-icon>
+                {{ formatNumber(richVideoInfo.likeCount) }}
+              </span>
+              <span *ngIf="richVideoInfo.durationSeconds">
+                <mat-icon>schedule</mat-icon>
+                {{ richVideoInfo.duration }}
+              </span>
+              <span *ngIf="richVideoInfo.publishedAt">
+                <mat-icon>calendar_today</mat-icon>
+                {{ richVideoInfo.publishedAt | date:'mediumDate' }}
+              </span>
+              <span class="rich-info-licensed" *ngIf="richVideoInfo.licensedContent">
+                <mat-icon>verified_user</mat-icon> Licensed content
+              </span>
+            </div>
+            <div class="rich-info-tags" *ngIf="richVideoInfo.tags?.length">
+              <span class="rich-info-tag" *ngFor="let t of richVideoInfo.tags.slice(0, 8)">{{ t }}</span>
+            </div>
+          </div>
+        </div>
+
         <div class="result">
           <div class="result-container">
             <h2 class="result-header">Copyright Status</h2>
@@ -63,6 +103,15 @@
                 <span class="status-icon">✓</span>
               </div>
             </div>
+            <button
+              class="flag-result-btn"
+              *ngIf="copyrightData.checker_log_id"
+              (click)="openFlagDialog()"
+              title="Flag this result as wrong"
+            >
+              <mat-icon>flag</mat-icon>
+              {{ flaggedThisResult ? 'Flagged — thanks' : 'Flag this result' }}
+            </button>
           </div>
 
           <div *ngIf="copyrightData.copyright_free && copyrightData.found_in_library && copyrightData.track" class="song-details-card">
@@ -83,10 +132,11 @@
               <button
                 mat-raised-button
                 class="action-button like-button"
+                [class.is-saved]="isSaved(copyrightData.track)"
                 (click)="saveMusic(copyrightData.track)"
               >
-                <mat-icon>favorite_border</mat-icon>
-                <span>Save</span>
+                <mat-icon>{{ isSaved(copyrightData.track) ? 'favorite' : 'favorite_border' }}</mat-icon>
+                <span>{{ isSaved(copyrightData.track) ? 'Saved' : 'Save' }}</span>
               </button>
               <button
                 mat-raised-button
@@ -150,7 +200,11 @@
             <div class="music-grid">
               <div *ngFor="let track of copyrightData.similar_tracks" class="music-card">
                 <div class="music-thumbnail">
-                  <img [src]="track.thumbnail" [alt]="track.name" />
+                  <img
+                    [src]="(track.thumbnail | ytThumb:'sddefault')"
+                    [alt]="track.name"
+                    loading="lazy"
+                  />
                   <div class="track-overlay">
                     <span class="track-duration">{{ track.duration }}</span>
                   </div>
@@ -169,10 +223,11 @@
                   <div class="track-actions">
                     <button
                       class="action-btn save-btn"
+                      [class.is-saved]="isSaved(track)"
                       (click)="saveMusic(track)"
-                      title="Save track"
+                      [title]="isSaved(track) ? 'Remove from favorites' : 'Save track'"
                     >
-                      <mat-icon>favorite_border</mat-icon>
+                      <mat-icon>{{ isSaved(track) ? 'favorite' : 'favorite_border' }}</mat-icon>
                     </button>
                     <button
                       class="action-btn download-btn"
@@ -190,22 +245,28 @@
       </div>
     </div>
   </div>
-  <button class="hero-action21 thq-button-outline thq-button-animated">
-    <span class="thq-body-small">Last Checked</span>
-  </button>
+  <h3 class="hero-last-checked-heading thq-heading-3">Last Checked</h3>
   <div class="hero-content2">
     <div
       class="hero-row-container1 thq-animated-group-container-horizontal thq-mask-image-horizontal"
     >
       <div class="thq-animated-group-horizontal">
-        <img
+        <div
           *ngFor="let item of lastChecked"
-          [attr.src]="item.thumbnail"
-          [attr.alt]="item.title"
-          [attr.title]="item.title"
-          class="hero-placeholder-image10 thq-img-scale thq-img-ratio-1-1 clickable-thumbnail"
+          class="last-checked-card"
           (click)="openLastCheckedModal(item)"
-        />
+        >
+          <img
+            [attr.src]="(item.thumbnail | ytThumb:'sddefault')"
+            [attr.alt]="item.title"
+            [attr.title]="item.title"
+            loading="lazy"
+            class="hero-placeholder-image10 thq-img-scale thq-img-ratio-1-1 clickable-thumbnail"
+          />
+          <span class="last-checked-time" *ngIf="getCheckedAt(item)">
+            {{ getCheckedAt(item) | timeAgo }}
+          </span>
+        </div>
       </div>
     </div>
     <div
@@ -215,6 +276,35 @@
       </div>
       <div class="thq-animated-group-horizontal-reverse">
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="flag-dialog" *ngIf="flagDialogOpen" (click)="closeFlagDialog()">
+  <div class="flag-dialog-card" (click)="$event.stopPropagation()">
+    <button class="flag-dialog-close" (click)="closeFlagDialog()" aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h3>Flag this result</h3>
+    <p>
+      Tell us why this result looks wrong. We review every flag and use them to
+      improve the checker. Mentioning the claim source (e.g. "Sony Music in YouTube Studio")
+      helps a lot.
+    </p>
+    <label class="flag-dialog-field">
+      <span>Reason</span>
+      <textarea
+        rows="4"
+        placeholder="What did Studio say about this track?"
+        [(ngModel)]="flagReason"
+      ></textarea>
+    </label>
+    <div class="flag-dialog-actions">
+      <button class="flag-dialog-submit" (click)="submitFlag()" [disabled]="flagSubmitting">
+        <mat-icon>flag</mat-icon>
+        {{ flagSubmitting ? 'Sending…' : 'Submit flag' }}
+      </button>
+      <button class="flag-dialog-cancel" (click)="closeFlagDialog()">Cancel</button>
     </div>
   </div>
 </div>

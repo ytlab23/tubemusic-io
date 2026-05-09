@@ -39,6 +39,12 @@ import { TermsConditionsComponent } from './components/legal/terms-conditions/te
 import { PrivacyPolicyComponent } from './components/legal/privacy-policy/privacy-policy.component';
 import { CopyrightPolicyComponent } from './components/legal/copyright-policy/copyright-policy.component';
 import { DmcaComponent } from './components/legal/dmca/dmca.component';
+import { RefundPolicyComponent } from './components/legal/refund-policy/refund-policy.component';
+import { ProComponent } from './components/pro/pro.component';
+import { AiMusicComponent } from './components/ai-music/ai-music.component';
+import { AccountComponent } from './components/account/account.component';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { YtThumbPipe } from './pipes/yt-thumb.pipe';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { Cta2Component } from './components/cta2/cta2.component';
 import { TestimonialsComponent } from './components/sub/testimonials/testimonials.component';
@@ -76,6 +82,12 @@ import { PageNotFound } from './page-not-found/page-not-found';
     PrivacyPolicyComponent,
     CopyrightPolicyComponent,
     DmcaComponent,
+    RefundPolicyComponent,
+    ProComponent,
+    AiMusicComponent,
+    AccountComponent,
+    TimeAgoPipe,
+    YtThumbPipe,
     AboutUsComponent,
     Cta2Component,
     TestimonialsComponent,

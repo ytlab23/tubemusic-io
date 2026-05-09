@@ -11,13 +11,14 @@ import {
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { MusicCheckerService } from '../../services/music-checker.service';
 import { ToastService } from '../../services/toast.service';
 import { SignupService } from '../../services/signup.service';
+import { FavoritesService } from '../../services/favorites.service';
 import { MusicDialogComponent } from '../music-dialog/music-dialog.component';
 
 @Component({
@@ -46,6 +47,12 @@ export class MusicCheckerComponent implements OnInit, OnDestroy {
   searchTime: number | null = null;
   copied = false;
   copyrightData: any = null;
+  richVideoInfo: any = null;
+  loadingRichInfo = false;
+  flagDialogOpen = false;
+  flagReason = '';
+  flagSubmitting = false;
+  flaggedThisResult = false;
 
   private currentSearchSub: Subscription | null = null;
 
@@ -55,12 +62,23 @@ export class MusicCheckerComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private sanitizer: DomSanitizer,
     private userService: SignupService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private favorites: FavoritesService
   ) {}
 
   ngOnInit(): void {
     this.isAuth();
     this.getLastChecked(8);
+    this.route.queryParams.subscribe((params) => {
+      const incoming = params['url'];
+      if (incoming && this.search_query !== incoming) {
+        this.search_query = incoming;
+        if (this.isYouTubeUrl(incoming)) {
+          this.searchByUrl();
+        }
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -187,7 +205,9 @@ export class MusicCheckerComponent implements OnInit, OnDestroy {
           if (response?.success && response?.data) {
             this.copyrightData = response.data;
             this.results = [this.copyrightData];
+            this.flaggedThisResult = false;
             this.emitResults('results');
+            this.loadRichVideoInfo(this.search_query.trim());
           } else {
             this.toastService.showToast('error', 'Failed to check copyright');
           }
@@ -200,6 +220,20 @@ export class MusicCheckerComponent implements OnInit, OnDestroy {
           console.error('searchByUrl error:', error);
         }
       );
+  }
+
+  private loadRichVideoInfo(urlOrId: string): void {
+    this.loadingRichInfo = true;
+    this.richVideoInfo = null;
+    this.musicService.getVideoInfo(urlOrId).subscribe({
+      next: (res: any) => {
+        this.richVideoInfo = res?.data ?? null;
+        this.loadingRichInfo = false;
+      },
+      error: () => {
+        this.loadingRichInfo = false;
+      },
+    });
   }
 
   private cancelOngoingSearch(): void {
@@ -236,31 +270,41 @@ export class MusicCheckerComponent implements OnInit, OnDestroy {
     });
   }
 
+  isSaved(track: any): boolean {
+    return this.favorites.isSaved(track?.video_id);
+  }
+
   saveMusic(track: any): void {
-    if (!this.isLogged) {
-      this.toastService.showToast('error', 'You need to login to save music');
-      this.router.navigate(['/sign-in']);
+    const videoId = track?.video_id;
+    if (!videoId) {
+      this.toastService.showToast('error', 'Missing video id');
       return;
     }
-
-    const musicData = {
-      videoId: track.video_id,
-      title: track.name,
+    const payload = {
+      videoId,
+      title: track.name || track.title,
       thumbnail: track.thumbnail,
-      url: `https://youtube.com/watch?v=${track.video_id}`,
+      url: track.url || `https://youtube.com/watch?v=${videoId}`,
       tags: [track.genre, track.mood].filter(Boolean),
+      source: 'checker' as const,
     };
-
-    this.musicService.createMusic(musicData).subscribe(
-      (response: any) => {
-        this.toastService.showToast('success', 'Music saved successfully');
+    this.favorites.toggle(payload).subscribe(
+      (saved) => {
+        if (saved) {
+          this.toastService.showToast(
+            'success',
+            this.isLogged ? 'Saved to your favorites' : 'Saved on this device'
+          );
+        } else {
+          this.toastService.showToast('info', 'Removed from favorites');
+        }
       },
       (error: any) => {
         if (
           error?.status === 400 &&
           (error?.error?.message || '').toLowerCase().includes('already exists')
         ) {
-          this.toastService.showToast('error', 'Music already exists');
+          this.toastService.showToast('error', 'Already saved');
         } else {
           console.error('An error occurred while saving music:', error);
           this.toastService.showToast(
@@ -325,7 +369,70 @@ export class MusicCheckerComponent implements OnInit, OnDestroy {
     return num.toString();
   }
 
+  /**
+   * Resolves a checked-at timestamp from a Music doc. Uses createdAt/updatedAt
+   * if present, otherwise decodes the timestamp from the Mongo ObjectId
+   * (first 8 hex chars = unix seconds).
+   */
+  getCheckedAt(item: any): Date | null {
+    if (!item) return null;
+    if (item.createdAt) return new Date(item.createdAt);
+    if (item.updatedAt) return new Date(item.updatedAt);
+    const id: string | undefined = item._id;
+    if (id && typeof id === 'string' && id.length >= 8) {
+      const seconds = parseInt(id.substring(0, 8), 16);
+      if (!isNaN(seconds)) return new Date(seconds * 1000);
+    }
+    return null;
+  }
+
   moveUp() {
     this.emitResults('input-clicked');
+  }
+
+  openFlagDialog(): void {
+    if (!this.copyrightData?.checker_log_id) {
+      this.toastService.showToast(
+        'info',
+        'This result does not have a flag id yet — re-run the check.'
+      );
+      return;
+    }
+    if (this.flaggedThisResult) {
+      this.toastService.showToast('info', 'You already flagged this result.');
+      return;
+    }
+    this.flagReason = '';
+    this.flagDialogOpen = true;
+  }
+
+  closeFlagDialog(): void {
+    this.flagDialogOpen = false;
+    this.flagReason = '';
+    this.flagSubmitting = false;
+  }
+
+  submitFlag(): void {
+    const id = this.copyrightData?.checker_log_id;
+    if (!id) return;
+    if (!this.flagReason.trim()) {
+      this.toastService.showToast('error', 'Add a short reason first');
+      return;
+    }
+    this.flagSubmitting = true;
+    this.musicService.flagCheck(id, this.flagReason.trim()).subscribe({
+      next: () => {
+        this.toastService.showToast('success', 'Thanks — flagged for review.');
+        this.flaggedThisResult = true;
+        this.closeFlagDialog();
+      },
+      error: (err: any) => {
+        this.flagSubmitting = false;
+        this.toastService.showToast(
+          'error',
+          err?.error?.message || 'Could not flag this result. Sign in first.'
+        );
+      },
+    });
   }
 }

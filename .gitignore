@@ -6,3 +6,9 @@ node_modules/
 # Ignore all .env files
 *.env
 **/.env
+
+# Editor / tool-local config
+.claude/
+
+# Internal product docs (not for public repo)
+TubeMusic-features.md

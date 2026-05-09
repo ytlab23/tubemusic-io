@@ -47,6 +47,8 @@ export class MusicController {
         this.deleteMusics = this.deleteMusics.bind(this);
         this.createMusic = this.createMusic.bind(this);
         this.lastCheckedMusics = this.lastCheckedMusics.bind(this);
+        this.deleteMusicByUser = this.deleteMusicByUser.bind(this);
+        this.deleteMusicByVideoIdForUser = this.deleteMusicByVideoIdForUser.bind(this);
 
     }
 
@@ -146,35 +148,35 @@ export class MusicController {
             data = data.links
             console.log(data.length)
             for (let i = 0; i < data.length; i++) {
-                // get the video id from the youtube link
-                if (data[i] != '') {
-                    const video_id = getYouTubeVideoId(data[i])
-                    const title = await this.youtubeVideoData(video_id).then((videoTitle ) => videoTitle.title)
-                    const thumbnail = await this.youtubeVideoData(video_id).then((thumb) => thumb.thumbnail)
-                    const tag = await this.youtubeVideoData(video_id).then((tag) => tag.tags)
-                    const musicData:any = {
-                        video_id: video_id,
-                        url: data[i],
-                        user_id: 'admin',
-                        thumbnail: thumbnail,
-                        title: title,
-                        tags: tag
-                    }
-                    console.log(musicData)
-                    // check if the video_id already exists in the database
-                    const music = await this.musicService.getMusicByVideoId(video_id)
-                    if (!music) {
-                        count++
-                        console.log("creating music")
-                        await this.musicService.createMusic(musicData)
-                    }
-                    else {
-                        repeated.push(data[i])
-                    }
-                } else {
+                if (!data[i]) {
                     console.log("empty link")
+                    continue
                 }
-                
+                const video_id = getYouTubeVideoId(data[i])
+                if (!video_id) {
+                    console.log("could not extract video id from", data[i])
+                    continue
+                }
+                const info = await this.youtubeVideoData(video_id)
+                if (!info) {
+                    console.log("youtube returned no items for", video_id)
+                    continue
+                }
+                const musicData: any = {
+                    video_id,
+                    url: data[i],
+                    user_id: 'admin',
+                    thumbnail: info.thumbnail,
+                    title: info.title,
+                    tags: info.tags,
+                }
+                const existing = await this.musicService.getMusicByVideoId(video_id)
+                if (!existing) {
+                    count++
+                    await this.musicService.createMusic(musicData)
+                } else {
+                    repeated.push(data[i])
+                }
             }
             res.json({message: 'Music created successfully', num_created: count, repeated: repeated})
         }
@@ -190,6 +192,46 @@ export class MusicController {
             res.json(result)
         } catch (error) {
             res.status(500).json({ message: error })
+        }
+    }
+
+    async deleteMusicByUser (req: AuthRequest, res: Response): Promise<void> {
+        try {
+            const id = req.params.id
+            const music = await this.musicService.getMusicById(id)
+            if (!music) {
+                res.status(404).json({ message: 'Music not found' })
+                return
+            }
+            if (music.user_id?.toString() !== req.user?._id?.toString()) {
+                res.status(403).json({ message: 'Not authorized to delete this music' })
+                return
+            }
+            await this.musicService.deleteMusic(id)
+            res.status(200).json({ success: true })
+        } catch (error) {
+            console.error(error)
+            res.status(500).json({ message: 'Failed to delete music' })
+        }
+    }
+
+    async deleteMusicByVideoIdForUser (req: AuthRequest, res: Response): Promise<void> {
+        try {
+            const videoId = req.params.videoId
+            if (!videoId) {
+                res.status(400).json({ message: 'video_id required' })
+                return
+            }
+            const music = await this.musicService.getMuiscByUserIdVidId(req.user._id, videoId)
+            if (!music) {
+                res.status(404).json({ message: 'Music not found' })
+                return
+            }
+            await this.musicService.deleteMusic((music as any)._id?.toString())
+            res.status(200).json({ success: true })
+        } catch (error) {
+            console.error(error)
+            res.status(500).json({ message: 'Failed to delete music' })
         }
     }
 

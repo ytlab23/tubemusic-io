@@ -8,9 +8,13 @@
         <form (ngSubmit)="onSubmit()">
           <h2>Create an account</h2>
           <input type="text" placeholder="User name" required [(ngModel)]="data.username" [ngModelOptions]="{standalone: true}">
+          <p class="signup-channel-preview" *ngIf="data.username">
+            Your channel: <strong>{{ data.username }}</strong>
+            <span class="signup-channel-hint">— used as your public TubeMusic name</span>
+          </p>
           <input type="email" placeholder="Email" required [(ngModel)]="data.email" [ngModelOptions]="{standalone: true}">
           <input type="password" placeholder="Enter your password" required [(ngModel)]="data.password" [ngModelOptions]="{standalone: true}">
-          <input type="password" placeholder="Confirm Your Password" required [(ngModel)]="data.confirmPassword" [ngModelOptions]="{standalone:true}" > 
+          <input type="password" placeholder="Confirm Your Password" required [(ngModel)]="data.confirmPassword" [ngModelOptions]="{standalone:true}" >
           <input type="submit" name="" value="Sign Up" />
           <div *ngIf="clicked" class="lds-ring"><div></div><div></div><div></div><div></div></div>
           <p class="signup">

@@ -1,0 +1,189 @@
+<main class="pro-page">
+  <div class="pro-page-bg" aria-hidden="true">
+    <div class="pro-bg-blob pro-bg-blob-1"></div>
+    <div class="pro-bg-blob pro-bg-blob-2"></div>
+    <div class="pro-bg-grid"></div>
+  </div>
+
+  <div class="pro-page-inner">
+    <a routerLink="/" class="pro-back-link">← Back to TubeMusic</a>
+
+    <!-- Hero -->
+    <header class="pro-hero">
+      <div class="pro-hero-badge">
+        <mat-icon>workspace_premium</mat-icon>
+        TubeMusic Pro
+      </div>
+      <h1 class="pro-hero-title">
+        The full creator toolkit, <em>for less than a coffee</em>.
+      </h1>
+      <p class="pro-hero-subtitle">
+        Unlimited YouTube to MP3 downloads, AI music generation, the full
+        royalty-free library, Tubepilot-grade copyright checking, and human
+        support. Built for YouTubers, TikTokers, podcasters, and anyone who
+        ships content.
+      </p>
+
+      <!-- Pricing card inside hero -->
+      <div class="pro-pricing">
+        <div
+          class="pro-pricing-toggle"
+          role="tablist"
+          aria-label="Billing period"
+        >
+          <button
+            type="button"
+            role="tab"
+            [attr.aria-selected]="billing === 'monthly'"
+            class="pro-pricing-option"
+            [class.active]="billing === 'monthly'"
+            (click)="setBilling('monthly')"
+          >
+            Monthly
+          </button>
+          <button
+            type="button"
+            role="tab"
+            [attr.aria-selected]="billing === 'yearly'"
+            class="pro-pricing-option"
+            [class.active]="billing === 'yearly'"
+            (click)="setBilling('yearly')"
+          >
+            Yearly
+            <span class="pro-pricing-save">Save {{ yearlySavingsPercent }}%</span>
+          </button>
+        </div>
+
+        <div class="pro-pricing-amount">
+          <span class="pro-pricing-currency">$</span>
+          <span class="pro-pricing-value">{{ currentPrice | number: '1.2-2' }}</span>
+          <span class="pro-pricing-unit">{{ currentUnit }}</span>
+        </div>
+        <p class="pro-pricing-note" *ngIf="billing === 'yearly'">
+          Just ${{ yearlyEquivMonthly | number: '1.2-2' }}/month — save ${{ monthlyAnnualSavings | number: '1.2-2' }} vs. monthly
+        </p>
+        <p class="pro-pricing-note" *ngIf="billing === 'monthly'">
+          Billed monthly, cancel anytime
+        </p>
+
+        <button
+          type="button"
+          (click)="handleGetPro()"
+          class="pro-cta-button"
+          [disabled]="checkoutLoading"
+        >
+          <ng-container *ngIf="!checkoutLoading">Get Pro</ng-container>
+          <ng-container *ngIf="checkoutLoading">Starting checkout…</ng-container>
+          <mat-icon *ngIf="!checkoutLoading">arrow_forward</mat-icon>
+        </button>
+        <p class="pro-pricing-error" *ngIf="checkoutError">
+          {{ checkoutError }}
+        </p>
+        <p class="pro-pricing-success" *ngIf="postCheckoutMessage">
+          {{ postCheckoutMessage }}
+        </p>
+        <p class="pro-pricing-methods">
+          Card via <strong>Whop</strong> · Apple Pay · Google Pay
+        </p>
+      </div>
+    </header>
+
+    <!-- Feature groups -->
+    <section *ngFor="let group of groups" class="pro-group">
+      <div class="pro-group-header">
+        <span class="pro-group-number">{{ group.number }}</span>
+        <div>
+          <h2 class="pro-group-title">{{ group.title }}</h2>
+          <p class="pro-group-description">{{ group.description }}</p>
+        </div>
+      </div>
+      <div class="pro-feature-grid">
+        <div
+          *ngFor="let feature of group.features"
+          class="pro-feature-card"
+          [class.is-coming-soon]="feature.comingSoon"
+        >
+          <span
+            *ngIf="feature.comingSoon"
+            class="pro-feature-soon-badge"
+            aria-label="Coming soon"
+          >
+            Soon!
+          </span>
+          <div class="pro-feature-icon">
+            <mat-icon>{{ feature.icon }}</mat-icon>
+          </div>
+          <h3 class="pro-feature-title">{{ feature.title }}</h3>
+          <p class="pro-feature-detail">{{ feature.detail }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison band -->
+    <section class="pro-comparison">
+      <h2 class="pro-comparison-title">Free vs. Pro at a glance</h2>
+      <div class="pro-comparison-table">
+        <div class="pro-comparison-header">
+          <span>Feature</span>
+          <span>Free</span>
+          <span class="highlight">Pro</span>
+        </div>
+        <div *ngFor="let row of comparisonRows" class="pro-comparison-row">
+          <span>{{ row.label }}</span>
+          <span class="pro-comparison-free">{{ row.free }}</span>
+          <span class="pro-comparison-pro">
+            <ng-container *ngIf="row.pro === 'Included'; else proText">
+              <mat-icon class="pro-check">check_circle</mat-icon>
+            </ng-container>
+            <ng-template #proText>{{ row.pro }}</ng-template>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pro-faq">
+      <h2 class="pro-faq-title">Questions, answered</h2>
+      <div class="pro-faq-list">
+        <details *ngFor="let item of faqs" class="pro-faq-item">
+          <summary>
+            <span>{{ item.q }}</span>
+            <span class="pro-faq-caret" aria-hidden="true">
+              <mat-icon>arrow_forward</mat-icon>
+            </span>
+          </summary>
+          <p>{{ item.a }}</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="pro-final-cta">
+      <div class="pro-final-cta-icon">
+        <mat-icon>favorite</mat-icon>
+      </div>
+      <h2>Support a tiny team building something you love</h2>
+      <p>
+        Every PRO subscription directly funds our servers, AI costs, and the
+        features on our roadmap. Help us stay independent and free for
+        everyone else.
+      </p>
+      <button
+        type="button"
+        (click)="handleGetPro()"
+        class="pro-cta-button pro-cta-button-large"
+        [disabled]="checkoutLoading"
+      >
+        <ng-container *ngIf="!checkoutLoading">
+          Get Pro — ${{ currentPrice | number: '1.2-2' }} {{ currentUnit }}
+        </ng-container>
+        <ng-container *ngIf="checkoutLoading">Starting checkout…</ng-container>
+        <mat-icon *ngIf="!checkoutLoading">arrow_forward</mat-icon>
+      </button>
+      <p class="pro-final-fineprint">
+        Cancel anytime · Card via Whop ·
+        <a routerLink="/refund-policy">Refund policy</a>
+      </p>
+    </section>
+  </div>
+</main>

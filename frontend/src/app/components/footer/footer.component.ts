@@ -48,6 +48,8 @@ export class FooterComponent {
   @Input()
   termsLink: string = 'Terms And Conditions';
   @Input()
+  refundLink: string = 'Refund Policy';
+  @Input()
   link3: string = 'Contact Us';
   @Input()
   link2: string = 'About Us';

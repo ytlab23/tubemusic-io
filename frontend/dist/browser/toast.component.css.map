@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/components/toast/toast.component.css"],
+  "sourcesContent": [".toast {\n    position: fixed;\n    top: 89px;\n    right: 20px;\n    padding: 15px;\n    color: white;\n    border-radius: 5px;\n    z-index: 9999;\n    opacity: 0.7;\n    transition: opacity 0.3s ease;\n  }\n  \n  .toast.success {\n    background-color: green;\n  }\n  \n  .toast.error {\n   \n    background-color: red;\n  }\n  \n  .toast.info {\n    background-color: blue;\n  }\n  \n  .toast.warning {\n    background-color: orange;\n  }\n  "],
+  "mappings": ";AAAA,CAAC;AACG,YAAU;AACV,OAAK;AACL,SAAO;AACP,WAAS;AACT,SAAO;AACP,iBAAe;AACf,WAAS;AACT,WAAS;AACT,cAAY,QAAQ,KAAK;AAC3B;AAEA,CAZD,KAYO,CAAC;AACL,oBAAkB;AACpB;AAEA,CAhBD,KAgBO,CAAC;AAEL,oBAAkB;AACpB;AAEA,CArBD,KAqBO,CAAC;AACL,oBAAkB;AACpB;AAEA,CAzBD,KAyBO,CAAC;AACL,oBAAkB;AACpB;",
+  "names": []
+}

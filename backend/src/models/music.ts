@@ -8,6 +8,8 @@ export interface Music {
   thumbnail?: string;
   title?: string;
   tags?: string[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export type MusicDocument = HydratedDocument<Music>;
@@ -21,7 +23,7 @@ const MusicSchema = new Schema<Music>(
     title: { type: String },
     tags: { type: [String] },
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: true }
 );
 
 const MusicModel = model<Music>("Music", MusicSchema);

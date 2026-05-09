@@ -12,7 +12,8 @@ router.post('/create-bulk', musicController.createBulkMusic);
 router.get('/all', musicController.getAllMusics);
 // last checked musics
 router.get('/last-checked/:n', musicController.lastCheckedMusics);
-// router.delete('/delete-all', musicController.deleteMusics);
+router.delete('/by-video/:videoId', authMiddleware, musicController.deleteMusicByVideoIdForUser);
+router.delete('/:id', authMiddleware, musicController.deleteMusicByUser);
 
 
 export default router;

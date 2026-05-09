@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/app.component.css"],
+  "sourcesContent": ["@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');\n\n/* Global font styles */\nh1, h2, h3, h4, h5, h6 {\n  font-family: 'Roboto', sans-serif;\n}\n\nbody, p, div, span {\n  font-family: serif;\n}\n\n.home-container {\n  width: 100%;\n  display: flex;\n  min-height: 100vh;\n  align-items: center;\n  flex-direction: column;\n}"],
+  "mappings": ";;;AAGA;AAAI;AAAI;AAAI;AAAI;AAAI;AAClB,eAAa,QAAQ,EAAE;AACzB;AAEA;AAAM;AAAG;AAAK;AACZ,eAAa;AACf;AAEA,CAAC;AACC,SAAO;AACP,WAAS;AACT,cAAY;AACZ,eAAa;AACb,kBAAgB;AAClB;",
+  "names": []
+}

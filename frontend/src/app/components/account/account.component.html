@@ -1,0 +1,205 @@
+<div class="account-shell">
+  <header class="account-head">
+    <div class="account-head-left">
+      <div class="account-avatar" aria-hidden="true">
+        <mat-icon>account_circle</mat-icon>
+        <span class="account-pro-star" *ngIf="profile.isPro" title="PRO member">
+          <mat-icon>star</mat-icon>
+        </span>
+      </div>
+      <div>
+        <h1>{{ profile.username || (isLoggedIn() ? 'Hello' : 'Guest') }}</h1>
+        <p class="account-email" *ngIf="profile.email">{{ profile.email }}</p>
+        <p class="account-email" *ngIf="!isLoggedIn()">
+          Browsing without an account — favorites are saved on this device only.
+        </p>
+        <span class="account-badge" *ngIf="profile.isPro">PRO member</span>
+        <span class="account-badge account-badge-free" *ngIf="isLoggedIn() && !profile.isPro">Free plan</span>
+        <span class="account-badge account-badge-free" *ngIf="!isLoggedIn()">Guest</span>
+      </div>
+    </div>
+    <div class="account-head-actions">
+      <button *ngIf="isLoggedIn()" class="account-secondary" (click)="signOut()">Sign out</button>
+      <button *ngIf="!isLoggedIn()" class="account-secondary" (click)="goToSignIn()">Sign in</button>
+      <button *ngIf="!profile.isPro" class="account-primary" (click)="goPro()">
+        <mat-icon>star</mat-icon> Go PRO
+      </button>
+    </div>
+  </header>
+
+  <nav class="account-tabs" aria-label="Account sections">
+    <button
+      class="account-tab"
+      [class.active]="activeTab === 'profile'"
+      (click)="switchTab('profile')"
+    >
+      <mat-icon>person</mat-icon> Profile
+    </button>
+    <button
+      class="account-tab"
+      [class.active]="activeTab === 'favorites'"
+      (click)="switchTab('favorites')"
+    >
+      <mat-icon>favorite</mat-icon> Favorites
+    </button>
+    <button
+      class="account-tab"
+      [class.active]="activeTab === 'ai-music'"
+      (click)="switchTab('ai-music')"
+    >
+      <mat-icon>auto_awesome</mat-icon> AI music
+    </button>
+    <button
+      class="account-tab"
+      [class.active]="activeTab === 'subscription'"
+      (click)="switchTab('subscription')"
+    >
+      <mat-icon>credit_card</mat-icon> Subscription
+    </button>
+  </nav>
+
+  <section *ngIf="activeTab === 'profile'" class="account-card">
+    <h2>Quick stats</h2>
+    <div class="account-stats">
+      <div class="account-stat">
+        <span class="account-stat-label">MP3 downloads today</span>
+        <span class="account-stat-value">
+          {{ profile.downloadsToday }} / {{ profile.isPro ? '∞' : profile.downloadsLimit }}
+        </span>
+      </div>
+      <div class="account-stat">
+        <span class="account-stat-label">Free AI music used</span>
+        <span class="account-stat-value">
+          {{ profile.freeAiUsedAt ? formatDate(profile.freeAiUsedAt) : 'Not yet' }}
+        </span>
+      </div>
+      <div class="account-stat">
+        <span class="account-stat-label">Plan</span>
+        <span class="account-stat-value">
+          {{ profile.isPro ? 'PRO ($2.90/mo)' : 'Free' }}
+        </span>
+      </div>
+    </div>
+    <div class="account-actions-row">
+      <a routerLink="/audio-download" class="account-secondary">
+        <mat-icon>download</mat-icon> Download an MP3
+      </a>
+      <a routerLink="/ai-music-free" class="account-secondary">
+        <mat-icon>auto_awesome</mat-icon> Generate AI music
+      </a>
+      <a routerLink="/copyright-free-music" class="account-secondary">
+        <mat-icon>library_music</mat-icon> Browse library
+      </a>
+    </div>
+  </section>
+
+  <section *ngIf="activeTab === 'favorites'" class="account-card">
+    <h2>Saved music</h2>
+    <p *ngIf="!isLoggedIn() && favorites.length" class="account-fav-banner">
+      <mat-icon>info</mat-icon>
+      Saving locally on this device.
+      <button class="account-link-btn" (click)="goToSignIn()">Sign in</button>
+      to sync favorites across devices.
+    </p>
+    <p *ngIf="loadingFavorites" class="account-loading">Loading…</p>
+    <p *ngIf="loadError" class="account-error">{{ loadError }}</p>
+    <div *ngIf="!loadingFavorites && favorites.length === 0" class="account-empty">
+      <mat-icon>favorite_border</mat-icon>
+      <p>No saved tracks yet.</p>
+      <a routerLink="/copyright-free-music" class="account-secondary">Find music to save</a>
+    </div>
+    <ul class="account-fav-list" *ngIf="favorites.length">
+      <li *ngFor="let track of favorites" class="account-fav-row">
+        <img
+          *ngIf="track.thumbnail"
+          [src]="(track.thumbnail | ytThumb:'mqdefault')"
+          [alt]="track.title"
+        />
+        <div class="account-fav-main">
+          <p class="account-fav-title">
+            {{ track.title || track.videoId }}
+            <span *ngIf="track.local" class="account-fav-local-pill" title="Stored on this device only">device</span>
+          </p>
+          <p class="account-fav-meta">
+            <span *ngFor="let tag of track.tags" class="account-fav-tag">{{ tag }}</span>
+          </p>
+        </div>
+        <div class="account-fav-actions">
+          <a
+            *ngIf="track.videoId"
+            class="account-icon-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+            [href]="'https://youtube.com/watch?v=' + track.videoId"
+            title="Open on YouTube"
+          >
+            <mat-icon>open_in_new</mat-icon>
+          </a>
+          <a
+            *ngIf="track.videoId"
+            class="account-icon-btn"
+            [routerLink]="['/audio-download']"
+            [queryParams]="{ url: 'https://youtube.com/watch?v=' + track.videoId }"
+            title="Download"
+          >
+            <mat-icon>download</mat-icon>
+          </a>
+          <button
+            class="account-icon-btn account-icon-btn-danger"
+            (click)="removeFavorite(track)"
+            title="Remove from favorites"
+            aria-label="Remove from favorites"
+          >
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section *ngIf="activeTab === 'ai-music'" class="account-card">
+    <h2>Your AI tracks</h2>
+    <div *ngIf="generations.length === 0" class="account-empty">
+      <mat-icon>auto_awesome</mat-icon>
+      <p>No generations yet.</p>
+      <a routerLink="/ai-music-free" class="account-primary">
+        <mat-icon>play_arrow</mat-icon> Make your first track
+      </a>
+    </div>
+    <ul class="account-ai-list" *ngIf="generations.length">
+      <li *ngFor="let g of generations" class="account-ai-row">
+        <div class="account-ai-main">
+          <p class="account-ai-title">{{ g.title || 'Untitled track' }}</p>
+          <p class="account-ai-meta">
+            <span>{{ formatDate(g.createdAt) }}</span>
+            <span *ngIf="g.mode">· {{ g.mode }}</span>
+            <span *ngIf="g.durationSeconds">· {{ g.durationSeconds }}s</span>
+          </p>
+        </div>
+        <a *ngIf="g.url" class="account-icon-btn" [href]="g.url" target="_blank" rel="noopener">
+          <mat-icon>download</mat-icon>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section *ngIf="activeTab === 'subscription'" class="account-card">
+    <h2>Subscription</h2>
+    <p *ngIf="profile.isPro" class="account-sub-status pro">
+      <mat-icon>verified</mat-icon> You’re on PRO. Thanks for supporting TubeMusic.
+    </p>
+    <p *ngIf="!profile.isPro" class="account-sub-status">
+      You’re on the Free plan. Go PRO for unlimited downloads, AI music, and the full library.
+    </p>
+
+    <div class="account-actions-row">
+      <a *ngIf="!profile.isPro" routerLink="/pro" class="account-primary">
+        <mat-icon>star</mat-icon> Compare plans
+      </a>
+      <a *ngIf="profile.isPro" class="account-secondary" href="javascript:void(0)" title="Manage on Whop (coming soon)">
+        <mat-icon>open_in_new</mat-icon> Manage subscription
+      </a>
+      <a routerLink="/refund-policy" class="account-link">Refund policy</a>
+    </div>
+  </section>
+</div>

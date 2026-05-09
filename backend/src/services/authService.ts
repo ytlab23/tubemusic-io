@@ -20,7 +20,10 @@ export class AuthService {
     private generateToken(user: User): string {
         const { _id, username, email } = user;
         const payload = { _id, username, email };
-        const secretKey = process.env.SECRET_KEY || 'SECRET_KEY';
+        const secretKey = process.env.SECRET_KEY;
+        if (!secretKey) {
+            throw new Error('SECRET_KEY environment variable is not set');
+        }
         const options = { expiresIn: '23h' };
         return jwt.sign(payload, secretKey, options);
     }
